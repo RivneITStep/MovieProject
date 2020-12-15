@@ -1,0 +1,23 @@
+<div class="background">
+  <div class="custom-container my-content">
+    <div class="container-bg">
+      <ul class="actor-list">
+        <li *ngFor="let actor of actors">
+          <div class="container-fluid">
+            <div class="row actor-block">
+              <img class="actor-img col-6" src="{{actor.pictureUrl}}" alt="">
+              <ul class="desc-block col">
+                <h2 class="object-name">{{actor.name}} {{actor.surname}}</h2>
+                <hr class="hr-white">
+                <h5>{{actor.description}}</h5>
+              </ul>
+              
+              <h3 class="object-age col">Age: {{actor.age}}</h3>
+              <h3 class="object-country col">Country: {{actor.country}}</h3>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

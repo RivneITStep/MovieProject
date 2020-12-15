@@ -1,0 +1,44 @@
+.spacer {
+    flex: 1 1 auto;
+}
+
+.logo-text{
+    font-family: "Montserrat", sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.my-search{
+    height: 20px;
+}
+
+a{
+    text-decoration: none;
+    font-family: "Montserrat", sans-serif;
+    font-size: 10px;
+    font-weight: 400;
+    color: white;
+    margin-left: 100px;
+}
+
+.temp-a{
+    margin-left: 50px !important;
+}
+
+.auth-element{
+    font-weight: 600;
+    color: whitesmoke;
+}
+
+.auth-element-register{
+    margin-left: 150px;
+}
+
+.auth-element-login{
+    margin-left: 50px !important;
+}
+
+.my-header{
+    position: fixed;
+    height: auto;
+}
