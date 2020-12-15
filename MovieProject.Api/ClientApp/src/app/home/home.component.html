@@ -32,11 +32,14 @@
     </div>
     <div class="announce-block">
       <ul class="announce-list">
-        <li>
-
-        </li>
-        <li>
-
+        <li *ngFor="let movie of headMovies">
+          <div class="container">
+            <div class="row">
+              <img src="{{movie.pictureUrl}}" alt="">
+              <h2>{{movie.name}}</h2>
+              <h3>wasd</h3>
+            </div>
+          </div>
         </li>
       </ul>
     </div>

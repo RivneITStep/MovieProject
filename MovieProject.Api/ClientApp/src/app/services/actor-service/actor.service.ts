@@ -21,7 +21,7 @@ export class ActorService {
   }
 
   addActor(model : ActorModel){
-    return this.http.post<ApiResult>(this.baseUrl + '/addactor/' , model);
+    return this.http.post<ApiResult>(this.baseUrl, model);
   }
   
 }
