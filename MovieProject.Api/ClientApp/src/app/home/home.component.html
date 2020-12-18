@@ -32,15 +32,19 @@
     </div>
     <div class="announce-block">
       <ul class="announce-list">
-        <li *ngFor="let movie of headMovies">
+        <li>
+          <h2>Films</h2>
+          <h5>Film, also called motion picture or movie, series of still photographs on film, projected in rapid succession onto a screen by means of light. Because of the optical phenomenon known as persistence of vision, this gives the illusion of actual, smooth, and continuous movement.</h5>
+        </li>
+        <li>
           <div class="container">
-            <div class="row">
-              <img src="{{movie.pictureUrl}}" alt="">
-              <h2>{{movie.name}}</h2>
-              <h3>wasd</h3>
-            </div>
+            <img class="col-img" src="{{headMovies[0].pictureUrl}}" alt="">
+            <h2 class="">{{headMovies[0].name}}</h2>
           </div>
         </li>
+        <li></li>
+        <li></li>
+        <li></li>
       </ul>
     </div>
   </div>
