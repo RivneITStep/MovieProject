@@ -40,5 +40,18 @@ a{
 
 .my-header{
     position: fixed;
+    z-index: 50;
     height: auto;
+}
+
+@media screen and (max-width: 1000px){
+    .my-header a{
+        margin-left: 50px;
+    }
+}
+
+@media screen and (max-width: 800px){
+    .my-search{
+        width: 50%;
+    }
 }

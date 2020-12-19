@@ -5,12 +5,9 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 
-.mat-toolbar .mat-primary{
-    background-color: #3a3a3a !important;
-}
-
 .custom-container{
     padding: 0 10%;
+    
 }
 
 /* width */

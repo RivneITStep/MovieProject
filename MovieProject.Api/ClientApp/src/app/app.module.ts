@@ -16,17 +16,21 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ActorService } from './services/actor-service/actor.service';
 import { RouterModule } from '@angular/router';
 import { ActorpageComponent } from './actorpage/actorpage.component';
+import { FooterComponent } from './footer/footer.component';
+import { NgxPaginationModule, PaginationControlsComponent} from 'ngx-pagination';
 
 @NgModule({
-  declarations: [					
+  declarations: [						
     AppComponent,
       HomeComponent,
       RegisterComponent,
       HeaderComponent,
       ActorsComponent,
-      ActorpageComponent
+      ActorpageComponent,
+      FooterComponent
    ],
   imports: [
+    NgxPaginationModule,
     CommonModule,
     FormsModule,
     MatToolbarModule,

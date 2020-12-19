@@ -1,12 +1,16 @@
 .background{
-    background-image: url('https://www.standard.co.uk/s3fs-public/thumbnails/image/2019/08/21/15/Peakyblinders-10.jpg');
+    background-image: url('https://images.alphacoders.com/108/1084146.jpg');
     width: 100%;
-    height: 1400px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
 }
 
 .my-text-block{
     font-family: 'Montserrat', sans-serif;
-    color: #303030;
+    color: #bae8e8;
+    text-shadow: 1px 1px 2px black, 0 0 1em black;
 }
 
 .block-title{
@@ -26,6 +30,7 @@
 
 .categories-route{
     margin-top: 40px;
+    margin-bottom: 50px;
 }
 
 .first-block{
@@ -68,33 +73,18 @@ h2{
 
 .announce-block{
     width: 100%;
-    background-color: #3a3a3a;
     border-radius: 15px;
+    margin-bottom: 100px;
 }
 
-.announce-list{
-    list-style-type: none;
-    height: 400px;
-}
-
-.announce-list li{
-    float: left;
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-
-.announce-list h2{
-    color: white;
-}
-
-.announce-list h5{
-    font-weight: 300;
-    color: white;
+.h2-desc{
+    text-shadow: 2px 0 0 rgb(0, 0, 0);
+    text-align: center;
 }
 
 .text-border{
     text-align: center;
-    background-color: #2b2a2a;
+    background-color: #000a1d;
     border-radius: 0px 0px 50px 50px;
 }
 
@@ -111,4 +101,36 @@ h2{
 
 .container h2{
     font-weight: 300;
+    font-family: 'Montserrat', sans-serif;
 }
+
+.col-img{
+    width: 80%;
+    height: auto;
+}
+
+h2{
+    font-family: 'Montserrat', sans-serif;
+}
+
+.see-more-h2{
+    text-align: center;
+    margin-top: 10px;
+}
+
+.hr-white{
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.75), rgba(0, 0, 0, 0));
+    height: 2px;
+}
+
+.text-border h2{
+    font-size: 18px;
+    font-weight: 400;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.items-block{
+    display: flex;
+    justify-content: space-around;
+}
+

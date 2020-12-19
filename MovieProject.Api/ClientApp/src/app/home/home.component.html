@@ -24,28 +24,42 @@
           <li class="li-btn">
             <img class="img-img" src="https://avatars.mds.yandex.net/get-kinopoisk-image/1946459/83a758fc-d3f9-485a-b75f-530fb611d63c/300x450" alt="">
             <div class="text-border">
-              <h2>Soon</h2>
+              <h2>SOON</h2>
             </div>
           </li>
         </ul>
       </div>
     </div>
+
+    <hr class="hr-white">
+
     <div class="announce-block">
-      <ul class="announce-list">
-        <li>
-          <h2>Films</h2>
-          <h5>Film, also called motion picture or movie, series of still photographs on film, projected in rapid succession onto a screen by means of light. Because of the optical phenomenon known as persistence of vision, this gives the illusion of actual, smooth, and continuous movement.</h5>
-        </li>
-        <li>
-          <div class="container">
-            <img class="col-img" src="{{headMovies[0].pictureUrl}}" alt="">
-            <h2 class="">{{headMovies[0].name}}</h2>
-          </div>
-        </li>
-        <li></li>
-        <li></li>
-        <li></li>
-      </ul>
+      <div>
+        <h2 class="h2-desc">Here you can watch the most popular and new films</h2>
+        <hr class="hr-white">
+      </div>
+
+      <div class="row items-block">
+        <div class="">
+          <img src="{{headMovies[0].pictureUrl}}"/>
+          <h2>{{headMovies[0].name}}</h2>  
+        </div>
+        <div class="">
+          <img src="{{headMovies[1].pictureUrl}}"/>
+          <h2>{{headMovies[1].name}}</h2>  
+        </div>
+        <div class="">
+          <img src="{{headMovies[2].pictureUrl}}"/>
+          <h2>{{headMovies[2].name}}</h2>  
+        </div>
+        <div class="">
+          <img src="{{headMovies[3].pictureUrl}}"/>
+          <h2>{{headMovies[3].name}}</h2>  
+        </div>
+     </div>
     </div>
+    
+    <div style="height: 50px;"></div>
+
   </div>
 </div>

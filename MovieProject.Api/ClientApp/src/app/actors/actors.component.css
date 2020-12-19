@@ -1,28 +1,31 @@
 .background{
-    background-color: #888888;
+    background-color: #e3f6f5;
 }
 
 .container-bg{
-    background-color: #EEEEEE;
-    height: 1400px;
-}
-
-.my-content{
-    height: 1400px;
+    background-color: #ffffff;
 }
 
 .actor-list{
+    font-family: 'Montserrat', sans-serif;
     padding-top: 50px;
+    padding-right: 40px;
     list-style-type: none;
 }
 
 .object-name{
     font-size: 50px;
-    color: white;
+    color: black;
 }
 
 .actor-list li{
     margin-bottom: 10px;
+}
+
+.actor-list li:hover{
+    cursor: pointer;
+    background-color: #bae8e8;
+    border-radius: 15px;
 }
 
 .actor-img{
@@ -32,11 +35,6 @@
     height: auto;
     display: block;
     margin: 0;
-}
-
-.actor-block{
-    border-radius: 15px;
-    background-color: #3a3a3a;
 }
 
 .object-name{
@@ -54,7 +52,18 @@
 }
 
 .desc-block h5{
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 400;
-    color: white;
+    color: black;
+}
+
+h4{
+    color: #2c698d;
+}
+
+.text-title{
+    padding-top: 100px;
+    padding-left: 40px;
+    padding-right: 40px;
+    font-family: 'Montserrat', sans-serif;
 }
