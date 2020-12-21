@@ -1,26 +1,23 @@
 <div class="background">
   <div class="custom-container my-content">
     <div class="container-bg">
-
       <div class="text-title">
         <h1>Actors</h1>
         <hr>
         <p>
           An actor is a person who portrays a character in a performance (also actress; see below).[1] The actor performs "in the flesh" in the traditional medium of the theatre or in modern media such as film, radio, and television. The analogous Greek term is ὑποκριτής (hupokritḗs), literally "one who answers".[2] The actor's interpretation of their role—the art of acting—pertains to the role played, whether based on a real person or fictional character. This can also be considered an "actor's role," which was called this due to scrolls being used in the theaters. Interpretation occurs even when the actor is "playing themselves", as in some forms of experimental performance art.
         </p>
-        <img src="https://lh3.googleusercontent.com/proxy/KARPT4qFJBOP3rwaCjEPk6JhMH8JjJYv4Gry0pH01hwHAFPc22xTXejQ-3c9xoMzIHrbKrjDL64U23fwt5Fy1pTJHA" alt="">
+        <img class="actors-page-img" src="https://lh3.googleusercontent.com/proxy/KARPT4qFJBOP3rwaCjEPk6JhMH8JjJYv4Gry0pH01hwHAFPc22xTXejQ-3c9xoMzIHrbKrjDL64U23fwt5Fy1pTJHA" alt="">
       </div>
-
       <ul class="actor-list">
         <li *ngFor="let actor of actors | paginate: { id: 'lid', itemsPerPage: 10, currentPage: page, totalItems: count }">
           <hr>
-          <div class="container-fluid">
+          <div class="container-fluid" [routerLink]="['./' + actor.id]">
             <div class="row actor-block">
               <img class="actor-img col-6" src="{{actor.pictureUrl}}" alt="">
               <ul class="desc-block col">
                 <h2 class="object-name">{{actor.name}} {{actor.surname}}</h2>
                 <hr class="hr-white">
-                <h5>{{actor.description}}</h5>
               </ul>
               <h3 class="object-name col">Age: <h4>{{actor.age}}</h4></h3>
               <h3 class="object-name col">Country: <h4>{{actor.country}}</h4></h3>
@@ -28,9 +25,8 @@
           </div>
         </li>
       </ul>
-      <div>
-        <pagination-controls id="lid" maxSize="5" directionLinks="true" (pageChange)="pageChanged($event)"></pagination-controls>
-      </div>
+      <pagination-controls id="lid" maxSize="5" directionLinks="true" (pageChange)="pageChanged($event)"></pagination-controls>
+      <div style="height: 15px;"></div>
     </div>
   </div>
 </div>

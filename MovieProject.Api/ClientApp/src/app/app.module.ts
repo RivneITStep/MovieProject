@@ -18,6 +18,7 @@ import { RouterModule } from '@angular/router';
 import { ActorpageComponent } from './actorpage/actorpage.component';
 import { FooterComponent } from './footer/footer.component';
 import { NgxPaginationModule, PaginationControlsComponent} from 'ngx-pagination';
+import { NzRateModule } from 'ng-zorro-antd/rate';
 
 @NgModule({
   declarations: [						

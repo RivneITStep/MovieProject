@@ -67,3 +67,9 @@ h4{
     padding-right: 40px;
     font-family: 'Montserrat', sans-serif;
 }
+
+.actors-page-img{
+    max-width: 100%;
+    height: auto;
+}
+

@@ -1,0 +1,106 @@
+.background{
+    font-family: 'Montserrat';
+    background-color: #e3f6f5;
+    font-weight: 400;
+}
+
+.main-content{
+    padding-top: 100px;
+    background-color: white;
+}
+
+.about-film{
+    margin-top: 90px;
+}
+
+.media-list li{
+    display: block;
+}
+
+.media-list li:last-child{
+    margin-top: 30px;
+}
+
+.movie-original-name{
+    color: #2F4F4F;
+}
+
+.row h4{
+    margin-bottom: 30px;
+    
+}
+
+.h-txt{
+    color: #2F4F4F;
+}
+
+.actors-list{
+    list-style-type: none;
+    padding: 0 !important;
+}
+
+.actors-list li{
+    margin-bottom: 10px;
+}
+
+.movie-actors{
+    margin-top: 0px;
+}
+
+.movie-actors h4{
+    margin-bottom: 30px;
+}
+
+.movie-text{
+    border-right: 1px solid rgb(233, 233, 233);
+}
+
+.photo-list{
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto 30px;
+    padding: 0 !important;
+}
+
+.photo-list img{
+    float: left;
+    margin: 10px;
+    width: calc( 25% - 20px );
+}
+
+.desc-block{
+    margin: auto 40px;
+}
+
+.avatar{
+    max-width: 50%;
+    display: block;
+}
+
+.reviews{
+    margin-top: 100px;
+    margin: auto 40px;
+}
+
+.review-list{
+    list-style-type: none;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-bottom: 0 !important;
+    padding-bottom: 15px;
+}
+
+.review-list li{
+    margin-top: 30px;
+    background-color: #bae8e8;
+    padding: 15px;
+    border-radius: 15px;
+}
+
+.user-review-rating{
+    float: right;
+}
+
+.review-text-block{
+    border-left: 1px solid rgb(181, 181, 181);
+}
