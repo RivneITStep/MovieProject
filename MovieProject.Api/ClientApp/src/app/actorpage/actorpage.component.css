@@ -115,6 +115,10 @@
     height: 180px;
 }
 
+.rating-block{
+    margin: auto 40px;
+}
+
 @media screen and (max-width: 1300px){
     .cover-img{
         width: 80%;

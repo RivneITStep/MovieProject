@@ -14,6 +14,10 @@ export class HomeComponent implements OnInit {
   constructor(private movieService: MovieService) { }
   headMovies: MovieModel[] = [];
 
+  donateOnClick(event){
+    window.open("https://www.liqpay.ua/checkout/i73130420823", "_blank");
+  }
+
   ngOnInit() {
     this.movieService.getAllMovies().subscribe(
       (data: MovieModel[]) => {

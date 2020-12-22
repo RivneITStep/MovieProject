@@ -9,7 +9,7 @@
 
 .my-text-block{
     font-family: 'Montserrat', sans-serif;
-    color: #bae8e8;
+    color: white;
     text-shadow: 1px 1px 2px black, 0 0 1em black;
 }
 
@@ -51,12 +51,16 @@
     display: flex;
 }
 
-.spacer{
-    flex: 1 1 auto;
+.list-img li:last-child{
+    margin-left: 10%;
 }
 
 .img-img{
     border-radius: 15px 15px 0px 0px;
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    display: block;
     filter: drop-shadow(1px 1px 10px black);
     filter: contrast(85%);
 }
@@ -134,3 +138,21 @@ h2{
     justify-content: space-around;
 }
 
+.donate-text{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    color: white;
+    text-align: center;
+}
+
+.donate .row .col-12 button{
+    margin: auto 30%;
+    width: 40%;
+    background-color: #001488;
+    height: 75px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 24px;
+    color: white;
+    text-shadow: 2px 0 0 rgb(0, 0, 0);
+}
