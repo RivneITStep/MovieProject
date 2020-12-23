@@ -1,0 +1,104 @@
+<div class="background">
+  <div class="custom-container">
+    <div class="main-content">
+      <div class="row">
+        <div class="media-block col-lg-4 col-xs-12">
+          <ul class="media-list">
+            <li>
+              <img class="cover-img" src="{{movie.pictureUrl}}" alt="">
+            </li>
+            <li>
+              <iframe class="cover-trailer" src="{{movie.trailerUrl}}"></iframe>
+            </li>
+          </ul>
+        </div>
+        <div class="movie-text col-lg-6 col-xs-12">
+          <h1 class="movie-name">{{movie.name}}</h1>
+          <h5 class="movie-original-name">{{movie.slogan}}</h5>
+          <hr>
+          <h4 class="about-film">About film:</h4>
+          <hr>
+          <div class="row">
+            <div class="ctg col-8">
+              <h3>Country:</h3>
+              <h3>Director:</h3>
+              <h3>Genre:</h3>
+              <h3>Composer:</h3>
+              <h3>Operator:</h3>
+              <h3>Budget:</h3>
+              <h3>Length:</h3>
+              <h3>Views:</h3>
+            </div>
+            <div class="txt col-4">
+              <h3 class="h-txt">{{movie.country}}</h3>
+              <h3 class="h-txt">{{movie.director}}</h3>
+              <h3 class="h-txt">{{movie.genre}}</h3>
+              <h3 class="h-txt">{{movie.composer}}</h3>
+              <h3 class="h-txt">{{movie.operator}}</h3>
+              <h3 class="h-txt">{{movie.budget}}$</h3>
+              <h3 class="h-txt">{{movie.length}}min</h3>
+              <h3 class="h-txt">{{movie.countViews}}</h3>
+            </div>
+          </div>
+        </div>
+        <div class="movie-actors col-2">
+          <h4>Actors:</h4>
+          <ul class="actors-list">
+            <li>Matthew McConaughey</li>
+            <li>Ann Hetevey</li>
+            <li>Jessica Chastain</li>
+            <li>Mackenzie Foy</li>
+            <li>Michael Caine</li>
+          </ul>
+        </div>
+      </div>
+      <div class="desc-block">
+        <hr>
+        <h3>Description:</h3>
+        <hr>
+        <p>{{movie.description}}</p>
+      </div>
+      <div class="gallery">
+        <ul class="photo-list">
+          <img src="https://cdn.onebauer.media/one/empire-tmdb/films/157336/images/xu9zaAevzQ5nnrsXN6JcahLnG4i.jpg?quality=50&width=1800&ratio=16-9&resizeStyle=aspectfill&format=jpg" alt="">
+          <img src="https://m.media-amazon.com/images/M/MV5BNjM5OTQzMTg4N15BMl5BanBnXkFtZTgwOTgyMjM0NTE@._V1_CR0,59,640,360_AL_UX477_CR0,0,477,268_AL_.jpg" alt="">
+          <img src="https://observer.com/wp-content/uploads/sites/2/2020/08/MV5BMjI5MTUzMTg4N15BMl5BanBnXkFtZTgwNTEyODgxMzE@._V1_SX1500_CR001500999_AL_.jpg?quality=80&w=635" alt="">
+          <img src="https://www.denofgeek.com/wp-content/uploads/2020/07/Jessica-Chastain-in-Interstellar-fire-crops.jpg?fit=1264%2C675" alt="">
+          <img src="https://www.denofgeek.com/wp-content/uploads/2016/08/Interstellar-primary1.jpg?fit=1300%2C731" alt="">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHDZjP7JAYLxpbV_RJA3voXvkGN_y9Ak2S5A&usqp=CAU" alt="">
+          <img src="https://www.fanbolt.com/wp-content/uploads/2014/11/interstellar-review.jpg" alt="">
+          <img src="https://img.cinemablend.com/filter:scale/quill/0/a/c/b/7/6/0acb76d743cdd053c5f6f10076cc5e85a1dbe870.jpg?mw=600" alt="">
+        </ul>
+      </div>
+      
+      <div class="rating-block">
+        <nz-rate [ngModel] = "0"></nz-rate>
+      </div>
+
+      <div class="reviews">
+        <hr>
+        <h3>Film reviews:</h3>
+        <hr>
+        <ul class="review-list">
+          <li>
+            <div class="row">
+              <div class="user-info col-2">
+                <img src="https://i.pinimg.com/236x/ec/46/8c/ec468ce45db32934ff7c385610b7f3f4.jpg" alt="" class="avatar">
+                <h3>Username</h3>
+              </div>
+              <div class="col-10 review-text-block">
+                <h2>I have watched this film</h2>
+                <hr>
+                <p>{{movie.description}}</p>
+                <div class="user-review-rating">
+                  <h3>Rating:</h3>
+                  <h4>8/10</h4>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,74 @@
+.background{
+    background-color: #e3f6f5;
+}
+
+.container-bg{
+    background-color: #ffffff;
+}
+
+.movie-list{
+    font-family: 'Montserrat', sans-serif;
+    padding-top: 50px;
+    padding-right: 40px;
+    list-style-type: none;
+}
+
+.object-name{
+    font-size: 50px;
+    color: black;
+}
+
+.movie-list li{
+    margin-bottom: 10px;
+}
+
+.movie-list li:hover{
+    cursor: pointer;
+    background-color: #bae8e8;
+    border-radius: 15px;
+}
+
+.movie-img{
+    border-radius: 15px;
+    padding: 10px;
+    max-width: 10%;
+    height: auto;
+    display: block;
+    margin: 0;
+}
+
+.object-name{
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.desc-block{
+    list-style-type: none;
+    padding: 10px;
+}
+
+.hr-white{
+    background-color: white;
+}
+
+.desc-block h5{
+    font-size: 10px;
+    font-weight: 400;
+    color: black;
+}
+
+h4{
+    color: #2c698d;
+}
+
+.text-title{
+    padding-top: 100px;
+    padding-left: 40px;
+    padding-right: 40px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.movies-page-img{
+    max-width: 100%;
+    height: auto;
+}

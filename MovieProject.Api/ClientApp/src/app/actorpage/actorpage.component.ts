@@ -19,6 +19,12 @@ export class ActorpageComponent implements OnInit {
   actor: ActorModel;
 
   ngOnInit() {
+    this.actorService.getActor(this.id).subscribe(
+      (data: ActorModel) => {
+        this.actor = data;
+        console.log(this.actor.name);
+      }
+    )
   }
 
 }

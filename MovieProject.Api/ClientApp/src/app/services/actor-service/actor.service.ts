@@ -17,7 +17,7 @@ export class ActorService {
   }
 
   getActor(id: number){
-    return this.http.get(this.baseUrl + '/get/' + id);
+    return this.http.get(this.baseUrl + '/' + id);
   }
 
   addActor(model : ActorModel){

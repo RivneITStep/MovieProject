@@ -19,16 +19,20 @@ import { ActorpageComponent } from './actorpage/actorpage.component';
 import { FooterComponent } from './footer/footer.component';
 import { NgxPaginationModule, PaginationControlsComponent} from 'ngx-pagination';
 import { DemoNgZorroAntdModule } from "./ng-zorro-antd.module";
+import { MoviesComponent } from './movies/movies.component';
+import { MoviepageComponent } from './moviepage/moviepage.component';
 
 @NgModule({
-  declarations: [						
+  declarations: [								
     AppComponent,
       HomeComponent,
       RegisterComponent,
       HeaderComponent,
       ActorsComponent,
       ActorpageComponent,
-      FooterComponent
+      FooterComponent,
+      MoviesComponent,
+      MoviepageComponent
    ],
   imports: [
     DemoNgZorroAntdModule,
