@@ -21,6 +21,8 @@ import { NgxPaginationModule, PaginationControlsComponent} from 'ngx-pagination'
 import { DemoNgZorroAntdModule } from "./ng-zorro-antd.module";
 import { MoviesComponent } from './movies/movies.component';
 import { MoviepageComponent } from './moviepage/moviepage.component';
+import { ApiService } from './core/api.service';
+
 
 @NgModule({
   declarations: [								

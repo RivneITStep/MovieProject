@@ -2,11 +2,21 @@
     width: 360px;
     padding: 8% 0 0;
     margin: auto;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
   }
+
+  .background{
+    background-image: url('https://wallpaperaccess.com/full/1264683.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+  }
+  
   .form {
     position: relative;
     z-index: 1;
-    background: #FFFFFF;
+    border-radius: 15px;
+    background: #bae8e8;
     max-width: 360px;
     margin: 0 auto 100px;
     padding: 45px;
@@ -26,7 +36,7 @@
   .form button {
     text-transform: uppercase;
     outline: 0;
-    background: rgb(206, 105, 22);
+    background: rgb(54, 0, 75);
     width: 100%;
     border: 0;
     padding: 15px;
@@ -37,7 +47,7 @@
     cursor: pointer;
   }
   .form button:hover,.form button:active,.form button:focus {
-    background: rgb(190, 95, 17);
+    background: rgb(54, 0, 75);
   }
   .form .message {
     margin: 15px 0 0;
@@ -45,7 +55,7 @@
     font-size: 12px;
   }
   .form .message a {
-    color: rgb(206, 105, 22);
+    color: rgb(54, 0, 75);
     text-decoration: none;
   }
   .form .register-form {

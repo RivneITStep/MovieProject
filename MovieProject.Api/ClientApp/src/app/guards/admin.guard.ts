@@ -1,5 +1,5 @@
 
-import { ApiService } from './../core/Api.service';
+import { ApiService } from './../core/api.service';
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs';

@@ -7,6 +7,7 @@ import { MoviesComponent } from './movies/movies.component';
 import { MoviepageComponent } from './moviepage/moviepage.component';
 import { RegisterComponent } from './register/register.component';
 import { NotLoginGuard } from './guards/notLogin.guard';
+import { AdminGuard } from './guards/admin.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -14,7 +15,7 @@ const routes: Routes = [
   { path: 'actors/:id', component: ActorpageComponent, pathMatch: 'full' },
   { path: 'movies', component: MoviesComponent, pathMatch: 'full' },
   { path: 'movies/:id', component: MoviepageComponent, pathMatch: 'full' },
-  { path: 'register', component: RegisterComponent, pathMatch: 'full'}
+  { path: 'register', component: RegisterComponent, pathMatch: 'full', canActivate: [NotLoginGuard] }
 ]
 
 @NgModule({
