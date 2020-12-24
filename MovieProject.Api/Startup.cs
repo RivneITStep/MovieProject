@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using MovieProject.Api.Helper;
 using MovieProject.Api.MappingProfiles;
 using MovieProject.Auth;
 using MovieProject.Auth.Interfaces;
@@ -134,6 +135,7 @@ namespace MovieProject.Api
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
+            //SeederDatabase.SeedData(app.ApplicationServices, env, Configuration);
         }
     }
 }
