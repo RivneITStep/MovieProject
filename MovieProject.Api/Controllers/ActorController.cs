@@ -32,7 +32,7 @@ namespace MovieProject.Api.Controllers
             try
             {
                 var obj = _mapper.Map<ActorDTO, Actor>(model);
-                await _context.AddAsync(obj);
+                await _context.actors.AddAsync(obj);
                 await _context.SaveChangesAsync();
 
                 return new ResultDTO
@@ -69,21 +69,14 @@ namespace MovieProject.Api.Controllers
             return _mapper.Map<List<Actor>, List<ActorDTO>>(entities);
         }
 
-        [HttpGet("films/{id}")]
-        public async Task<List<MovieDTO>> getActorFilms([FromRoute]int id)
-        {
-            var actor = await _context.actors.SingleOrDefaultAsync(t => t.Id == id);
-            var entities = await actor.actorFilms.AsQueryable().ToListAsync();
-            return _mapper.Map<List<Movie>, List<MovieDTO>>(entities);
-        }
-        
-        [HttpPost("photos/add/{id}")]
-        public async Task<ResultDTO> addActorPhoto([FromRoute]int id, [FromBody]PhotoDTO model)
+        [HttpPost("{id}/add/movie")]
+        public async Task<ResultDTO> addActorFilm([FromBody]MovieDTO model, [FromRoute]int id)
         {
             try
             {
-                var obj = _mapper.Map<PhotoDTO, Photo>(model);
-                await _context.photos.AddAsync(obj);
+                var actor = await _context.actors.SingleOrDefaultAsync(t => t.Id == id);
+                var obj = _mapper.Map<MovieDTO, Movie>(model);
+                actor.actorFilms.Add(obj);
                 await _context.SaveChangesAsync();
 
                 return new ResultDTO
@@ -92,7 +85,7 @@ namespace MovieProject.Api.Controllers
                     Message = "Posted"
                 };
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 List<string> temp = new List<string>();
                 temp.Add(ex.Message);
@@ -100,12 +93,20 @@ namespace MovieProject.Api.Controllers
                 return new ResultErrorDTO
                 {
                     Status = 500,
-                    Message = "ERROR",
+                    Message = "Error",
                     Errors = temp
                 };
             }
-            
         }
+
+        [HttpGet("{id}/movies")]
+        public async Task<List<MovieDTO>> getActorFilms([FromRoute]int id)
+        {
+            var actor = await _context.actors.SingleOrDefaultAsync(t => t.Id == id);
+            var entities = await actor.actorFilms.AsQueryable().ToListAsync();
+            return _mapper.Map<List<Movie>, List<MovieDTO>>(entities);
+        }
+        
 
     }
 }
