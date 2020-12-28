@@ -1,0 +1,48 @@
+.logo {
+    height: 32px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 16px;
+  }
+
+  nz-header {
+    background: #fff;
+    padding: 0;
+  }
+
+  nz-sider{
+      height: 1000px;
+      max-width: 10%;
+  }
+
+  nz-content {
+    margin: 0 16px;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  nz-breadcrumb {
+    margin: 16px 0;
+  }
+
+  .inner-content {
+    padding: 24px;
+    background: #fff;
+    min-height: 360px;
+  }
+
+  .page-title{
+      font-family: 'Montserrat', sans-serif;
+      margin-top: 20px;
+      margin-left: 16px;
+      margin-bottom: 30px;
+  }
+
+  @media screen and (max-width: 600px){
+      th{
+          font-size: 10px;
+          padding: 5px !important;
+      }
+
+      h1{
+          font-size: 18px;
+      }
+  }

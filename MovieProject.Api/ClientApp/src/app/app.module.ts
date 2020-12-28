@@ -22,10 +22,12 @@ import { DemoNgZorroAntdModule } from "./ng-zorro-antd.module";
 import { MoviesComponent } from './movies/movies.component';
 import { MoviepageComponent } from './moviepage/moviepage.component';
 import { ApiService } from './core/api.service';
+import { LoginComponent } from './login/login.component';
+import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 
 
 @NgModule({
-  declarations: [								
+  declarations: [										
     AppComponent,
       HomeComponent,
       RegisterComponent,
@@ -34,7 +36,9 @@ import { ApiService } from './core/api.service';
       ActorpageComponent,
       FooterComponent,
       MoviesComponent,
-      MoviepageComponent
+      MoviepageComponent,
+      LoginComponent,
+      AdminPanelComponent
    ],
   imports: [
     DemoNgZorroAntdModule,

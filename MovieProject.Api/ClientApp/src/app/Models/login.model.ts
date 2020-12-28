@@ -1,9 +1,9 @@
 export class SignInModel{
-    public Email: string;
-    public Password: string;
+    public email: string;
+    public password: string;
 
     constructor(){
-        this.Email = null;
-        this.Password = null;
+        this.email = null;
+        this.password = null;
     }
 }
