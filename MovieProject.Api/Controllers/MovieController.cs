@@ -111,7 +111,35 @@ namespace MovieProject.Api.Controllers
             var entities = await movie.filmActors.AsQueryable().ToListAsync();
             return _mapper.Map<List<Actor>, List<ActorDTO>>(entities);
         }
-
+        
+        [HttpDelete("delete/{id}")]
+        public async Task<ResultDTO> deleteMovie([FromRoute]int id)
+        {
+            try
+            {
+                var obj = await _context.movies.SingleOrDefaultAsync(t => t.Id == id);
+                _context.movies.Remove(obj);
+                await _context.SaveChangesAsync();
+                _logger.LogInformation($"Movie: id: {obj.Id} deleted");
+                return new ResultDTO
+                {
+                    Status = 200,
+                    Message = "Posted"
+                };
+            }
+            catch (Exception ex)
+            {
+                List<string> temp = new List<string>();
+                temp.Add(ex.Message);
+                _logger.LogInformation($"Movie not deleted: {ex.Message}");
+                return new ResultErrorDTO
+                {
+                    Status = 500,
+                    Message = "Error",
+                    Errors = temp
+                };
+            }
+        }
 
     }
 }

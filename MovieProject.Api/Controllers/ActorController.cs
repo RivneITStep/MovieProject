@@ -113,6 +113,34 @@ namespace MovieProject.Api.Controllers
             return _mapper.Map<List<Movie>, List<MovieDTO>>(entities);
         }
         
+        [HttpDelete("delete/{id}")]
+        public async Task<ResultDTO> deleteActor([FromRoute]int id)
+        {
+            try
+            {
+                var obj = await _context.actors.SingleOrDefaultAsync(t => t.Id == id);
+                _context.actors.Remove(obj);
+                await _context.SaveChangesAsync();
+                _logger.LogInformation($"Actor: id: {obj.Id} deleted");
+                return new ResultDTO
+                {
+                    Status = 200,
+                    Message = "Posted"
+                };
+            }
+            catch(Exception ex)
+            {
+                List<string> temp = new List<string>();
+                temp.Add(ex.Message);
+                _logger.LogInformation($"Actor not deleted: {ex.Message}");
+                return new ResultErrorDTO
+                {
+                    Status = 500,
+                    Message = "Error",
+                    Errors = temp
+                };
+            }
+        }
 
     }
 }
