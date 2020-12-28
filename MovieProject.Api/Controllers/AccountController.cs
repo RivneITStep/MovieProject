@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using MovieProject.Api.Helper;
 using MovieProject.Auth.Interfaces;
 using MovieProject.DAL;
@@ -23,6 +24,7 @@ namespace MovieProject.Api.Controllers
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly IConfiguration _configuration;
+        private readonly ILogger<AccountController> _logger;
         private readonly IJWTService _jwtTokenService;
 
         public AccountController(
@@ -30,12 +32,14 @@ namespace MovieProject.Api.Controllers
             UserManager<User> userManager,
             SignInManager<User> signInManager,
             IConfiguration configuration,
+            ILogger<AccountController> logger,
             IJWTService jWtTokenService)
         {
             _userManager = userManager;
             _context = context;
             _configuration = configuration;
             _signInManager = signInManager;
+            _logger = logger;
             _jwtTokenService = jWtTokenService;
         }
 
@@ -61,6 +65,7 @@ namespace MovieProject.Api.Controllers
 
             if (!result.Succeeded)
             {
+                _logger.LogInformation($"User: email: {user.Email} register failed");
                 return new ResultErrorDTO
                 {
                     Status = 500,
@@ -69,6 +74,7 @@ namespace MovieProject.Api.Controllers
             }
             else
             {
+                _logger.LogInformation($"User registered: id: {user.Id} email: {user.Email}");
                 result = _userManager.AddToRoleAsync(user, "User").Result;
                 await _context.SaveChangesAsync();
             }
@@ -98,6 +104,7 @@ namespace MovieProject.Api.Controllers
                 var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
                 if (!result.Succeeded)
                 {
+                    _logger.LogInformation($"User: email: {model.Email} login failed");
                     List<string> error = new List<string>();
                     error.Add("User is not found, password or email isn't correct!");
                     return new ResultErrorDTO
@@ -111,7 +118,7 @@ namespace MovieProject.Api.Controllers
                 {
                     var user = await _userManager.FindByEmailAsync(model.Email);
                     await _signInManager.SignInAsync(user, false);
-
+                    _logger.LogInformation($"User: email: {model.Email} login success");
                     return new ResultLoginDTO
                     {
                         Status = 200,

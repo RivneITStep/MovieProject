@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using MovieProject.DAL;
 using MovieProject.DAL.Entities;
 using MovieProject.DTO.Models;
@@ -19,11 +20,13 @@ namespace MovieProject.Api.Controllers
     {
         private readonly EFContext _context;
         private readonly IMapper _mapper;
+        private readonly ILogger<MovieController> _logger;
 
-        public MovieController(EFContext context, IMapper mapper)
+        public MovieController(EFContext context, IMapper mapper, ILogger<MovieController> logger)
         {
             _context = context;
             _mapper = mapper;
+            _logger = logger;
         }
 
         [HttpGet("{id}")]
@@ -47,6 +50,7 @@ namespace MovieProject.Api.Controllers
             {
                 var obj = _mapper.Map<MovieDTO, Movie>(model);
                 await _context.movies.AddAsync(obj);
+                _logger.LogInformation($"Movie added: id: {obj.Id} name: {obj.Name}");
                 await _context.SaveChangesAsync();
 
                 return new ResultDTO
@@ -59,7 +63,7 @@ namespace MovieProject.Api.Controllers
             {
                 List<string> temp = new List<string>();
                 temp.Add(ex.Message);
-
+                _logger.LogInformation($"Movie not added: {ex.Message}");
                 return new ResultErrorDTO
                 {
                     Status = 500,
@@ -77,6 +81,7 @@ namespace MovieProject.Api.Controllers
                 var movie = await _context.movies.SingleOrDefaultAsync(t => t.Id == id);
                 var obj = _mapper.Map<ActorDTO, Actor>(model);
                 movie.filmActors.Add(obj);
+                _logger.LogInformation($"Actor added to movie: id: {obj.Id} name: {obj.Name}");
                 await _context.SaveChangesAsync();
 
                 return new ResultDTO
@@ -89,7 +94,7 @@ namespace MovieProject.Api.Controllers
             {
                 List<string> temp = new List<string>();
                 temp.Add(ex.Message);
-
+                _logger.LogInformation($"Actor not added to movie: {ex.Message}");
                 return new ResultErrorDTO
                 {
                     Status = 500,

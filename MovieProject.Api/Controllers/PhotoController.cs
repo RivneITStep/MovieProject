@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using MovieProject.DAL;
 using MovieProject.DAL.Entities;
 using MovieProject.DTO.Models;
@@ -19,10 +20,12 @@ namespace MovieProject.Api.Controllers
     {
         private readonly EFContext _context;
         private readonly IMapper _mapper;
-        public PhotoController(EFContext context, IMapper mapper)
+        private readonly ILogger<PhotoController> _logger;
+        public PhotoController(EFContext context, IMapper mapper, ILogger<PhotoController> logger)
         {
             _context = context;
             _mapper = mapper;
+            _logger = logger;
         }
 
         [HttpGet("actor/{id}")]
@@ -33,7 +36,7 @@ namespace MovieProject.Api.Controllers
                 var obj = _mapper.Map<PhotoDTO, Photo>(model);
                 await _context.photos.AddAsync(obj);
                 await _context.SaveChangesAsync();
-
+                _logger.LogInformation($"Actor`s: id: {model.ActorId} photo successfuly added");
                 return new ResultDTO
                 {
                     Status = 200,
@@ -44,7 +47,7 @@ namespace MovieProject.Api.Controllers
             {
                 List<string> temp = new List<string>();
                 temp.Add(ex.Message);
-
+                _logger.LogInformation($"Actor`s: id: {model.ActorId} photo add failed. {ex.Message}");
                 return new ResultErrorDTO
                 {
                     Status = 500,
