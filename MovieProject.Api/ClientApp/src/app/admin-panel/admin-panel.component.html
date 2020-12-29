@@ -16,20 +16,20 @@
     <h1 class="page-title">Admin Panel</h1>
     <nz-content>
       <div class="inner-content">
-        <nz-table nzTitle="Movies" #basicTable [nzData]="" class="movie-panel" *ngIf="div1">
+        <nz-table nzTitle="Movies" #basicTable [nzData]="movieList" class="movie-panel" *ngIf="div1">
           <thead>
             <tr>
+              <th>Id</th>
               <th>Name</th>
-              <th>Age</th>
-              <th>Address</th>
+              <th>Director</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let data of basicTable.data">
+              <td>{{ data.id }}</td>
               <td>{{ data.name }}</td>
-              <td>{{ data.age }}</td>
-              <td>{{ data.address }}</td>
+              <td>{{ data.director }}</td>
               <td>
                 <a>Action 一 {{ data.name }}</a>
                 <nz-divider nzType="vertical"></nz-divider>
@@ -39,20 +39,20 @@
           </tbody>
         </nz-table>
 
-        <nz-table nzTitle="Actors" #basicTable [nzData]="" class="movie-panel" *ngIf="div2">
+        <nz-table nzTitle="Actors" #basicTable [nzData]="actorList" class="movie-panel" *ngIf="div2">
           <thead>
             <tr>
+              <th>Id</th>
               <th>Name</th>
               <th>Age</th>
-              <th>Address</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let data of basicTable.data">
+              <td>{{ data.id }}</td>
               <td>{{ data.name }}</td>
               <td>{{ data.age }}</td>
-              <td>{{ data.address }}</td>
               <td>
                 <a>Action 一 {{ data.name }}</a>
                 <nz-divider nzType="vertical"></nz-divider>
@@ -63,7 +63,6 @@
         </nz-table>
 
         <nz-table nzTitle="Users" #basicTable [nzData]="" class="movie-panel" *ngIf="div3">
-          
           <thead>
             <tr>
               <th>Name</th>
@@ -85,6 +84,7 @@
             </tr>
           </tbody>
         </nz-table>
+
       </div>
     </nz-content>
   </nz-layout>
