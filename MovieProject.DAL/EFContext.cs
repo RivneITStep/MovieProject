@@ -16,5 +16,6 @@ namespace MovieProject.DAL
         public DbSet<Actor> actors { get; set; }
         public DbSet<Photo> photos { get; set; }
         public DbSet<Review> reviews { get; set; }
+        public DbSet<NewsArticle> articles { get; set; }
     }
 }
