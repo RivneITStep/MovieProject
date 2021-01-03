@@ -17,54 +17,53 @@ export class AdminPanelComponent implements OnInit {
   div1: boolean = false;
   div2: boolean = false;
   div3: boolean = false;
-
-  count1: number;
-  page1: number = 1;
-
-  count2: number;
-  page2: number = 1;
-
-  count3: number;
-  page3: number = 1;
+  div4: boolean = false;
+  div5: boolean = false;
 
   actorList: ActorModel[] = [];
   movieList: MovieModel[] = [];
+
+  actorAddModel: ActorModel;
+  movieAddModel: MovieModel;
 
   moviePanelClick() {
     this.div1 = true;
     this.div2 = false;
     this.div3 = false;
+    this.div4 = false;
+    this.div5 = false;
   }
 
   actorPanelClick(){
     this.div1 = false;
     this.div2 = true;
-    this.div3 = false
+    this.div3 = false;
+    this.div4 = false;
+    this.div5 = false;
   }
 
   userPanelClick(){
     this.div1 = false;
     this.div2 = false;
     this.div3 = true;
+    this.div4 = false;
+    this.div5 = false;
   }
 
-  pageChanged(event){
-    if(this.div1 == true){
-      this.page1 = event;
-    }
-    if(this.div2 == true){
-      this.page2 = event;
-    }
-    if(this.div3 == true){
-      this.page3 == event;
-    }
-    let scrollToTop = window.setInterval(() => {
-      let pos = window.pageYOffset;
-      if (pos > 0) {
-          window.scrollTo(0, pos - 500);
-      } else {
-          window.clearInterval(scrollToTop);
-      }}, 16);
+  movieAddClick(){
+    this.div1 = false;
+    this.div2 = false;
+    this.div3 = false;
+    this.div4 = true;
+    this.div5 = false;
+  }
+
+  actorAddClick(){
+    this.div1 = false;
+    this.div2 = false;
+    this.div3 = false;
+    this.div4 = false;
+    this.div5 = true;
   }
 
   ngOnInit() {

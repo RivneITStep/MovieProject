@@ -10,6 +10,12 @@
           <li (click)="userPanelClick()" nz-menu-item>Users</li>
         </ul>
       </li>
+      <li nz-submenu nzTitle="Post">
+        <ul>
+          <li (click)="actorAddClick()" nz-menu-item>Actors</li>
+          <li (click)="movieAddClick()" nz-menu-item>Movies</li>
+        </ul>
+      </li>
     </ul>
   </nz-sider>
   <nz-layout>
@@ -84,7 +90,6 @@
             </tr>
           </tbody>
         </nz-table>
-
       </div>
     </nz-content>
   </nz-layout>
