@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using MovieProject.DAL;
 using MovieProject.DAL.Entities;
 using MovieProject.DTO.Models;
+using MovieProject.DTO.Models.Filters;
 using MovieProject.DTO.Models.Result;
 using System;
 using System.Collections.Generic;
@@ -71,6 +72,28 @@ namespace MovieProject.Api.Controllers
         public async Task<IEnumerable<ActorDTO>> getActors()
         {
             var entities = await _context.actors.ToListAsync();
+            return _mapper.Map<List<Actor>, List<ActorDTO>>(entities);
+        }
+
+        [HttpGet("filters")]
+        public async Task<IEnumerable<ActorDTO>> searchActorByFilters([FromBody]ActorFilter filter)
+        {
+            var entities = await _context.actors.ToListAsync();
+            if (!String.IsNullOrEmpty(filter.Country))
+            {
+                entities = entities.Where(s => s.Country.ToLower().Contains(filter.Country.ToLower())).ToList();
+            }
+
+            if (filter.BirthYear != 0)
+            {
+                entities = entities.Where(s => s.BirthYear.Equals(filter.BirthYear)).ToList();
+            }
+
+            if (filter.CountFilms != 0)
+            {
+                entities = entities.Where(s => s.CountFilms.Equals(filter.CountFilms)).ToList();
+            }
+
             return _mapper.Map<List<Actor>, List<ActorDTO>>(entities);
         }
 

@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using MovieProject.DAL;
 using MovieProject.DAL.Entities;
 using MovieProject.DTO.Models;
+using MovieProject.DTO.Models.Filters;
 using MovieProject.DTO.Models.Result;
 using System;
 using System.Collections.Generic;
@@ -52,6 +53,33 @@ namespace MovieProject.Api.Controllers
             {
                 entities = entities.Where(s => s.Name.ToLower().Contains(search) || s.OriginalName.ToLower().Contains(search)).ToList();
             }
+            return _mapper.Map<List<Movie>, List<MovieDTO>>(entities);
+        }
+
+        [HttpGet("filters")]
+        public async Task<IEnumerable<MovieDTO>> getMoviesByFilter([FromBody]MovieFilter filter)
+        {
+            var entities = await _context.movies.ToListAsync();
+            if (!String.IsNullOrEmpty(filter.Country))
+            {
+                entities = entities.Where(s => s.Country.ToLower().Contains(filter.Country.ToLower())).ToList();
+            }
+
+            if (!String.IsNullOrEmpty(filter.Genre))
+            {
+                entities = entities.Where(s => s.Genre.ToLower().Contains(filter.Genre.ToLower())).ToList();
+            }
+
+            if(filter.Year != 0)
+            {
+                entities = entities.Where(s => s.Year.Equals(filter.Year)).ToList();
+            }
+
+            if(filter.Rating != 0)
+            {
+                entities = entities.Where(s => s.Rating > filter.Rating).ToList();
+            }
+
             return _mapper.Map<List<Movie>, List<MovieDTO>>(entities);
         }
 
