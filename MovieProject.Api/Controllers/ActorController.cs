@@ -30,7 +30,7 @@ namespace MovieProject.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ResultDTO> addActor([FromBody]ActorDTO model)
+        public async Task<ResultDTO> addActor([FromBody] ActorDTO model)
         {
             try
             {
@@ -46,7 +46,7 @@ namespace MovieProject.Api.Controllers
                     Message = "Posted"
                 };
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 List<string> temp = new List<string>();
                 temp.Add(ex.Message);
@@ -61,7 +61,7 @@ namespace MovieProject.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActorDTO> getActor([FromRoute]int id)
+        public async Task<ActorDTO> getActor([FromRoute] int id)
         {
             var obj = await _context.actors.SingleOrDefaultAsync(t => t.Id == id);
             return _mapper.Map<Actor, ActorDTO>(obj);
@@ -75,7 +75,7 @@ namespace MovieProject.Api.Controllers
         }
 
         [HttpPost("{id}/add/movie")]
-        public async Task<ResultDTO> addActorFilm([FromBody]MovieDTO model, [FromRoute]int id)
+        public async Task<ResultDTO> addActorFilm([FromBody] MovieDTO model, [FromRoute] int id)
         {
             try
             {
@@ -106,11 +106,23 @@ namespace MovieProject.Api.Controllers
         }
 
         [HttpGet("{id}/movies")]
-        public async Task<List<MovieDTO>> getActorFilms([FromRoute]int id)
+        public async Task<List<MovieDTO>> getActorFilms([FromRoute] int id)
         {
             var actor = await _context.actors.SingleOrDefaultAsync(t => t.Id == id);
             var entities = await actor.actorFilms.AsQueryable().ToListAsync();
             return _mapper.Map<List<Movie>, List<MovieDTO>>(entities);
+        }
+
+        [HttpGet("search/{search}")]
+        public async Task<IEnumerable<ActorDTO>> searchActorByName([FromRoute]string search)
+        {
+            search = search.ToLower();
+            var entities = await _context.actors.ToListAsync();
+            if (!String.IsNullOrEmpty(search))
+            {
+                entities = entities.Where(s => s.Name.ToLower().Contains(search) || s.Surname.ToLower().Contains(search)).ToList();
+            }
+            return _mapper.Map<List<Actor>, List<ActorDTO>>(entities);
         }
         
         [HttpDelete("delete/{id}")]

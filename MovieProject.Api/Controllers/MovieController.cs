@@ -43,6 +43,18 @@ namespace MovieProject.Api.Controllers
             return _mapper.Map<List<Movie>, List<MovieDTO>>(entities);
         }
 
+        [HttpGet("search/{search}")]
+        public async Task<IEnumerable<MovieDTO>> searchMovieByName([FromRoute]string search)
+        {
+            search = search.ToLower();
+            var entities = await _context.movies.ToListAsync();
+            if (!String.IsNullOrEmpty(search))
+            {
+                entities = entities.Where(s => s.Name.ToLower().Contains(search) || s.OriginalName.ToLower().Contains(search)).ToList();
+            }
+            return _mapper.Map<List<Movie>, List<MovieDTO>>(entities);
+        }
+
         [HttpPost]
         public async Task<ResultDTO> addMovie([FromBody] MovieDTO model)
         {
