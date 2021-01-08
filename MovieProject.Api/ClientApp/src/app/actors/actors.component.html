@@ -1,32 +1,54 @@
 <div class="background">
-  <div class="custom-container my-content">
-    <div class="container-bg">
-      <div class="text-title">
-        <h1>Actors</h1>
-        <hr>
-        <p>
-          An actor is a person who portrays a character in a performance (also actress; see below).[1] The actor performs "in the flesh" in the traditional medium of the theatre or in modern media such as film, radio, and television. The analogous Greek term is ὑποκριτής (hupokritḗs), literally "one who answers".[2] The actor's interpretation of their role—the art of acting—pertains to the role played, whether based on a real person or fictional character. This can also be considered an "actor's role," which was called this due to scrolls being used in the theaters. Interpretation occurs even when the actor is "playing themselves", as in some forms of experimental performance art.
-        </p>
-        <img class="actors-page-img" src="https://lh3.googleusercontent.com/proxy/KARPT4qFJBOP3rwaCjEPk6JhMH8JjJYv4Gry0pH01hwHAFPc22xTXejQ-3c9xoMzIHrbKrjDL64U23fwt5Fy1pTJHA" alt="">
-      </div>
-      <ul class="actor-list">
-        <li *ngFor="let actor of actors | paginate: { id: 'lid', itemsPerPage: 10, currentPage: page, totalItems: count }">
-          <hr>
-          <div class="container-fluid" [routerLink]="['./' + actor.id]">
-            <div class="row actor-block">
-              <img class="actor-img col-6" src="{{actor.pictureUrl}}" alt="">
-              <ul class="desc-block col">
-                <h2 class="object-name">{{actor.name}} {{actor.surname}}</h2>
-                <hr class="hr-white">
-              </ul>
-              <h3 class="object-name col">Age: <h4>{{actor.age}}</h4></h3>
-              <h3 class="object-name col">Country: <h4>{{actor.country}}</h4></h3>
-            </div>
-          </div>
+  <div class="intro-block">
+    <div class="intro-text">
+      <p class="intro-text-title">
+        Actors
+      </p>
+      <hr class="hr-white">
+      <p class="text-intro">
+        Acting technique is paramount to anyone wanting to be a serious actor. It's quite easy to imitate a character or
+        even an emotion, but where's the depth in that? How can you sustain or repeat again what you might have found
+        intuitively? Do you even know what you did or how you did it?
+        The technique, however, will help you find a character, which in turn informs how you approach the
+        text/script/written word. How do you bring the dialogue alive? How do you know what choices to make? The goal of
+        a trained actor is to become a fully realised three-dimensional character, with a rich backstory. I must believe
+        the character you play is truthful and not a cliche, a caricature, a thin external representation of someone who
+        barely resembles a human being. I must believe what you say is real and that you're not reciting, spouting or
+        commenting.
+      </p>
+    </div>
+    <img class="intro-img"
+      src="https://purepng.com/public/uploads/large/purepng.com-tom-cruisetom-cruisetomcruisethomascruise-mapotheramerican-actorproducerimf-agentethan-huntmission-impossible-1701528084526axldn.png"
+      alt="">
+  </div>
+  <hr class="hrhr-black">
+  <div class="content-block">
+    <div>
+      <ul class="actor-filters">
+        <li>
+          Country
+          <ul></ul>
+        </li>
+        <li>
+          Birth year
+          <ul></ul>
+        </li>
+        <li>
+          Count of films
+          <ul></ul>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <ul class="actors">
+        <li class="actor" *ngFor="let item of actors | paginate: { id: 'lid', itemsPerPage: 10, currentPage: page, totalItems: count }">
+          <img src="{{item.pictureUrl}}" alt="" class="actor-img">
+          <p class="actor-name">{{item.name}} {{item.surname}}</p>
+          <p class="actor-country">{{item.country}}</p>
+          <img class="actor-like" src="https://www.flaticon.com/svg/static/icons/svg/889/889140.svg" alt="">
         </li>
       </ul>
       <pagination-controls id="lid" maxSize="5" directionLinks="true" (pageChange)="pageChanged($event)"></pagination-controls>
-      <div style="height: 15px;"></div>
     </div>
   </div>
 </div>
