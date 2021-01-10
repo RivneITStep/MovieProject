@@ -1,0 +1,42 @@
+.background{
+    height: 1000px;
+    padding: 100px 5%;
+    background-color: rgb(30,30,30);
+}
+
+.content-block{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 5%;
+}
+
+.grid-item{
+    background-color: white;
+    border-radius: 15px;
+    padding: 15px;
+}
+
+.form{
+    display: grid;
+    grid-template-columns: 1fr;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.form-input{
+    margin-bottom: 30px;
+}
+
+.add-actor-header{
+    font-size: 30px;
+}
+
+.hr-black{
+    background-color: black;
+}
+
+.btn-manager{
+    border: none;
+    font-size: 30px;
+    background-color: rgb(0, 197, 223);
+    color: white;
+}

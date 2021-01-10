@@ -24,10 +24,11 @@ import { MoviepageComponent } from './moviepage/moviepage.component';
 import { ApiService } from './core/api.service';
 import { LoginComponent } from './login/login.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
+import { ActorManagerComponent } from './actor-manager/actor-manager.component';
 
 
 @NgModule({
-  declarations: [										
+  declarations: [											
     AppComponent,
       HomeComponent,
       RegisterComponent,
@@ -38,7 +39,8 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
       MoviesComponent,
       MoviepageComponent,
       LoginComponent,
-      AdminPanelComponent
+      AdminPanelComponent,
+      ActorManagerComponent
    ],
   imports: [
     DemoNgZorroAntdModule,

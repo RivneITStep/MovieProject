@@ -147,7 +147,6 @@ namespace MovieProject.Api.Controllers
             }
             return _mapper.Map<List<Actor>, List<ActorDTO>>(entities);
         }
-        
         [HttpDelete("delete/{id}")]
         public async Task<ResultDTO> deleteActor([FromRoute]int id)
         {

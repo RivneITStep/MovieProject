@@ -1,0 +1,43 @@
+<div class="background">
+  <div class="content-block">
+    <div class="grid-item">
+      <div class="form">
+        <p class="add-actor-header">Add actor</p>
+        <input class="form-input" nz-input placeholder="Name" [(ngModel)]="name"/>
+        <input class="form-input" nz-input placeholder="Surname" [(ngModel)]="surname"/>
+        <input class="form-input" nz-input placeholder="Country" [(ngModel)]="country"/>
+        <input class="form-input" nz-input placeholder="Description" [(ngModel)]="description"/>
+        <input class="form-input" nz-input placeholder="Age" [(ngModel)]="age"/>
+        <input class="form-input" nz-input placeholder="Count of films" [(ngModel)]="countFilms"/>
+        <input class="form-input" nz-input placeholder="Birth year" [(ngModel)]="birthYear"/>
+        <input class="form-input" nz-input placeholder="Picture Url" [(ngModel)]="pictureUrl"/>
+        <button class="btn-manager" (click)="postActor()">Add actor</button>
+      </div>
+      
+    </div>
+    <div class="grid-item">
+      <nz-table #basicTable [nzData]="list">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of basicTable.data">
+            <td>{{ data.id }}</td>
+            <td>{{ data.name }}</td>
+            <td>{{ data.surname }}</td>
+            <td>
+              <a>Edit</a>
+              <nz-divider nzType="vertical"></nz-divider>
+              <a>Delete</a>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
+  </div>
+</div>

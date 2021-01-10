@@ -58,9 +58,9 @@ namespace MovieProject.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IEnumerable<ReviewDTO>> getMovieReviews([FromRoute]int id)
+        public IEnumerable<ReviewDTO> getMovieReviews([FromRoute]int id)
         {
-            var entities = await _context.reviews.Where(t => t.MovieId == id).AsQueryable().ToListAsync();
+            var entities = _context.reviews.Where(t => t.MovieId == id).ToList();
             return _mapper.Map<List<Review>, List<ReviewDTO>>(entities);
         }
 
