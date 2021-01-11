@@ -1,34 +1,6 @@
 <div class="background">
   <div class="content-block">
     <div class="grid-item">
-      <div class="form" *ngIf="div1 == true">
-        <p class="add-actor-header">Add actor </p>
-        <input class="form-input" nz-input placeholder="Name" [(ngModel)]="actor.name"/>
-        <input class="form-input" nz-input placeholder="Surname" [(ngModel)]="actor.surname"/>
-        <input class="form-input" nz-input placeholder="Country" [(ngModel)]="actor.country"/>
-        <input class="form-input" nz-input placeholder="Description" [(ngModel)]="actor.description"/>
-        <input class="form-input" nz-input placeholder="Age" [(ngModel)]="actor.age"/>
-        <input class="form-input" nz-input placeholder="Count of films" [(ngModel)]="actor.countFilms"/>
-        <input class="form-input" nz-input placeholder="Birth year" [(ngModel)]="actor.birthYear"/>
-        <input class="form-input" nz-input placeholder="Picture Url" [(ngModel)]="actor.pictureUrl"/>
-        <button class="btn-manager" (click)="postActor()">Add actor</button>
-      </div>
-
-      <div class="form" *ngIf="div2 == true">
-        <p class="add-actor-header">Edit actor</p>
-        <input class="form-input" nz-input placeholder="Name" [(ngModel)]="actor.name"/>
-        <input class="form-input" nz-input placeholder="Surname" [(ngModel)]="actor.surname"/>
-        <input class="form-input" nz-input placeholder="Country" [(ngModel)]="actor.country"/>
-        <input class="form-input" nz-input placeholder="Description" [(ngModel)]="actor.description"/>
-        <input class="form-input" nz-input placeholder="Age" [(ngModel)]="actor.age"/>
-        <input class="form-input" nz-input placeholder="Count of films" [(ngModel)]="actor.countFilms"/>
-        <input class="form-input" nz-input placeholder="Birth year" [(ngModel)]="actor.birthYear"/>
-        <input class="form-input" nz-input placeholder="Picture Url" [(ngModel)]="actor.pictureUrl"/>
-        <button class="btn-manager" (click)="editActor()">Edit actor</button>
-      </div>
-      
-    </div>
-    <div class="grid-item">
       <button class="btn-manager" (click)="showAddActor()">Add actor</button>
       <nz-table #basicTable [nzData]="list">
         <thead>
@@ -52,6 +24,34 @@
           </tr>
         </tbody>
       </nz-table>
+    </div>
+    <div class="grid-item">
+      <div class="form" *ngIf="div1 == true">
+        <p class="add-actor-header">Add actor </p>
+        <input class="form-input" nz-input placeholder="Name" [(ngModel)]="actor.name" />
+        <input class="form-input" nz-input placeholder="Surname" [(ngModel)]="actor.surname" />
+        <input class="form-input" nz-input placeholder="Country" [(ngModel)]="actor.country" />
+        <input class="form-input" nz-input placeholder="Description" [(ngModel)]="actor.description" />
+        <input class="form-input" nz-input placeholder="Age" [(ngModel)]="actor.age" />
+        <input class="form-input" nz-input placeholder="Count of films" [(ngModel)]="actor.countFilms" />
+        <input class="form-input" nz-input placeholder="Birth year" [(ngModel)]="actor.birthYear" />
+        <input class="form-input" nz-input placeholder="Picture Url" [(ngModel)]="actor.pictureUrl" />
+        <button class="btn-manager" (click)="postActor()">Add actor</button>
+      </div>
+
+      <div class="form" *ngIf="div2 == true">
+        <p class="add-actor-header">Edit actor</p>
+        <input class="form-input" nz-input placeholder="Name" [(ngModel)]="actor.name" />
+        <input class="form-input" nz-input placeholder="Surname" [(ngModel)]="actor.surname" />
+        <input class="form-input" nz-input placeholder="Country" [(ngModel)]="actor.country" />
+        <input class="form-input" nz-input placeholder="Description" [(ngModel)]="actor.description" />
+        <input class="form-input" nz-input placeholder="Age" [(ngModel)]="actor.age" />
+        <input class="form-input" nz-input placeholder="Count of films" [(ngModel)]="actor.countFilms" />
+        <input class="form-input" nz-input placeholder="Birth year" [(ngModel)]="actor.birthYear" />
+        <input class="form-input" nz-input placeholder="Picture Url" [(ngModel)]="actor.pictureUrl" />
+        <button class="btn-manager" (click)="editActor()">Edit actor</button>
+      </div>
+
     </div>
   </div>
 </div>

@@ -11,6 +11,8 @@ import { AdminGuard } from './guards/admin.guard';
 import { LoginComponent } from './login/login.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { ActorManagerComponent } from './actor-manager/actor-manager.component';
+import { FilmManagerComponent } from './film-manager/film-manager.component';
+
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'actors', component: ActorsComponent, pathMatch: 'full' },
@@ -20,7 +22,8 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent, pathMatch: 'full', canActivate: [NotLoginGuard] },
   { path: 'login', component: LoginComponent, pathMatch: 'full', canActivate: [NotLoginGuard] },
   { path: 'admin-panel', component: AdminPanelComponent, pathMatch: 'full'},
-  {path: 'admin-panel/actor-manager', component: ActorManagerComponent, pathMatch: 'full'}
+  { path: 'admin-panel/actor-manager', component: ActorManagerComponent, pathMatch: 'full'},
+  { path: 'admin-panel/film-manager', component: FilmManagerComponent, pathMatch: 'full'}
 ]
 
 @NgModule({

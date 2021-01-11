@@ -113,6 +113,36 @@ namespace MovieProject.Api.Controllers
             }
         }
 
+        [HttpPost("edit")]
+        public async Task<ResultDTO> editMovie([FromBody]MovieDTO model)
+        {
+            var obj = await _context.movies.SingleOrDefaultAsync(t => t.Id == model.Id);
+
+            obj.Name = model.Name;
+            obj.OriginalName = model.OriginalName;
+            obj.Year = model.Year;
+            obj.Description = model.Description;
+            obj.Country = model.Country;
+            obj.Director = model.Director;
+            obj.Operator = model.Operator;
+            obj.Composer = model.Composer;
+            obj.Genre = model.Genre;
+            obj.Slogan = model.Slogan;
+            obj.Budget = model.Budget;
+            obj.Length = model.Length;
+            obj.CountViews = model.CountViews;
+            obj.PictureUrl = model.PictureUrl;
+            obj.TrailerUrl = model.TrailerUrl;
+
+            await _context.SaveChangesAsync();
+
+            return new ResultDTO
+            {
+                Status = 200,
+                Message = "Edited"
+            };
+        }
+
         [HttpPost("{id}/add/actor")]
         public async Task<ResultDTO> addMovieActor([FromBody]ActorDTO model, [FromRoute]int id)
         {
@@ -152,7 +182,7 @@ namespace MovieProject.Api.Controllers
             return _mapper.Map<List<Actor>, List<ActorDTO>>(entities);
         }
         
-        [HttpDelete("delete/{id}")]
+        [HttpDelete("{id}")]
         public async Task<ResultDTO> deleteMovie([FromRoute]int id)
         {
             try

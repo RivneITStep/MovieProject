@@ -19,14 +19,6 @@ export class ActorManagerComponent implements OnInit {
   div2: boolean = false;
 
   list: ActorModel[] = [];
-  name: string;
-  surname: string;
-  country: string;
-  age: number;
-  countFilms: number;
-  birthYear: number;
-  description: string;
-  pictureUrl: string;
   actor: ActorModel = new ActorModel();
   actorEditId: number;
   isError: boolean = false;

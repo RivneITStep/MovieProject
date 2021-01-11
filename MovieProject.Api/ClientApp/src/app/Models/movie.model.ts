@@ -1,7 +1,8 @@
 export class MovieModel{
-    public id : number;
+    public id: number;
     public name: string;
     public originalName: string;
+    public year: number;
     public description: string;
     public country: string;
     public director: string;
@@ -9,17 +10,17 @@ export class MovieModel{
     public composer: string;
     public genre: string;
     public slogan: string;
-    public budget: string;
+    public budget: number;
     public length: number;
     public countViews: number;
-    public pictureUrl: number;
+    public pictureUrl: string;
     public trailerUrl: string;
     public rating: number;
 
     constructor(){
-        this.id = null;
         this.name = null;
         this.originalName = null;
+        this.year = null;
         this.description = null;
         this.country = null;
         this.director = null;

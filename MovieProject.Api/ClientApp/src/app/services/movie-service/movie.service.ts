@@ -23,8 +23,16 @@ constructor(private http: HttpClient) { }
     return this.http.get(this.baseUrl + '/' + id);
   }
 
+  editMovie(model: MovieModel){
+    return this.http.post<ApiResult>(this.baseUrl + '/edit', model);
+  }
+
   addMovie(model: MovieModel){
     return this.http.post<ApiResult>(this.baseUrl, model);
+  }
+
+  deleteMovie(id: number){
+    return this.http.delete<ApiResult>(this.baseUrl + '/' + id);
   }
 
 }
