@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit {
             if (decodedJwtData.roles === 'User') {
               this.router.navigate(['/']);
             } else if (decodedJwtData.roles === 'Admin') {
-              this.router.navigate(['/admin/panel']);
+              this.router.navigate(['/admin-panel']);
             }
 
 

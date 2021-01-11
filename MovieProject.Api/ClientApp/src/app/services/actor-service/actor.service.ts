@@ -27,5 +27,9 @@ export class ActorService {
   deleteActor(id: number){
     return this.http.delete<ApiResult>(this.baseUrl + '/' + id);
   }
+
+  editActor(model: ActorModel){
+    return this.http.post<ApiResult>(this.baseUrl + '/edit', model);
+  }
   
 }

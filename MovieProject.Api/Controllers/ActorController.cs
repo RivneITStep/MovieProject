@@ -61,6 +61,29 @@ namespace MovieProject.Api.Controllers
             }
         }
 
+        [HttpPost("edit/")]
+        public async Task<ResultDTO> editActor([FromBody]ActorDTO model)
+        {
+            var obj = await _context.actors.SingleOrDefaultAsync(t => t.Id == model.Id);
+
+            obj.Name = model.Name;
+            obj.Surname = model.Surname;
+            obj.Age = model.Age;
+            obj.Description = model.Description;
+            obj.CountFilms = model.CountFilms;
+            obj.BirthYear = model.BirthYear;
+            obj.Country = model.Country;
+            obj.PictureUrl = model.PictureUrl;
+
+            await _context.SaveChangesAsync();
+            return new ResultDTO
+            {
+                Message = "Edited",
+                Status = 200
+            };
+        }
+
+
         [HttpGet("{id}")]
         public async Task<ActorDTO> getActor([FromRoute] int id)
         {
@@ -147,7 +170,7 @@ namespace MovieProject.Api.Controllers
             }
             return _mapper.Map<List<Actor>, List<ActorDTO>>(entities);
         }
-        [HttpDelete("delete/{id}")]
+        [HttpDelete("{id}")]
         public async Task<ResultDTO> deleteActor([FromRoute]int id)
         {
             try
@@ -175,6 +198,8 @@ namespace MovieProject.Api.Controllers
                 };
             }
         }
+
+
 
     }
 }

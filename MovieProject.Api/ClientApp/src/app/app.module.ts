@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
-import { NotifierModule } from 'angular-notifier';
+import { NotifierModule, NotifierOptions } from 'angular-notifier';
 import { RegisterComponent } from './register/register.component';
 import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
@@ -25,7 +25,11 @@ import { ApiService } from './core/api.service';
 import { LoginComponent } from './login/login.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { ActorManagerComponent } from './actor-manager/actor-manager.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
+const notifierOptions: NotifierOptions = {
+  position: {horizontal: { position: 'right' }, vertical: { position: 'bottom' }}
+};
 
 @NgModule({
   declarations: [											
@@ -44,13 +48,14 @@ import { ActorManagerComponent } from './actor-manager/actor-manager.component';
    ],
   imports: [
     DemoNgZorroAntdModule,
+    NgxSpinnerModule,
     NgxPaginationModule,
     CommonModule,
     FormsModule,
     MatToolbarModule,
     MatInputModule,
     BrowserModule.withServerTransition({ appId : 'ng-cli-universal' }),
-    NotifierModule,
+    NotifierModule.withConfig(notifierOptions),
     HttpClientModule,
     AppRoutingModule,
     RouterModule,
