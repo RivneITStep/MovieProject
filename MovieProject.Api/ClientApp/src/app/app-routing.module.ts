@@ -12,6 +12,7 @@ import { LoginComponent } from './login/login.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { ActorManagerComponent } from './actor-manager/actor-manager.component';
 import { FilmManagerComponent } from './film-manager/film-manager.component';
+import { NewsManagerComponent } from './news-manager/news-manager.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -21,9 +22,10 @@ const routes: Routes = [
   { path: 'movies/:id', component: MoviepageComponent, pathMatch: 'full' },
   { path: 'register', component: RegisterComponent, pathMatch: 'full', canActivate: [NotLoginGuard] },
   { path: 'login', component: LoginComponent, pathMatch: 'full', canActivate: [NotLoginGuard] },
-  { path: 'admin-panel', component: AdminPanelComponent, pathMatch: 'full'},
-  { path: 'admin-panel/actor-manager', component: ActorManagerComponent, pathMatch: 'full'},
-  { path: 'admin-panel/film-manager', component: FilmManagerComponent, pathMatch: 'full'}
+  { path: 'admin-panel', component: AdminPanelComponent, pathMatch: 'full' },
+  { path: 'admin-panel/actor-manager', component: ActorManagerComponent, pathMatch: 'full' },
+  { path: 'admin-panel/film-manager', component: FilmManagerComponent, pathMatch: 'full' },
+  { path: 'admin-panel/news-manager', component: NewsManagerComponent, pathMatch: 'full' }
 ]
 
 @NgModule({

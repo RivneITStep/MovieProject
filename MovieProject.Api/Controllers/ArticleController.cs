@@ -66,5 +66,18 @@ namespace MovieProject.Api.Controllers
             }
             
         }
+
+        [HttpDelete("{id}")]
+        public async Task<ResultDTO> deleteArticle([FromRoute]int id)
+        {
+            var obj = await _context.articles.SingleOrDefaultAsync(t => t.Id == id);
+            _context.articles.Remove(obj);
+            await _context.SaveChangesAsync();
+            return new ResultDTO
+            {
+                Status = 200,
+                Message = "Deleted"
+            };
+        }
     }
 }

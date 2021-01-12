@@ -16,6 +16,7 @@ namespace MovieProject.Api.MappingProfiles
             CreateMap<Movie, MovieDTO>().ReverseMap();
             CreateMap<Photo, PhotoDTO>().ReverseMap();
             CreateMap<Review, ReviewDTO>().ReverseMap();
+            CreateMap<NewsArticle, NewsArticleDTO>().ReverseMap();
         }
     }
 }
