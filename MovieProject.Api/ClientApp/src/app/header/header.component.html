@@ -1,13 +1,13 @@
 <mat-toolbar style="background-color: rgb(30,30,30); color: white;" class="mat-elevation-z8 my-header">
-  
+
   <span class="logo-text">MovieRate</span>
-    <div class="spacer"></div>
-  <input matInput type="text" class="my-search">
-  
+  <div class="spacer"></div>
   <a class="temp-a" mat-button routerLink="">Home</a>
   <a mat-button routerLink="actors">Actors</a>
   <a mat-button routerLink="movies">Films</a>
   <a mat-button class="auth-element auth-element-login" *ngIf="isLoggedIn === true" (click)="Logout()">Logout</a>
-  <a mat-button routerLink="register" class="auth-element auth-element-register" *ngIf="isLoggedIn === false">Register</a>
-  <a mat-button routerLink="login" color="login" routerLink="login" class="auth-element auth-element-login"  *ngIf="isLoggedIn === false">Login</a>
- </mat-toolbar>
+  <a mat-button routerLink="register" class="auth-element auth-element-register"
+    *ngIf="isLoggedIn === false">Register</a>
+  <a mat-button routerLink="login" color="login" routerLink="login" class="auth-element auth-element-login"
+    *ngIf="isLoggedIn === false">Login</a>
+</mat-toolbar>

@@ -1,158 +1,154 @@
 .background{
-    font-family: 'Montserrat';
-    background-color: #e3f6f5;
-    font-weight: 400;
+    height: 1000px;
 }
 
-.main-content{
+.upper-block{
+    padding: 0 5%;
+    background-color: rgb(30,30,30);
     padding-top: 100px;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    box-shadow: 0 10px 50px -2px rgb(30,30,30);
+}
+
+.film-name{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 48px;
+    color: white;
+    font-weight: 500;
+}
+
+.film-original-name{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    color: rgb(205, 205, 205);
+}
+
+.hr-white{
     background-color: white;
 }
 
-.media-list li{
-    display: block;
+.actor-data{
+    font-family: "Montserrat", sans-serif;
+    font-size: 18px;
+    color: white;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    margin-bottom: 50px;
 }
 
-.about-film{
-    margin-top: 90px;
-}
-
-.media-list li{
-    display: block;
-}
-
-.media-list li:last-child{
-    margin-top: 30px;
-}
-
-.movie-original-name{
-    color: #2F4F4F;
-}
-
-.row h3{
-    margin-bottom: 30px;
-    font-size: 17px;
-    
-}
-
-.h-txt{
-    color: #2F4F4F;
-}
-
-.actors-list{
-    list-style-type: none;
-    padding: 0 !important;
-}
-
-.actors-list li{
-    margin-bottom: 10px;
-}
-
-.movie-actors{
-    margin-top: 0px;
-}
-
-.movie-actors h4{
-    margin-bottom: 30px;
-}
-
-.movie-text{
-    border-right: 1px solid rgb(233, 233, 233);
-}
-
-.photo-list{
-    display: flex;
-    flex-wrap: wrap;
-    margin: auto 30px;
-    padding: 0 !important;
-}
-
-.photo-list img{
-    float: left;
-    margin: 10px;
-    width: calc( 25% - 20px );
-}
-
-.desc-block{
-    margin: auto 40px;
-}
-
-.avatar{
-    max-width: 50%;
-    display: block;
-}
-
-.reviews{
-    margin-top: 100px;
-    margin: auto 40px;
-}
-
-.review-list{
-    list-style-type: none;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-    margin-bottom: 0 !important;
-    padding-bottom: 15px;
-}
-
-.review-list li{
-    margin-top: 30px;
-    background-color: #bae8e8;
-    padding: 15px;
-    border-radius: 15px;
-}
-
-.user-review-rating{
+.actor-data td{
     float: right;
 }
 
-.review-text-block{
-    border-left: 1px solid rgb(181, 181, 181);
+.actor-data tr,td{
+    margin-bottom: 20px;
 }
 
-.cover-trailer{
-    width: 300px;
-    height: 180px;
+.middle-block{
+    padding: 50px 5%;
 }
 
-.rating-block{
-    margin: auto 40px;
+.desc-header{
+    font-family: "Montserrat", sans-serif;
+    color: black;
+    font-size: 36px;
+    font-weight: 500;
 }
 
-@media screen and (max-width: 1300px){
-    .cover-img{
-        width: 80%;
+.desc{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+}
+
+.inter-block{
+    background-color: #49C6E5;
+    padding: 50px 5%;
+}
+
+.actors-header{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 36px;
+    font-weight: 500;
+    color: white;
+}
+
+.actor-name{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: white;
+}
+
+.actors{
+    display: grid;
+    grid-template-columns: repeat(6,1fr);
+    column-gap: 2%;
+}
+
+.grid-image{
+    display: block;
+    max-width: 100%;
+}
+
+.film-image{
+    display: block;
+    max-width: 100%;
+}
+
+@media screen and (max-width: 1500px){
+    .film-info{
+        margin-left: 50px;
+    }
+}
+
+@media screen and (max-width: 1250px){
+    .film-name{
+        font-size: 36px;
     }
 
-    .cover-trailer{
-        width: 80%;
-        height: 40% !important;
+    .film-original-name{
+        font-size: 18px;
     }
 
-    .row h3{
-        font-size: 10px;
+    .actor-data td,th{
+        font-size: 16px;
         margin-bottom: 10px;
     }
+}
 
-    .actors-list li{
-        font-size: 10px;
-    }
-
-    .movie-actors h4{
-        font-size: 15px;
-    }
-
-    .movie-name{
-        font-size: 28px;
-    }
-
-    .movie-original-name{
-        font-size: 15px;
+@media screen and (max-width: 1050px){
+    .actors{
+        grid-template-columns: repeat(3,1fr);
+        column-gap: 60px;
     }
 }
 
-@media screen and (max-width: 500px){
-    .custom-container{
-        padding: 0 2%;
+@media screen and (max-width: 700px){
+    .upper-block{
+        grid-template-columns: 1fr;
+    }
+
+    .film-info{
+        margin-left: 0;
+    }
+
+    .film-image{
+        margin: auto auto;
+    }
+
+    .film-name{
+        text-align: center;
+    }
+
+    .film-original-name{
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 600px){
+    .actors{
+        grid-template-columns: repeat(2,1fr);
     }
 }
