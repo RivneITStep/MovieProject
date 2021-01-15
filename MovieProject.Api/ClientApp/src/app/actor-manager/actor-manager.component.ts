@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NotifierService } from 'angular-notifier';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ActorModel } from '../Models/actor.model';
+import { ActorAddModel } from '../Models/actoradd.model';
 import { MovieModel } from '../Models/movie.model';
 import { ApiResult } from '../Models/result.model';
 import { ActorService } from '../services/actor-service/actor.service';
@@ -20,46 +21,47 @@ export class ActorManagerComponent implements OnInit {
 
   list: ActorModel[] = [];
   actor: ActorModel = new ActorModel();
+  actorAdd: ActorAddModel = new ActorAddModel();
   actorEditId: number;
   isError: boolean = false;
 
   postActor() {
     this.spinner.show();
     this.isError = false;
-    if (this.actor.name === null) {
+    if (this.actorAdd.name === null) {
       this.isError = true;
       this.notifier.notify('error', 'Enter name');
     }
-    if (this.actor.surname === null) {
+    if (this.actorAdd.surname === null) {
       this.isError = true;
       this.notifier.notify('error', 'Enter surname');
     }
-    if (this.actor.age === null) {
+    if (this.actorAdd.age === null) {
       this.isError = true;
       this.notifier.notify('error', 'Enter age');
     }
-    if (this.actor.country === null) {
+    if (this.actorAdd.country === null) {
       this.isError = true;
       this.notifier.notify('error', 'Enter country');
     }
-    if (this.actor.description === null) {
+    if (this.actorAdd.description === null) {
       this.isError = true;
       this.notifier.notify('error', 'Enter description');
     }
-    if (this.actor.countFilms === null) {
+    if (this.actorAdd.countFilms === null) {
       this.isError = true;
       this.notifier.notify('error', 'Enter count of films');
     }
-    if (this.actor.birthYear === null) {
+    if (this.actorAdd.birthYear === null) {
       this.isError = true;
       this.notifier.notify('error', 'Enter birth year');
     }
-    if (this.actor.pictureUrl === null) {
+    if (this.actorAdd.pictureUrl === null) {
       this.isError = true;
       this.notifier.notify('error', 'Enter pictureUrl');
     }
     if (this.isError === false) {
-      this.actorService.addActor(this.actor).subscribe(
+      this.actorService.addActor(this.actorAdd).subscribe(
         (data: ApiResult) => {
           if (data.status === 200) {
             this.notifier.notify('success', 'Actor added');
@@ -70,17 +72,17 @@ export class ActorManagerComponent implements OnInit {
           }
         }
       );
-      this.actor.id = null;
-      this.actor.name = null;
-      this.actor.surname = null;
-      this.actor.country = null;
-      this.actor.birthYear = null;
-      this.actor.countFilms = null;
-      this.actor.pictureUrl = null;
-      this.actor.description = null;
-      this.actor.age = null;
+      this.actorAdd.name = null;
+      this.actorAdd.surname = null;
+      this.actorAdd.country = null;
+      this.actorAdd.birthYear = null;
+      this.actorAdd.countFilms = null;
+      this.actorAdd.pictureUrl = null;
+      this.actorAdd.description = null;
+      this.actorAdd.age = null;
     }
     this.spinner.hide();
+    window.location.reload();
   }
 
   showEditActor(id: number) {
@@ -153,6 +155,7 @@ export class ActorManagerComponent implements OnInit {
       this.actor.age = null;
     }
     this.spinner.hide();
+    window.location.reload();
   }
 
   deleteActor(id: number){
@@ -169,6 +172,7 @@ export class ActorManagerComponent implements OnInit {
       }
     );
     this.spinner.hide();
+    window.location.reload();
   }
 
   ngOnInit() {

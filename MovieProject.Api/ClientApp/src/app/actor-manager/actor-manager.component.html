@@ -28,14 +28,14 @@
     <div class="grid-item">
       <div class="form" *ngIf="div1 == true">
         <p class="add-actor-header">Add actor </p>
-        <input class="form-input" nz-input placeholder="Name" [(ngModel)]="actor.name" />
-        <input class="form-input" nz-input placeholder="Surname" [(ngModel)]="actor.surname" />
-        <input class="form-input" nz-input placeholder="Country" [(ngModel)]="actor.country" />
-        <input class="form-input" nz-input placeholder="Description" [(ngModel)]="actor.description" />
-        <input class="form-input" nz-input placeholder="Age" [(ngModel)]="actor.age" />
-        <input class="form-input" nz-input placeholder="Count of films" [(ngModel)]="actor.countFilms" />
-        <input class="form-input" nz-input placeholder="Birth year" [(ngModel)]="actor.birthYear" />
-        <input class="form-input" nz-input placeholder="Picture Url" [(ngModel)]="actor.pictureUrl" />
+        <input class="form-input" nz-input placeholder="Name" [(ngModel)]="actorAdd.name" />
+        <input class="form-input" nz-input placeholder="Surname" [(ngModel)]="actorAdd.surname" />
+        <input class="form-input" nz-input placeholder="Country" [(ngModel)]="actorAdd.country" />
+        <input class="form-input" nz-input placeholder="Description" [(ngModel)]="actorAdd.description" />
+        <input class="form-input" nz-input placeholder="Age" [(ngModel)]="actorAdd.age" />
+        <input class="form-input" nz-input placeholder="Count of films" [(ngModel)]="actorAdd.countFilms" />
+        <input class="form-input" nz-input placeholder="Birth year" [(ngModel)]="actorAdd.birthYear" />
+        <input class="form-input" nz-input placeholder="Picture Url" [(ngModel)]="actorAdd.pictureUrl" />
         <button class="btn-manager" (click)="postActor()">Add actor</button>
       </div>
 

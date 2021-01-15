@@ -2,6 +2,7 @@ import { ActorModel } from './../../Models/actor.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ApiResult } from 'src/app/Models/result.model';
+import { ActorAddModel } from 'src/app/Models/actoradd.model';
 
 
 @Injectable({
@@ -20,7 +21,7 @@ export class ActorService {
     return this.http.get(this.baseUrl + '/' + id);
   }
 
-  addActor(model : ActorModel){
+  addActor(model : ActorAddModel){
     return this.http.post<ApiResult>(this.baseUrl, model);
   }
 

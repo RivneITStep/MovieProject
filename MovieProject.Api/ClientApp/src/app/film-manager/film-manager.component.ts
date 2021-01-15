@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MovieModel } from '../Models/movie.model';
+import { MovieAddModel } from '../Models/movieadd.model';
+import { MovieEditModel } from '../Models/movieedit.model';
 import { ApiResult } from '../Models/result.model';
 import { MovieService } from '../services/movie-service/movie.service';
 
@@ -20,6 +22,8 @@ export class FilmManagerComponent implements OnInit {
   list: MovieModel[] = [];
   editMovieId: number;
   movie: MovieModel = new MovieModel();
+  movieAdd: MovieAddModel = new MovieAddModel();
+  movieEdit: MovieEditModel = new MovieEditModel();
 
   constructor(private movieService: MovieService, private spinner: NgxSpinnerService, private notifier: NotifierService) { }
 
@@ -43,68 +47,66 @@ export class FilmManagerComponent implements OnInit {
   postMovie() {
     this.spinner.show();
     this.isError = false;
-    this.movie.id = 0;
-    this.movie.rating = 0;
-    if (this.movie.name === null) {
+    if (this.movieAdd.name === null) {
       this.isError = true;
       this.notifier.notify('error', 'Enter name');
     }
-    if (this.movie.originalName === null) {
+    if (this.movieAdd.originalName === null) {
       this.isError = true;
       this.notifier.notify('error', 'Enter original name');
     }
-    if (this.movie.description === null) {
+    if (this.movieAdd.description === null) {
       this.isError = true;
       this.notifier.notify('error', 'Enter description');
     }
-    if (this.movie.country === null) {
+    if (this.movieAdd.country === null) {
       this.isError = true;
       this.notifier.notify('error', 'Enter country');
     }
-    if (this.movie.director === null) {
+    if (this.movieAdd.director === null) {
       this.isError = true;
       this.notifier.notify('error', 'Enter director');
     }
-    if (this.movie.operator === null) {
+    if (this.movieAdd.operator === null) {
       this.isError = true;
       this.notifier.notify('error', 'Enter operator');
     }
-    if (this.movie.composer === null) {
+    if (this.movieAdd.composer === null) {
       this.isError = true;
       this.notifier.notify('error', 'Enter composer');
     }
-    if (this.movie.genre === null) {
+    if (this.movieAdd.genre === null) {
       this.isError = true;
       this.notifier.notify('error', 'Enter genre');
     }
-    if (this.movie.slogan === null) {
+    if (this.movieAdd.slogan === null) {
       this.isError = true;
       this.notifier.notify('error', 'Enter slogan');
     }
-    if (this.movie.budget === null) {
+    if (this.movieAdd.budget === null) {
       this.isError = true;
       this.notifier.notify('error', 'Enter budget');
     }
-    if (this.movie.length === null) {
+    if (this.movieAdd.length === null) {
       this.isError = true;
       this.notifier.notify('error', 'Enter length');
     }
-    if (this.movie.countViews === null) {
+    if (this.movieAdd.countViews === null) {
       this.isError = true;
       this.notifier.notify('error', 'Enter count of views');
     }
-    if (this.movie.pictureUrl === null) {
+    if (this.movieAdd.pictureUrl === null) {
       this.isError = true;
       this.notifier.notify('error', 'Enter picture url');
     }
-    if (this.movie.trailerUrl === null) {
+    if (this.movieAdd.trailerUrl === null) {
       this.isError = true;
       this.notifier.notify('error', 'Enter trailer url');
     }
 
 
     if (this.isError === false) {
-      this.movieService.addMovie(this.movie).subscribe(
+      this.movieService.addMovie(this.movieAdd).subscribe(
         (data: ApiResult) => {
           if(data.status == 200){
             this.notifier.notify('success','Movie added');
@@ -115,90 +117,88 @@ export class FilmManagerComponent implements OnInit {
           }
         }
       );
-      this.movie.id = null;
-      this.movie.name = null;
-      this.movie.originalName = null;
-      this.movie.description = null;
-      this.movie.country = null;
-      this.movie.director = null;
-      this.movie.operator = null;
-      this.movie.composer = null;
-      this.movie.genre = null;
-      this.movie.slogan = null;
-      this.movie.budget = null;
-      this.movie.length = null;
-      this.movie.countViews = null;
-      this.movie.pictureUrl = null;
-      this.movie.trailerUrl = null;
+      this.movieAdd.name = null;
+      this.movieAdd.originalName = null;
+      this.movieAdd.description = null;
+      this.movieAdd.country = null;
+      this.movieAdd.director = null;
+      this.movieAdd.operator = null;
+      this.movieAdd.composer = null;
+      this.movieAdd.genre = null;
+      this.movieAdd.slogan = null;
+      this.movieAdd.budget = null;
+      this.movieAdd.length = null;
+      this.movieAdd.countViews = null;
+      this.movieAdd.pictureUrl = null;
+      this.movieAdd.trailerUrl = null;
     }
     this.spinner.hide();
   }
 
   editMovie(){
-    this.movie.id = this.editMovieId;
-    this.movie.rating = 0;
+    this.movieEdit.id = this.editMovieId;
     this.spinner.show();
     this.isError = false;
-    if (this.movie.name === null) {
+    if (this.movieEdit.name === null) {
       this.isError = true;
       this.notifier.notify('error', 'Enter name');
     }
-    if (this.movie.originalName === null) {
+    if (this.movieEdit.originalName === null) {
       this.isError = true;
       this.notifier.notify('error', 'Enter original name');
     }
-    if (this.movie.description === null) {
+    if (this.movieEdit.description === null) {
       this.isError = true;
       this.notifier.notify('error', 'Enter description');
     }
-    if (this.movie.country === null) {
+    if (this.movieEdit.country === null) {
       this.isError = true;
       this.notifier.notify('error', 'Enter country');
     }
-    if (this.movie.director === null) {
+    if (this.movieEdit.director === null) {
       this.isError = true;
       this.notifier.notify('error', 'Enter director');
     }
-    if (this.movie.operator === null) {
+    if (this.movieEdit.operator === null) {
       this.isError = true;
       this.notifier.notify('error', 'Enter operator');
     }
-    if (this.movie.composer === null) {
+    if (this.movieEdit.composer === null) {
       this.isError = true;
       this.notifier.notify('error', 'Enter composer');
     }
-    if (this.movie.genre === null) {
+    if (this.movieEdit.genre === null) {
       this.isError = true;
       this.notifier.notify('error', 'Enter genre');
     }
-    if (this.movie.slogan === null) {
+    if (this.movieEdit.slogan === null) {
       this.isError = true;
       this.notifier.notify('error', 'Enter slogan');
     }
-    if (this.movie.budget === null) {
+    if (this.movieEdit.budget === null) {
       this.isError = true;
       this.notifier.notify('error', 'Enter budget');
     }
-    if (this.movie.length === null) {
+    if (this.movieEdit.length === null) {
       this.isError = true;
       this.notifier.notify('error', 'Enter length');
     }
-    if (this.movie.countViews === null) {
+    if (this.movieEdit.countViews === null) {
       this.isError = true;
       this.notifier.notify('error', 'Enter count of views');
     }
-    if (this.movie.pictureUrl === null) {
+    if (this.movieEdit.pictureUrl === null) {
       this.isError = true;
       this.notifier.notify('error', 'Enter picture url');
     }
-    if (this.movie.trailerUrl === null) {
+    if (this.movieEdit.trailerUrl === null) {
       this.isError = true;
       this.notifier.notify('error', 'Enter trailer url');
     }
 
 
     if (this.isError === false) {
-      this.movieService.editMovie(this.movie).subscribe(
+      this.movieService.editMovie(this.movieEdit).subscribe(
         (data: ApiResult) => {
           if(data.status == 200){
             this.notifier.notify('success','Movie edited');
@@ -209,21 +209,21 @@ export class FilmManagerComponent implements OnInit {
           }
         }
       );
-      this.movie.id = null;
-      this.movie.name = null;
-      this.movie.originalName = null;
-      this.movie.description = null;
-      this.movie.country = null;
-      this.movie.director = null;
-      this.movie.operator = null;
-      this.movie.composer = null;
-      this.movie.genre = null;
-      this.movie.slogan = null;
-      this.movie.budget = null;
-      this.movie.length = null;
-      this.movie.countViews = null;
-      this.movie.pictureUrl = null;
-      this.movie.trailerUrl = null;
+      this.movieEdit.id = null;
+      this.movieEdit.name = null;
+      this.movieEdit.originalName = null;
+      this.movieEdit.description = null;
+      this.movieEdit.country = null;
+      this.movieEdit.director = null;
+      this.movieEdit.operator = null;
+      this.movieEdit.composer = null;
+      this.movieEdit.genre = null;
+      this.movieEdit.slogan = null;
+      this.movieEdit.budget = null;
+      this.movieEdit.length = null;
+      this.movieEdit.countViews = null;
+      this.movieEdit.pictureUrl = null;
+      this.movieEdit.trailerUrl = null;
     }
     this.spinner.hide();
   }

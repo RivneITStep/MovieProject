@@ -3,6 +3,8 @@ import { ApiResult } from 'src/app/Models/result.model';
 import { MovieModel } from './../../Models/movie.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { MovieAddModel } from 'src/app/Models/movieadd.model';
+import { MovieEditModel } from 'src/app/Models/movieedit.model';
 
 
 @Injectable({
@@ -23,11 +25,11 @@ constructor(private http: HttpClient) { }
     return this.http.get(this.baseUrl + '/' + id);
   }
 
-  editMovie(model: MovieModel){
+  editMovie(model: MovieEditModel){
     return this.http.post<ApiResult>(this.baseUrl + '/edit', model);
   }
 
-  addMovie(model: MovieModel){
+  addMovie(model: MovieAddModel){
     return this.http.post<ApiResult>(this.baseUrl, model);
   }
 

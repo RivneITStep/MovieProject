@@ -59,6 +59,7 @@ export class NewsManagerComponent implements OnInit {
     this.article.pictureUrl = null;
     this.article.userId = null;
     this.spinner.hide();
+    window.location.reload();
   }
 
   deleteNews(id: number){
@@ -71,6 +72,7 @@ export class NewsManagerComponent implements OnInit {
         }
       }
     );
+    window.location.reload();
   }
 
   ngOnInit() {

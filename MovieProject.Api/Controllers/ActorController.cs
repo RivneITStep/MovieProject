@@ -120,15 +120,14 @@ namespace MovieProject.Api.Controllers
             return _mapper.Map<List<Actor>, List<ActorDTO>>(entities);
         }
 
-        [HttpPost("{id}/add/movie")]
-        public async Task<ResultDTO> addActorFilm([FromBody] MovieDTO model, [FromRoute] int id)
+        [HttpPost("{id}/add/movie/{movieid}")]
+        public async Task<ResultDTO> addActorFilm([FromRoute]int id, [FromRoute]int movieid)
         {
             try
             {
+                var movie = await _context.movies.SingleOrDefaultAsync(t => t.Id == movieid);
                 var actor = await _context.actors.SingleOrDefaultAsync(t => t.Id == id);
-                var obj = _mapper.Map<MovieDTO, Movie>(model);
-                actor.actorFilms.Add(obj);
-                _logger.LogInformation($"Movie added to actor: id: {obj.Id} name: {obj.Name}");
+                actor.actorFilms.Add(movie);
                 await _context.SaveChangesAsync();
 
                 return new ResultDTO
