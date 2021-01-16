@@ -12,7 +12,6 @@ namespace MovieProject.DAL
     {
         public EFContext(DbContextOptions<EFContext> options) : base(options) { }
         public DbSet<Movie> movies { get; set; }
-        public DbSet<Announcement> announcements { get; set; }
         public DbSet<Actor> actors { get; set; }
         public DbSet<Photo> photos { get; set; }
         public DbSet<Review> reviews { get; set; }

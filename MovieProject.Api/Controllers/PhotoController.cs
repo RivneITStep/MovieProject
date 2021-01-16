@@ -28,13 +28,16 @@ namespace MovieProject.Api.Controllers
             _logger = logger;
         }
 
-        [HttpGet("actor/{id}")]
+        [HttpPost("actor")]
         public async Task<ResultDTO> addActorPhoto([FromBody]PhotoDTO model)
         {
             try
             {
-                var obj = _mapper.Map<PhotoDTO, Photo>(model);
-                await _context.photos.AddAsync(obj);
+                var actor = await _context.actors.SingleOrDefaultAsync(t => t.Id == model.ActorId);
+                var photo = new Photo();
+                photo.PictureUrl = model.PictureUrl;
+                photo.Actor = actor;
+                await _context.photos.AddAsync(photo);
                 await _context.SaveChangesAsync();
                 _logger.LogInformation($"Actor`s: id: {model.ActorId} photo successfuly added");
                 return new ResultDTO
@@ -56,14 +59,6 @@ namespace MovieProject.Api.Controllers
                 };
             }
         }
-
-        [HttpGet("actor/{id}")]
-        public async Task<IEnumerable<PhotoDTO>> getActorPhotos([FromRoute]int id)
-        {
-            var entities = await _context.photos.Where(t => t.ActorId == id).ToListAsync();
-            return _mapper.Map<List<Photo>, List<PhotoDTO>>(entities);
-        }
-
 
     }
 }

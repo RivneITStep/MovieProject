@@ -89,7 +89,7 @@
 
 .grid-image{
     display: block;
-    max-width: 100%;
+    max-width: 200px;
 }
 
 .film-image{
@@ -152,4 +152,88 @@
     .actors{
         grid-template-columns: repeat(2,1fr);
     }
+}
+
+.review-block{
+    padding: 50px 5%;
+}
+
+.comment{
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    background-color: rgb(30,30,30);
+    padding: 15px;
+    border-radius: 15px;
+}
+
+.user-avatar{
+    width: 100px;
+}
+
+.user-name{
+    text-align: center;
+    color: white;
+    font-weight: 500;
+    font-family: 'Montserrat',sans-serif;
+}
+
+.comment{
+    margin-bottom: 10px;
+}
+
+.comment-title{
+    font-weight: 500;
+    font-size: 24px;
+}
+
+.comment-content{
+    padding-left: 50px;
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+}
+
+.write-comment-block{
+    background-color: #49C6E5;
+    border-radius: 5px;
+    padding: 15px;
+    margin-top: 50px;
+}
+
+.write-comment{
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 20px;
+}
+
+.write-comment-title{
+    font-family: 'Montserrat', sans-serif;
+    color: black;
+}
+
+.write-comment-text{
+    font-family: 'Montserrat', sans-serif;
+    color: black;
+    font-weight: 500;
+}
+
+.comment-header{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    color: white;
+    font-size: 18px;
+}
+
+.comment-btn{
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 20px;
+    width: 10%;
+    height: 50px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(30,30,30);
+    color: white;
+}
+
+.comment-warn{
+    text-align: center;
 }

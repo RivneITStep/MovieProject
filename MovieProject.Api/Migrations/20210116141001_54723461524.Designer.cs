@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MovieProject.DAL;
 
 namespace MovieProject.Api.Migrations
 {
     [DbContext(typeof(EFContext))]
-    partial class EFContextModelSnapshot : ModelSnapshot
+    [Migration("20210116141001_54723461524")]
+    partial class _54723461524
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -317,6 +319,9 @@ namespace MovieProject.Api.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
+                    b.Property<int>("Mark")
+                        .HasColumnType("int");
+
                     b.Property<int>("MovieId")
                         .HasColumnType("int");
 
@@ -491,8 +496,8 @@ namespace MovieProject.Api.Migrations
 
             modelBuilder.Entity("MovieProject.DAL.Entities.Review", b =>
                 {
-                    b.HasOne("MovieProject.DAL.Entities.Movie", "Movie")
-                        .WithMany("Reviews")
+                    b.HasOne("MovieProject.DAL.Entities.Movie", "reviewMovie")
+                        .WithMany("reviews")
                         .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -501,7 +506,7 @@ namespace MovieProject.Api.Migrations
                         .WithMany("Reviews")
                         .HasForeignKey("UserId");
 
-                    b.Navigation("Movie");
+                    b.Navigation("reviewMovie");
 
                     b.Navigation("User");
                 });
@@ -513,7 +518,7 @@ namespace MovieProject.Api.Migrations
 
             modelBuilder.Entity("MovieProject.DAL.Entities.Movie", b =>
                 {
-                    b.Navigation("Reviews");
+                    b.Navigation("reviews");
                 });
 
             modelBuilder.Entity("MovieProject.DAL.Entities.User", b =>

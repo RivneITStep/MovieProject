@@ -14,7 +14,6 @@ export class MovieService {
 
 constructor(private http: HttpClient) { }
   baseUrl = location.origin + '/api/movie';
-  Movies: MovieModel[] = [];
 
   getAllMovies(){
     console.log(this.baseUrl);
@@ -35,6 +34,10 @@ constructor(private http: HttpClient) { }
 
   deleteMovie(id: number){
     return this.http.delete<ApiResult>(this.baseUrl + '/' + id);
+  }
+
+  getMovieActors(id: number){
+    return this.http.get(this.baseUrl + '/' + id + '/actors');
   }
 
 }

@@ -196,5 +196,15 @@ namespace MovieProject.Api.Controllers
             return _mapper.Map<List<Movie>, List<MovieDTO>>(actors);
         }
 
+        [HttpGet("{id}/photos")]
+        public async Task<IEnumerable<PhotoDTO>> getActorPhotos([FromRoute]int id)
+        {
+            var actor = await _context.actors.Include(t => t.Photos).SingleOrDefaultAsync(t => t.Id == id);
+            var photos = actor.Photos.ToList();
+            return _mapper.Map<List<Photo>, List<PhotoDTO>>(photos);
+            
+        }
+        
+
     }
 }

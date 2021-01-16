@@ -8,6 +8,6 @@ namespace MovieProject.DAL.Entities
         public int Id { get; set; }
         public string PictureUrl { get; set; }
         public int ActorId { get; set; }
-        public virtual Actor photoActor { get; set; }
+        public virtual Actor Actor { get; set; }
     }
 }

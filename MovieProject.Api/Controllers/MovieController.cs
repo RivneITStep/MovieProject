@@ -237,6 +237,5 @@ namespace MovieProject.Api.Controllers
             var actors = _context.movies.Include(t => t.Actors).ThenInclude(t => t.Movies).SingleOrDefault(t => t.Id == id).Actors;
             return _mapper.Map<List<Actor>, List<ActorDTO>>(actors);
         }
-
     }
 }
