@@ -127,7 +127,6 @@ namespace MovieProject.Api.Controllers
             {
                 var movie = await _context.movies.SingleOrDefaultAsync(t => t.Id == movieid);
                 var actor = await _context.actors.SingleOrDefaultAsync(t => t.Id == id);
-                actor.actorFilms.Add(movie);
                 await _context.SaveChangesAsync();
 
                 return new ResultDTO
@@ -148,14 +147,6 @@ namespace MovieProject.Api.Controllers
                     Errors = temp
                 };
             }
-        }
-
-        [HttpGet("{id}/movies")]
-        public async Task<List<MovieDTO>> getActorFilms([FromRoute] int id)
-        {
-            var actor = await _context.actors.SingleOrDefaultAsync(t => t.Id == id);
-            var entities = await actor.actorFilms.AsQueryable().ToListAsync();
-            return _mapper.Map<List<Movie>, List<MovieDTO>>(entities);
         }
 
         [HttpGet("search/{search}")]
@@ -198,7 +189,12 @@ namespace MovieProject.Api.Controllers
             }
         }
 
-
+        [HttpGet("{id}/movies")]
+        public IEnumerable<MovieDTO> getActorFilms([FromRoute] int id)
+        {
+            var actors = _context.actors.Include(t => t.Movies).ThenInclude(t => t.Actors).SingleOrDefault(t => t.Id == id).Movies;
+            return _mapper.Map<List<Movie>, List<MovieDTO>>(actors);
+        }
 
     }
 }

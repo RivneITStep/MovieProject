@@ -3,36 +3,23 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MovieProject.DAL;
 
 namespace MovieProject.Api.Migrations
 {
     [DbContext(typeof(EFContext))]
-    partial class EFContextModelSnapshot : ModelSnapshot
+    [Migration("20210115212027_addmtm2")]
+    partial class addmtm2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.1");
-
-            modelBuilder.Entity("ActorMovie", b =>
-                {
-                    b.Property<int>("ActorsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MoviesId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ActorsId", "MoviesId");
-
-                    b.HasIndex("MoviesId");
-
-                    b.ToTable("ActorMovie");
-                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -229,6 +216,28 @@ namespace MovieProject.Api.Migrations
                         .IsUnique();
 
                     b.ToTable("announcements");
+                });
+
+            modelBuilder.Entity("MovieProject.DAL.Entities.FilmActor", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<int>("ActorId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MovieId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ActorId");
+
+                    b.HasIndex("MovieId");
+
+                    b.ToTable("filmActors");
                 });
 
             modelBuilder.Entity("MovieProject.DAL.Entities.Movie", b =>
@@ -433,21 +442,6 @@ namespace MovieProject.Api.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("ActorMovie", b =>
-                {
-                    b.HasOne("MovieProject.DAL.Entities.Actor", null)
-                        .WithMany()
-                        .HasForeignKey("ActorsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MovieProject.DAL.Entities.Movie", null)
-                        .WithMany()
-                        .HasForeignKey("MoviesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -510,6 +504,25 @@ namespace MovieProject.Api.Migrations
                     b.Navigation("Movie");
                 });
 
+            modelBuilder.Entity("MovieProject.DAL.Entities.FilmActor", b =>
+                {
+                    b.HasOne("MovieProject.DAL.Entities.Actor", "Actor")
+                        .WithMany("filmActors")
+                        .HasForeignKey("ActorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MovieProject.DAL.Entities.Movie", "Movie")
+                        .WithMany("filmActors")
+                        .HasForeignKey("MovieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Actor");
+
+                    b.Navigation("Movie");
+                });
+
             modelBuilder.Entity("MovieProject.DAL.Entities.NewsArticle", b =>
                 {
                     b.HasOne("MovieProject.DAL.Entities.User", "newsArcticleUser")
@@ -549,12 +562,16 @@ namespace MovieProject.Api.Migrations
 
             modelBuilder.Entity("MovieProject.DAL.Entities.Actor", b =>
                 {
+                    b.Navigation("filmActors");
+
                     b.Navigation("Photos");
                 });
 
             modelBuilder.Entity("MovieProject.DAL.Entities.Movie", b =>
                 {
                     b.Navigation("Announcement");
+
+                    b.Navigation("filmActors");
 
                     b.Navigation("reviews");
                 });

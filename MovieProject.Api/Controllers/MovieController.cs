@@ -150,7 +150,6 @@ namespace MovieProject.Api.Controllers
             {
                 var movie = await _context.movies.SingleOrDefaultAsync(t => t.Id == id);
                 var obj = _mapper.Map<ActorDTO, Actor>(model);
-                movie.filmActors.Add(obj);
                 _logger.LogInformation($"Actor added to movie: id: {obj.Id} name: {obj.Name}");
                 await _context.SaveChangesAsync();
 
@@ -172,14 +171,6 @@ namespace MovieProject.Api.Controllers
                     Errors = temp
                 };
             }
-        }
-
-        [HttpGet("{id}/actors")]
-        public async Task<List<ActorDTO>> getFilmActors([FromRoute]int id)
-        {
-            var movie = await _context.movies.SingleOrDefaultAsync(t => t.Id == id);
-            var entities = await movie.filmActors.AsQueryable().ToListAsync();
-            return _mapper.Map<List<Actor>, List<ActorDTO>>(entities);
         }
         
         [HttpDelete("{id}")]
@@ -209,6 +200,42 @@ namespace MovieProject.Api.Controllers
                     Errors = temp
                 };
             }
+        }
+
+        [HttpPost("{id}/actor/{actorid}")]
+        public ResultDTO addFilmActor([FromRoute]int id,[FromRoute]int actorid)
+        {
+            try
+            {
+                var movie = _context.movies.FirstOrDefault(t => t.Id == id); 
+                var actor = _context.actors.FirstOrDefault(t => t.Id == actorid);
+                movie.Actors.Add(actor);
+                _context.SaveChanges();
+
+                return new ResultDTO
+                {
+                    Status = 200,
+                    Message = "Posted"
+                };
+            }
+            catch (Exception ex)
+            {
+                List<string> temp = new List<string>();
+                temp.Add(ex.Message);
+                return new ResultErrorDTO
+                {
+                    Status = 500,
+                    Message = "Error",
+                    Errors = temp
+                };
+            }
+        }
+
+        [HttpGet("{id}/actors")]
+        public IEnumerable<ActorDTO> getFilmActors([FromRoute]int id)
+        {
+            var actors = _context.movies.Include(t => t.Actors).ThenInclude(t => t.Movies).SingleOrDefault(t => t.Id == id).Actors;
+            return _mapper.Map<List<Actor>, List<ActorDTO>>(actors);
         }
 
     }
