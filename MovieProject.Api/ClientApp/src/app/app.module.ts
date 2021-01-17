@@ -28,13 +28,14 @@ import { ActorManagerComponent } from './actor-manager/actor-manager.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { FilmManagerComponent } from './film-manager/film-manager.component';
 import { NewsManagerComponent } from './news-manager/news-manager.component';
+import { TestComponent } from './test/test.component';
 
 const notifierOptions: NotifierOptions = {
   position: {horizontal: { position: 'right' }, vertical: { position: 'bottom' }}
 };
 
 @NgModule({
-  declarations: [													
+  declarations: [														
     AppComponent,
       HomeComponent,
       RegisterComponent,
@@ -48,7 +49,8 @@ const notifierOptions: NotifierOptions = {
       AdminPanelComponent,
       ActorManagerComponent,
       FilmManagerComponent,
-      NewsManagerComponent
+      NewsManagerComponent,
+      TestComponent
    ],
   imports: [
     DemoNgZorroAntdModule,

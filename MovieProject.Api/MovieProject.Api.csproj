@@ -18,4 +18,8 @@
     <ProjectReference Include="..\MovieProject.DTO\MovieProject.DTO.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Files" />
+  </ItemGroup>
+
 </Project>

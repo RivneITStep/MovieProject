@@ -13,6 +13,7 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { ActorManagerComponent } from './actor-manager/actor-manager.component';
 import { FilmManagerComponent } from './film-manager/film-manager.component';
 import { NewsManagerComponent } from './news-manager/news-manager.component';
+import { TestComponent } from './test/test.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -25,7 +26,8 @@ const routes: Routes = [
   { path: 'admin-panel', component: AdminPanelComponent, pathMatch: 'full' },
   { path: 'admin-panel/actor-manager', component: ActorManagerComponent, pathMatch: 'full' },
   { path: 'admin-panel/film-manager', component: FilmManagerComponent, pathMatch: 'full' },
-  { path: 'admin-panel/news-manager', component: NewsManagerComponent, pathMatch: 'full' }
+  { path: 'admin-panel/news-manager', component: NewsManagerComponent, pathMatch: 'full' },
+  { path: 'test', component: TestComponent, pathMatch: 'full'}
 ]
 
 @NgModule({
