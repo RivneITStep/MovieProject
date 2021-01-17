@@ -39,8 +39,6 @@ namespace MovieProject.Api.Controllers
                 _logger.LogInformation($"Actor added: id: {obj.Id} name: {obj.Name}");
                 await _context.actors.AddAsync(obj);
                 await _context.SaveChangesAsync();
-
-
                 return new ResultDTO
                 {
                     Status = 200,
@@ -150,15 +148,12 @@ namespace MovieProject.Api.Controllers
         }
 
         [HttpGet("search/{search}")]
-        public async Task<IEnumerable<ActorDTO>> searchActorByName([FromRoute]string search)
+        public async Task<IEnumerable<ActorDTO>> searchActor([FromRoute]string search)
         {
-            search = search.ToLower();
-            var entities = await _context.actors.ToListAsync();
-            if (!String.IsNullOrEmpty(search))
-            {
-                entities = entities.Where(s => s.Name.ToLower().Contains(search) || s.Surname.ToLower().Contains(search)).ToList();
-            }
-            return _mapper.Map<List<Actor>, List<ActorDTO>>(entities);
+            var actors = await _context.actors.ToListAsync();
+            search = String.Concat(search.Where(c => !Char.IsWhiteSpace(c)));
+            var result = actors.Where(t => search.ToLower().Contains(t.Name.ToLower()) || search.ToLower().Contains(t.Surname.ToLower())).ToList();
+            return _mapper.Map<List<Actor>, List<ActorDTO>>(result);
         }
         [HttpDelete("{id}")]
         public async Task<ResultDTO> deleteActor([FromRoute]int id)

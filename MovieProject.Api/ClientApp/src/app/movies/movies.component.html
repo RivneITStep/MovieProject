@@ -1,33 +1,47 @@
 <div class="background">
-  <div class="custom-container my-content">
-    <div class="container-bg">
-      <div class="text-title">
-        <h1>Movies</h1>
-        <hr>
-        <p>
-          Film, also called movie, motion picture or moving picture, is a visual art used to simulate experiences that communicate ideas, stories, perceptions, feelings, beauty, or atmosphere through the use of moving images. These images are generally accompanied by sound, and more rarely, other sensory stimulations.[1] The word "cinema", short for cinematography, is often used to refer to filmmaking and the film industry, and to the art form that is the result of it.
-          The moving images of a film are created by photographing actual scenes with a motion-picture camera, by photographing drawings or miniature models using traditional animation techniques, by means of CGI and computer animation, or by a combination of some or all of these techniques, and other visual effects.
-        </p>
-        <img class="movies-page-img" src="https://lh3.googleusercontent.com/proxy/KARPT4qFJBOP3rwaCjEPk6JhMH8JjJYv4Gry0pH01hwHAFPc22xTXejQ-3c9xoMzIHrbKrjDL64U23fwt5Fy1pTJHA" alt="">
-      </div>
-      <ul class="movie-list">
-        <li *ngFor="let movie of movies | paginate: { id: 'lid', itemsPerPage: 10, currentPage: page, totalItems: count }">
-          <hr>
-          <div class="container-fluid" [routerLink]="['./' + movie.id]">
-            <div class="row movie-block">
-              <img class="movie-img col-6" src="{{movie.pictureUrl}}" alt="">
-              <ul class="desc-block col">
-                <h2 class="object-name">{{movie.name}}</h2>
-                <hr class="hr-white">
-              </ul>
-              <h3 class="object-name col">Director: <h4>{{movie.director}}</h4></h3>
-              <h3 class="object-name col">Country: <h4>{{movie.country}}</h4></h3>
-            </div>
-          </div>
-        </li>
+  <div class="upper-block">
+    <div class="movies-intro-text">
+      <p class="movies-intro">Movies</p>
+      <hr class="hr-white">
+      <p class="movies-header">A film, also called a movie, motion picture or moving picture, is a work of visual art
+        used
+        to simulate experiences that communicate ideas, stories, perceptions, feelings, beauty, or atmosphere through
+        the
+        use of moving images. These images are generally accompanied by sound, and more rarely, other sensory
+        stimulations.[1] The word "cinema", short for cinematography, is often used to refer to filmmaking and the film
+        industry, and to the art form that is the result of it.
+
+        The moving images of a film are created by photographing actual scenes with a motion-picture camera, by
+        photographing drawings or miniature models using traditional animation techniques, by means of CGI and computer
+        animation, or by a combination of some or all of these techniques, and other visual effects.
+
+        Traditionally, films were recorded onto celluloid film stock through a photochemical process and then shown
+        through a movie projector onto a large screen. Contemporary films are often fully digital through the entire
+        process of production, distribution, and exhibition, while films recorded in a photochemical form traditionally
+        included an analogous optical soundtrack (a graphic recording of the spoken words, music and other sounds that
+        accompany the images which runs along a portion of the film exclusively reserved for it, and is not projected).
+      </p>
+    </div>
+
+    <img class="grid-header-image"
+      src="https://www.pikpng.com/pngl/b/572-5727462_interstellar-png-transparent-background-architecture-clipart.png"
+      alt="">
+  </div>
+  <div class="content-block">
+    <div class="filters">
+      <ul class="movie-filters">
+        <li>Country</li>
+        <li>Genre</li>
+        <li>Year</li>
+        <li>Rating</li>
       </ul>
-      <pagination-controls id="lid" maxSize="5" directionLinks="true" (pageChange)="pageChanged($event)"></pagination-controls>
-      <div style="height: 15px;"></div>
+    </div>
+    <div class="movies">
+      <div routerLink="{{item.id}}" class="movie" *ngFor="let item of movies | paginate: { id: 'lid', itemsPerPage: 12, currentPage: page, totalItems: count }">
+        <img src="{{item.pictureUrl}}" alt="">
+        <p class="movie-name">{{item.name}}</p>
+      </div>
     </div>
   </div>
+  <pagination-controls class="pagination" id="lid" maxSize="5" directionLinks="true" (pageChange)="pageChanged($event)"></pagination-controls>
 </div>

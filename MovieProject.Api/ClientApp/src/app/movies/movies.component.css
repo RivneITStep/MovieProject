@@ -1,74 +1,79 @@
 .background{
-    background-color: #e3f6f5;
+
 }
 
-.container-bg{
-    background-color: #ffffff;
+.upper-block{
+    background-color: rgb(30,30,30);
+    box-shadow: 0 10px 50px -2px rgb(30,30,30);
+    padding: 50px 5%;
+    padding-top: 100px;
 }
 
-.movie-list{
+.movies-header{
     font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    color: white;
+}
+
+.upper-block{
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+}
+
+.grid-header-image{
+    width: auto;
+}
+
+.content-block{
+    padding: 0 5%;
     padding-top: 50px;
-    padding-right: 40px;
+    display: grid;
+    grid-template-columns: 2fr 8fr;
+}
+
+.movie-filters{
     list-style-type: none;
-}
-
-.object-name{
-    font-size: 50px;
-    color: black;
-}
-
-.movie-list li{
-    margin-bottom: 10px;
-}
-
-.movie-list li:hover{
-    cursor: pointer;
-    background-color: #bae8e8;
-    border-radius: 15px;
-}
-
-.movie-img{
-    border-radius: 15px;
-    padding: 10px;
-    max-width: 10%;
-    height: auto;
-    display: block;
-    margin: 0;
-}
-
-.object-name{
-    font-size: 20px;
+    font-family: "Montserrat", sans-serif;
     font-weight: 500;
+    padding: 0;
+    margin-right: 15px;
+    border-radius: 10px;
+    background-color: rgb(180, 250, 200);
 }
 
-.desc-block{
-    list-style-type: none;
-    padding: 10px;
+.movie-filters li{
+    padding: 15px;
+    margin-bottom: 30px;
 }
 
 .hr-white{
     background-color: white;
 }
 
-.desc-block h5{
-    font-size: 10px;
-    font-weight: 400;
-    color: black;
+.movies-intro{
+    font-size: 36px;
+    color: white;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
 }
 
-h4{
-    color: #2c698d;
+.movies-intro-text{
+    padding-right: 50px;
 }
 
-.text-title{
-    padding-top: 100px;
-    padding-left: 40px;
-    padding-right: 40px;
-    font-family: 'Montserrat', sans-serif;
+.movies{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 3%;
 }
 
-.movies-page-img{
-    max-width: 100%;
-    height: auto;
+.pagination{
+    margin-top: 100px;
+    padding-left: 400px;
+    text-align: center;
+}
+
+.movie-name{
+    font-family: "Montserrat", sans-serif;
+    font-size: 24px;
 }
