@@ -1,67 +1,89 @@
 <div class="background">
   <div class="upper-block">
     <div class="actor-photo">
-      <img class="actor-grid-image"
-        src="https://avatars.mds.yandex.net/get-kinopoisk-image/1600647/9c33caef-be28-4257-b7ed-a407698f1a32/280x420"
-        alt="">
+      <img class="actor-grid-image" src="{{actor.pictureUrl}}" alt="">
     </div>
     <div class="actor-info">
-      <p class="actor-name">Leonardo DiCaprio</p>
+      <p class="actor-name">{{actor.name}} {{actor.surname}}</p>
       <p class="about">About actor:</p>
       <hr class="actor-hr">
       <table class="actor-data">
         <tr>
           <th>Country:</th>
-          <td>USA</td>
+          <td>{{actor.country}}</td>
         </tr>
         <tr>
           <th>Age</th>
-          <td>51</td>
+          <td>{{actor.age}}</td>
         </tr>
         <tr>
           <th>Count of films:</th>
-          <td>176</td>
+          <td>{{actor.countFilms}}</td>
         </tr>
         <tr>
           <th>Birth year:</th>
-          <td>1965</td>
+          <td>{{actor.birthYear}}</td>
         </tr>
       </table>
+      <div class="admin-add-actor-photo">
+        <button class="btn-manager">Add photo</button>
+
+        <button (click)="showModal()" class="btn-manager">Add film</button>
+        <nz-modal nzWidth="800px" [(nzVisible)]="isVisible" nzTitle="Add actor film" (nzOnCancel)="handleCancel()"
+          (nzOnOk)="handleOk()">
+          <ng-container *nzModalContent>
+            <div class="add-actor-film">
+              <nz-table #basicTable [nzData]="availableMovies">
+                <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>
+                      
+                    </th>
+                    <th>Name</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let data of basicTable.data">
+                    <td>{{data.id}}</td>
+                    <td>
+                      <img src="{{data.pictureUrl}}" alt="">
+                    </td>
+                    <td>{{data.name}}</td>
+                    <td>
+                      <a>Add</a>
+                    </td>
+                  </tr>
+                </tbody>
+              </nz-table>
+            </div>
+          </ng-container>
+        </nz-modal>
+      </div>
     </div>
   </div>
   <div class="middle-block">
     <p class="desc-title">Description:</p>
     <hr>
     <p class="actor-desc">
-      Born in Los Angeles, DiCaprio began his career by appearing in television commercials in the late 1980s. In the
-      early 1990s, he played recurring roles in various television series, such as the sitcom Parenthood. He had his
-      first major film role in This Boy's Life (1993) and received acclaim for his supporting role as a developmentally
-      disabled boy in What's Eating Gilbert Grape (1993). He achieved international stardom in the epic romance Titanic
-      (1997), which became the highest-grossing film to that point. After a few commercially unsuccessful films,
-      DiCaprio starred in two successful features in 2002: the biographical crime drama Catch Me If You Can and the
-      historical drama Gangs of New York, which marked his first of many collaborations with director Martin Scorsese.
-
-      DiCaprio portrayed Howard Hughes in The Aviator (2004) and continued to receive acclaim for his performances in
-      the political thriller Blood Diamond (2006), the crime drama The Departed (2006), and the romantic drama
-      Revolutionary Road (2008). In the 2010s, he starred in the science fiction thriller Inception (2010), the western
-      Django Unchained (2012), the biopic The Wolf of Wall Street (2013), the survival drama The Revenant (2015), and
-      the comedy-drama Once Upon a Time in Hollywood (2019), all of which were critical and commercial successes. His
-      accolades include an Academy Award, a BAFTA, and a Golden Globe Award for The Revenant as well as two other Golden
-      Globes for The Aviator and The Wolf of Wall Street.
+      {{actor.description}}
     </p>
   </div>
   <div class="inter-block">
     <p class="actor-films-header">Films:</p>
-    <div></div>
+    <div class="films">
+      <div class="film" *ngFor="let item of actorMovies">
+        <img src="{{item.pictureUrl}}" alt="">
+        <p class="film-name">{{item.name}}</p>
+      </div>
+    </div>
   </div>
   <div class="lower-block">
     <p class="actor-photos-title">Actor photos:</p>
     <hr class="actor-hr">
     <div class="actor-photos">
-      <img class="gallery-grid-image" src="https://ramblingrooby.files.wordpress.com/2016/01/revenant-leo-banner-1280jpg-9b4220_1280w.jpg" alt="">
-      <img class="gallery-grid-image" src="https://images.hdqwalls.com/download/kate-winslet-leonardo-dicaprio-in-titanic-ia-1280x720.jpg" alt="">
-      <img class="gallery-grid-image" src="https://a-static.besthdwallpaper.com/leonardo-dicaprio-on-inception-wallpaper-1280x720-15122_45.jpg" alt="">
-      <img class="gallery-grid-image" src="https://occ-0-1068-1723.1.nflxso.net/dnm/api/v6/E8vDc_W8CLv7-yMQu8KMEC7Rrr8/AAAABU7VBy81Ck6nB1h5oiiPWIiDjBLn7-6OUH-BqTal1UYyV2ANtTJYmmMzwTBhog8P12UFI_d5aF_X7_ptbXZLY6NguzCz.jpg?r=e5e" alt="">
+      <img *ngFor="let item of actorPhotos" class="gallery-grid-image" src="{{item.pictureUrl}}" alt="">
     </div>
   </div>
 </div>

@@ -237,5 +237,18 @@ namespace MovieProject.Api.Controllers
             var actors = _context.movies.Include(t => t.Actors).ThenInclude(t => t.Movies).SingleOrDefault(t => t.Id == id).Actors;
             return _mapper.Map<List<Actor>, List<ActorDTO>>(actors);
         }
+
+        [HttpGet("{id}/available")]
+        public IEnumerable<MovieDTO> getActorAvailableMovies([FromRoute]int id)
+        {
+            var movies = _context.movies.ToList();
+            var actor = _context.actors.Include(t => t.Movies).SingleOrDefault(t => t.Id == id);
+            foreach (var el in actor.Movies)
+            {
+                movies.Remove(el);
+            }
+            return _mapper.Map<List<Movie>,List<MovieDTO>>(movies);
+        }
+        
     }
 }

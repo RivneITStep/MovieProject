@@ -167,3 +167,24 @@
     padding: 50px 5%;
     background-color: rgb(30,30,30);
 }
+
+.films{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.film-name{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    color: white;
+}
+
+.btn-manager{
+    border: none;
+    background-color: #49C6E5;
+    color: white;
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    margin-right: 10px;
+}

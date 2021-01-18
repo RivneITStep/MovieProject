@@ -40,4 +40,8 @@ constructor(private http: HttpClient) { }
     return this.http.get(this.baseUrl + '/' + id + '/actors');
   }
 
+  getActorAvailableMovies(id: number){
+    return this.http.get(this.baseUrl + '/' + id + '/available');
+  }
+
 }

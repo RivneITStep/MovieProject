@@ -33,4 +33,12 @@ export class ActorService {
     return this.http.post<ApiResult>(this.baseUrl + '/edit', model);
   }
   
+  getActorMovies(id: number){
+    return this.http.get(this.baseUrl +'/' + id + '/movies');
+  }
+
+  getActorPhotos(id: number){
+    return this.http.get(this.baseUrl + '/' + id + '/photos');
+  }
+
 }

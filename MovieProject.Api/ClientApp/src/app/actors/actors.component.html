@@ -41,7 +41,7 @@
     </div>
     <div>
       <ul class="actors">
-        <li class="actor" *ngFor="let item of actors | paginate: { id: 'lid', itemsPerPage: 10, currentPage: page, totalItems: count }">
+        <li routerLink="{{item.id}}" class="actor" *ngFor="let item of actors | paginate: { id: 'lid', itemsPerPage: 10, currentPage: page, totalItems: count }">
           <img src="{{item.pictureUrl}}" alt="" class="actor-img">
           <p class="actor-name">{{item.name}} {{item.surname}}</p>
           <p class="actor-country">{{item.country}}</p>
