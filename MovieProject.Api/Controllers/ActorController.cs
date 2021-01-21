@@ -197,7 +197,6 @@ namespace MovieProject.Api.Controllers
             var actor = await _context.actors.Include(t => t.Photos).SingleOrDefaultAsync(t => t.Id == id);
             var photos = actor.Photos.ToList();
             return _mapper.Map<List<Photo>, List<PhotoDTO>>(photos);
-            
         }
         
 

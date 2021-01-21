@@ -1,10 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { NotifierService } from 'angular-notifier';
+import { ApiService } from '../core/api.service';
 import { ActorModel } from '../Models/actor.model';
 import { MovieModel } from '../Models/movie.model';
 import { PhotoModel } from '../Models/photo.model';
+import { PhotoAddModel } from '../Models/photoadd.model';
+import { ApiResult } from '../Models/result.model';
 import { ActorService } from '../services/actor-service/actor.service';
 import { MovieService } from '../services/movie-service/movie.service';
+import { PhotoService } from '../services/photo-service/photo.service';
 
 @Component({
   selector: 'app-actorpage',
@@ -12,11 +17,12 @@ import { MovieService } from '../services/movie-service/movie.service';
   styleUrls: ['./actorpage.component.css']
 })
 export class ActorpageComponent implements OnInit {
+  isAdmin: boolean;
 
-  constructor(private activateRoute: ActivatedRoute, private actorService: ActorService, private  movieService: MovieService) { 
+  constructor(private photoService: PhotoService, private apiService: ApiService, private notifier: NotifierService, private activateRoute: ActivatedRoute, private actorService: ActorService, private  movieService: MovieService) { 
     this.id = activateRoute.snapshot.params['id'];
+    this.isAdmin = this.apiService.isAdmin();
   }
-
   id: number;
   thisUrl: string;
   actor: ActorModel = new ActorModel();
@@ -25,9 +31,14 @@ export class ActorpageComponent implements OnInit {
   isVisible: boolean = false;
   isVisible2: boolean = false;
   availableMovies: MovieModel[] = [];
+  photoAddActor: PhotoAddModel = new PhotoAddModel();
 
   showModal(): void {
     this.isVisible = true;
+  }
+
+  showModal2(): void {
+    this.isVisible2 = true;
   }
 
   handleOk(): void {
@@ -40,8 +51,53 @@ export class ActorpageComponent implements OnInit {
     this.isVisible = false;
   }
 
-  addFilmToActor(){
-    
+  handleOk2(): void {
+    console.log('Button ok clicked!');
+    this.isVisible2 = false;
+  }
+
+  handleCancel2(): void {
+    console.log('Button cancel clicked!');
+    this.isVisible2 = false;
+  }
+
+  addFilmToActor(movie_id: number){
+    this.movieService.addFilmActor(movie_id, this.id).subscribe(
+      (data: ApiResult) => {
+        if(data.status == 200){
+          this.movieService.getMovie(movie_id).subscribe(
+            (data: MovieModel) => {
+              this.actorMovies.push(data);
+            }
+          );
+          this.notifier.notify('success','Movie actor added to film');
+        }else{
+          for (var i = 0; i < data.errors; i++) {
+            this.notifier.notify('error', data.errors[i])
+          }
+        }
+      }
+    );
+  }
+
+  addPhotoToActor(){
+    this.photoAddActor.actorId = this.id;
+    this.photoService.addActorPhoto(this.photoAddActor).subscribe(
+      (data: ApiResult) => {
+        if(data.status == 200){
+          this.photoService.getActorPhoto(this.photoAddActor).subscribe(
+            (data: PhotoModel) => {
+              this.actorPhotos.push(data);
+            }
+          );
+          this.notifier.notify('success','Actor photo added');
+        }else{
+          for (var i = 0; i < data.errors; i++) {
+            this.notifier.notify('error', data.errors[i])
+          }
+        }
+      }
+    );
   }
 
   ngOnInit() {

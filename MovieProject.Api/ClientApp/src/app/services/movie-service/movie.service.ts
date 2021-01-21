@@ -20,8 +20,9 @@ constructor(private http: HttpClient) { }
     return this.http.get(this.baseUrl);
   }
 
-  getMovie(id: number){
-    return this.http.get(this.baseUrl + '/' + id);
+  
+  getMovie(id: number): Observable<MovieModel>{
+    return this.http.get<MovieModel>(this.baseUrl + '/' + id);
   }
 
   editMovie(model: MovieEditModel){
@@ -42,6 +43,10 @@ constructor(private http: HttpClient) { }
 
   getActorAvailableMovies(id: number){
     return this.http.get(this.baseUrl + '/' + id + '/available');
+  }
+
+  addFilmActor(movie_id: number, actor_id: number){
+    return this.http.post<ApiResult>(this.baseUrl + '/' + movie_id + '/actor/' + actor_id, null);
   }
 
 }

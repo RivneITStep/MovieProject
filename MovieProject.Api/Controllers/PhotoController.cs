@@ -28,6 +28,13 @@ namespace MovieProject.Api.Controllers
             _logger = logger;
         }
 
+        [HttpGet("actor/{actorid}")]
+        public async Task<PhotoDTO> getLastAddedPhoto([FromRoute]int actorid)
+        {
+            var photo = await _context.photos.OrderByDescending(t => t.Id).FirstOrDefaultAsync(t => t.ActorId == actorid);
+            return _mapper.Map<Photo, PhotoDTO>(photo);
+        }
+
         [HttpPost("actor")]
         public async Task<ResultDTO> addActorPhoto([FromBody]PhotoDTO model)
         {

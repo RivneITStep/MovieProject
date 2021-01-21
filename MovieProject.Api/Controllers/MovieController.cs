@@ -249,6 +249,5 @@ namespace MovieProject.Api.Controllers
             }
             return _mapper.Map<List<Movie>,List<MovieDTO>>(movies);
         }
-        
     }
 }
