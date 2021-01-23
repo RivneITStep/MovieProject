@@ -23,7 +23,7 @@ namespace MovieProject.DAL.Entities
         public string PictureUrl { get; set; }
         public string TrailerUrl { get; set; }
         public float Rating { get; set; }
-        public List<Actor> Actors { get; set; } = new List<Actor>();
+        public virtual ICollection<Actor> Actors { get; set; }
         public virtual ICollection<Review> Reviews { get; set; } 
     }
 }

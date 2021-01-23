@@ -17,5 +17,7 @@ namespace MovieProject.DTO.Models
         public int BirthYear { get; set; }
         public int Age { get; set; }
         public string PictureUrl { get; set; }
+        public List<PhotoDTO> Photos { get; set; }
+        public List<MovieDTO> Movies { get; set; }
     }
 }

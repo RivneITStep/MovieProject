@@ -21,138 +21,28 @@ namespace MovieProject.Api.Controllers
     {
         private readonly EFContext _context;
         private readonly IMapper _mapper;
-        private readonly ILogger<MovieController> _logger;
 
-        public MovieController(EFContext context, IMapper mapper, ILogger<MovieController> logger)
+        public MovieController(EFContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
-            _logger = logger;
         }
-
-        [HttpGet("{id}")]
-        public async Task<MovieDTO> getMovie([FromRoute]int id)
-        {
-            var obj = await _context.movies.SingleOrDefaultAsync(t => t.Id == id);
-            return _mapper.Map<Movie, MovieDTO>(obj);
-        }
-
-        [HttpGet]
-        public async Task<List<MovieDTO>> getMovies()
-        {
-            var entities = await _context.movies.ToListAsync();
-            return _mapper.Map<List<Movie>, List<MovieDTO>>(entities);
-        }
-
-        [HttpGet("search/{search}")]
-        public async Task<IEnumerable<MovieDTO>> searchMovieByName([FromRoute]string search)
-        {
-            search = search.ToLower();
-            var entities = await _context.movies.ToListAsync();
-            if (!String.IsNullOrEmpty(search))
-            {
-                entities = entities.Where(s => s.Name.ToLower().Contains(search) || s.OriginalName.ToLower().Contains(search)).ToList();
-            }
-            return _mapper.Map<List<Movie>, List<MovieDTO>>(entities);
-        }
-
-        [HttpGet("filters")]
-        public async Task<IEnumerable<MovieDTO>> getMoviesByFilter([FromBody]MovieFilter filter)
-        {
-            var entities = await _context.movies.ToListAsync();
-            if (!String.IsNullOrEmpty(filter.Country))
-            {
-                entities = entities.Where(s => s.Country.ToLower().Contains(filter.Country.ToLower())).ToList();
-            }
-
-            if (!String.IsNullOrEmpty(filter.Genre))
-            {
-                entities = entities.Where(s => s.Genre.ToLower().Contains(filter.Genre.ToLower())).ToList();
-            }
-
-            if(filter.Year != 0)
-            {
-                entities = entities.Where(s => s.Year.Equals(filter.Year)).ToList();
-            }
-
-            if(filter.Rating != 0)
-            {
-                entities = entities.Where(s => s.Rating > filter.Rating).ToList();
-            }
-
-            return _mapper.Map<List<Movie>, List<MovieDTO>>(entities);
-        }
-
+        
+        //CRUD
+        /// <summary>
+        /// This POST method adds Movie model to database
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
-        public async Task<ResultDTO> addMovie([FromBody] MovieDTO model)
+        public async Task<ResultDTO> AddMovie([FromBody] MovieDTO model)
         {
-            try
-            {
-                var obj = _mapper.Map<MovieDTO, Movie>(model);
-                await _context.movies.AddAsync(obj);
-                _logger.LogInformation($"Movie added: id: {obj.Id} name: {obj.Name}");
-                await _context.SaveChangesAsync();
-
-                return new ResultDTO
-                {
-                    Status = 200,
-                    Message = "Posted"
-                };
-            }
-            catch (Exception ex)
-            {
-                List<string> temp = new List<string>();
-                temp.Add(ex.Message);
-                _logger.LogInformation($"Movie not added: {ex.Message}");
-                return new ResultErrorDTO
-                {
-                    Status = 500,
-                    Message = "Error",
-                    Errors = temp
-                };
-            }
-        }
-
-        [HttpPost("edit")]
-        public async Task<ResultDTO> editMovie([FromBody]MovieDTO model)
-        {
-            var obj = await _context.movies.SingleOrDefaultAsync(t => t.Id == model.Id);
-
-            obj.Name = model.Name;
-            obj.OriginalName = model.OriginalName;
-            obj.Year = model.Year;
-            obj.Description = model.Description;
-            obj.Country = model.Country;
-            obj.Director = model.Director;
-            obj.Operator = model.Operator;
-            obj.Composer = model.Composer;
-            obj.Genre = model.Genre;
-            obj.Slogan = model.Slogan;
-            obj.Budget = model.Budget;
-            obj.Length = model.Length;
-            obj.CountViews = model.CountViews;
-            obj.PictureUrl = model.PictureUrl;
-            obj.TrailerUrl = model.TrailerUrl;
-
+            var movie = _mapper.Map<MovieDTO,Movie>(model);
+            await _context.movies.AddAsync(movie);
             await _context.SaveChangesAsync();
-
-            return new ResultDTO
-            {
-                Status = 200,
-                Message = "Edited"
-            };
-        }
-
-        [HttpPost("{id}/add/actor")]
-        public async Task<ResultDTO> addMovieActor([FromBody]ActorDTO model, [FromRoute]int id)
-        {
             try
             {
-                var movie = await _context.movies.SingleOrDefaultAsync(t => t.Id == id);
-                var obj = _mapper.Map<ActorDTO, Actor>(model);
-                _logger.LogInformation($"Actor added to movie: id: {obj.Id} name: {obj.Name}");
-                await _context.SaveChangesAsync();
-
+                
                 return new ResultDTO
                 {
                     Status = 200,
@@ -161,9 +51,8 @@ namespace MovieProject.Api.Controllers
             }
             catch (Exception ex)
             {
-                List<string> temp = new List<string>();
+                var temp = new List<string>();
                 temp.Add(ex.Message);
-                _logger.LogInformation($"Actor not added to movie: {ex.Message}");
                 return new ResultErrorDTO
                 {
                     Status = 500,
@@ -173,81 +62,63 @@ namespace MovieProject.Api.Controllers
             }
         }
         
+        /// <summary>
+        /// This GET method returns Movie model from database by it`s ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("{id}")]
+        public async Task<MovieDTO> GetMovie([FromRoute] int id)
+        {
+            var movie = await _context.movies.SingleOrDefaultAsync(t => t.Id == id);
+            return _mapper.Map<Movie, MovieDTO>(movie);
+        }
+        
+        /// <summary>
+        /// This GET method returns all Movie models from database
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<IEnumerable<MovieDTO>> GetMovies()
+        {
+            var movies = await _context.movies.ToListAsync();
+            return _mapper.Map<List<Movie>, List<MovieDTO>>(movies);
+        }
+        
+        /// <summary>
+        /// This POST method edits Movie model by it`s ID
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost("edit")]
+        public async Task<ResultDTO> EditMovie([FromBody] MovieDTO model)
+        {
+            var movie = await _context.movies.SingleOrDefaultAsync(t => t.Id == model.Id);
+            _mapper.Map(model, movie);
+            await _context.SaveChangesAsync();
+            return new ResultDTO
+            {
+                Status = 200,
+                Message = "Edited"
+            };
+        }
+        
+        /// <summary>
+        /// This DELETE method deletes Movie model from database by it`s ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
-        public async Task<ResultDTO> deleteMovie([FromRoute]int id)
+        public async Task<ResultDTO> DeleteMovie([FromRoute] int id)
         {
-            try
+            var movie = await _context.movies.SingleOrDefaultAsync(t => t.Id == id);
+            _context.movies.Remove(movie);
+            await _context.SaveChangesAsync();
+            return new ResultDTO
             {
-                var obj = await _context.movies.SingleOrDefaultAsync(t => t.Id == id);
-                _context.movies.Remove(obj);
-                await _context.SaveChangesAsync();
-                _logger.LogInformation($"Movie: id: {obj.Id} deleted");
-                return new ResultDTO
-                {
-                    Status = 200,
-                    Message = "Posted"
-                };
-            }
-            catch (Exception ex)
-            {
-                List<string> temp = new List<string>();
-                temp.Add(ex.Message);
-                _logger.LogInformation($"Movie not deleted: {ex.Message}");
-                return new ResultErrorDTO
-                {
-                    Status = 500,
-                    Message = "Error",
-                    Errors = temp
-                };
-            }
-        }
-
-        [HttpPost("{id}/actor/{actorid}")]
-        public ResultDTO addFilmActor([FromRoute]int id,[FromRoute]int actorid)
-        {
-            try
-            {
-                var movie = _context.movies.FirstOrDefault(t => t.Id == id); 
-                var actor = _context.actors.FirstOrDefault(t => t.Id == actorid);
-                movie.Actors.Add(actor);
-                _context.SaveChanges();
-
-                return new ResultDTO
-                {
-                    Status = 200,
-                    Message = "Posted"
-                };
-            }
-            catch (Exception ex)
-            {
-                List<string> temp = new List<string>();
-                temp.Add(ex.Message);
-                return new ResultErrorDTO
-                {
-                    Status = 500,
-                    Message = "Error",
-                    Errors = temp
-                };
-            }
-        }
-
-        [HttpGet("{id}/actors")]
-        public IEnumerable<ActorDTO> getFilmActors([FromRoute]int id)
-        {
-            var actors = _context.movies.Include(t => t.Actors).ThenInclude(t => t.Movies).SingleOrDefault(t => t.Id == id).Actors;
-            return _mapper.Map<List<Actor>, List<ActorDTO>>(actors);
-        }
-
-        [HttpGet("{id}/available")]
-        public IEnumerable<MovieDTO> getActorAvailableMovies([FromRoute]int id)
-        {
-            var movies = _context.movies.ToList();
-            var actor = _context.actors.Include(t => t.Movies).SingleOrDefault(t => t.Id == id);
-            foreach (var el in actor.Movies)
-            {
-                movies.Remove(el);
-            }
-            return _mapper.Map<List<Movie>,List<MovieDTO>>(movies);
+                Status = 200,
+                Message = "Deleted"
+            };
         }
     }
 }

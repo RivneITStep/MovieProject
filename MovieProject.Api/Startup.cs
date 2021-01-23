@@ -39,7 +39,7 @@ namespace MovieProject.Api
         {
             services.AddCors();
             services.AddDbContext<EFContext>(
-                    opt => opt.UseSqlServer(Configuration["ConnectionString"],
+                    opt => opt.UseLazyLoadingProxies().UseSqlServer(Configuration["ConnectionString"],
                     b => b.MigrationsAssembly("MovieProject.Api")));
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<EFContext>()
@@ -78,11 +78,21 @@ namespace MovieProject.Api
                 };
             });
 
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+                {
+                    Title = "Swagger API",
+                    Description = "API Documentation",
+                    Version = "v1"
 
-
-
-
-
+                });
+            });
+                
+            
+            services.AddControllers().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -115,6 +125,11 @@ namespace MovieProject.Api
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseSwagger();
+            app.UseSwaggerUI(options =>
+            {
+                options.SwaggerEndpoint("/swagger/v1/swagger.json","Swagger API");
+            });
 
             app.UseEndpoints(endpoints =>
             {

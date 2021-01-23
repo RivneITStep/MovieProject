@@ -13,6 +13,9 @@ using System.Threading.Tasks;
 
 namespace MovieProject.Api.Controllers
 {
+    /// <summary>
+    /// Article Controller is responsible for NewsArticle`s CRUD
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class ArticleController : ControllerBase
@@ -24,60 +27,6 @@ namespace MovieProject.Api.Controllers
             _context = context;
             _mapper = mapper;
         }
-
-        [HttpGet]
-        public async Task<IEnumerable<NewsArticleDTO>> getArticles()
-        {
-            var entities = await _context.articles.ToListAsync();
-            return _mapper.Map<List<NewsArticle>, List<NewsArticleDTO>>(entities);
-        }
-
-        [HttpGet("{id}")]
-        public async Task<NewsArticleDTO> getArticle([FromRoute]int id)
-        {
-            var obj = await _context.articles.SingleOrDefaultAsync(t => t.Id == id);
-            return _mapper.Map<NewsArticle, NewsArticleDTO>(obj);
-        }
-
-        [HttpPost]
-        public async Task<ResultDTO> addArticle([FromBody]NewsArticleDTO model)
-        {
-            try
-            {
-                var obj = _mapper.Map<NewsArticleDTO, NewsArticle>(model);
-                await _context.articles.AddAsync(obj);
-                await _context.SaveChangesAsync();
-                return new ResultDTO
-                {
-                    Status = 200,
-                    Message = "Posted"
-                };
-            }
-            catch(Exception ex)
-            {
-                List<string> temp = new List<string>();
-                temp.Add(ex.Message);
-                return new ResultErrorDTO
-                {
-                    Status = 500,
-                    Message = "Error",
-                    Errors = temp
-                };
-            }
-            
-        }
-
-        [HttpDelete("{id}")]
-        public async Task<ResultDTO> deleteArticle([FromRoute]int id)
-        {
-            var obj = await _context.articles.SingleOrDefaultAsync(t => t.Id == id);
-            _context.articles.Remove(obj);
-            await _context.SaveChangesAsync();
-            return new ResultDTO
-            {
-                Status = 200,
-                Message = "Deleted"
-            };
-        }
+        
     }
 }

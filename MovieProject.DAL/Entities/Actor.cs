@@ -20,6 +20,6 @@ namespace MovieProject.DAL.Entities
         public int Age { get; set; }
         public string PictureUrl { get; set; }
         public virtual ICollection<Photo> Photos { get; set; }
-        public List<Movie> Movies { get; set; } = new List<Movie>();
+        public virtual ICollection<Movie> Movies { get; set; }
     }
 }

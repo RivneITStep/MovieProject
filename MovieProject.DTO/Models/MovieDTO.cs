@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MovieProject.DTO.Models.Result;
 
 namespace MovieProject.DTO.Models
 {
@@ -24,5 +25,7 @@ namespace MovieProject.DTO.Models
         public string PictureUrl { get; set; }
         public string TrailerUrl { get; set; }
         public float Rating { get; set; }
+        public List<ActorDTO> Actors { get; set; }
+        public List<ReviewDTO> Reviews { get; set; }
     }
 }

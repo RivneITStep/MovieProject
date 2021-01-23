@@ -16,6 +16,9 @@ using System.Threading.Tasks;
 
 namespace MovieProject.Api.Controllers
 {
+    /// <summary>
+    /// Account Controller is responsible for Users Authorization
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class AccountController : ControllerBase
@@ -43,6 +46,11 @@ namespace MovieProject.Api.Controllers
             _jwtTokenService = jWtTokenService;
         }
 
+        /// <summary>
+        /// This POST method is used to Register
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost("register")]
         public async Task<ResultDTO> Register([FromBody]UserRegisterDTO model)
         {
@@ -86,7 +94,11 @@ namespace MovieProject.Api.Controllers
         }
 
 
-
+        /// <summary>
+        /// This POST method is used to Login
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost("login")]
         public async Task<ResultDTO> Login([FromBody]UserLoginDTO model)
         {
