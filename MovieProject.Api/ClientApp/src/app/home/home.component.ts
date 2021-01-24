@@ -1,4 +1,4 @@
-import { MovieModel } from './../Models/movie.model';
+import { MovieModel } from '../models/movie.model';
 import { MovieService } from './../services/movie-service/movie.service';
 import { HttpClient } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';

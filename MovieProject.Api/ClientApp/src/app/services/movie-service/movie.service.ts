@@ -1,10 +1,10 @@
 import { Observable } from 'rxjs';
-import { ApiResult } from 'src/app/Models/result.model';
-import { MovieModel } from './../../Models/movie.model';
+import { ApiResult } from 'src/app/models/result.model';
+import { MovieModel } from '../../models/movie.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { MovieAddModel } from 'src/app/Models/movieadd.model';
-import { MovieEditModel } from 'src/app/Models/movieedit.model';
+import { MovieAddModel } from 'src/app/models/movieadd.model';
+import { MovieEditModel } from 'src/app/models/movieedit.model';
 
 
 @Injectable({

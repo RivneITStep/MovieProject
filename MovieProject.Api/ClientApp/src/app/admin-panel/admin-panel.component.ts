@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActorModel } from '../Models/actor.model';
-import { MovieModel } from '../Models/movie.model';
+import { ActorModel } from '../models/actor.model';
+import { MovieModel } from '../models/movie.model';
 import { ActorService } from '../services/actor-service/actor.service';
 import { MovieService } from '../services/movie-service/movie.service';
 

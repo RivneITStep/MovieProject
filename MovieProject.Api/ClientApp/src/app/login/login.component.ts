@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ApiService } from './../core/api.service';
-import { SignInModel } from './../Models/login.model';
+import { SignInModel } from '../models/login.model';
 import { Component, OnInit } from '@angular/core';
 import { NotifierService } from 'angular-notifier';
 

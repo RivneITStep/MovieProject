@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MovieProject.DTO.Models.Actor;
 
 namespace MovieProject.Api.Controllers
 {
@@ -38,11 +39,11 @@ namespace MovieProject.Api.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<ResultDTO> AddActor([FromBody]ActorDTO model)
+        public async Task<ResultDTO> AddActor([FromBody]ActorAddDTO model)
         {
             try
             {
-                var actor = _mapper.Map<ActorDTO, Actor>(model);
+                var actor = _mapper.Map<ActorAddDTO, Actor>(model);
                 await _context.actors.AddAsync(actor);
                 await _context.SaveChangesAsync();
                 return new ResultDTO
@@ -121,6 +122,25 @@ namespace MovieProject.Api.Controllers
                 Status = 200,
                 Message = "Deleted"
             };
+        }
+        
+        /// <summary>
+        /// This GET method return list of unique column data from SQL table 
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <returns></returns>
+        [HttpGet("filter/{filter}")]
+        public async Task<IEnumerable<string>> GetFilterList([FromRoute]string filter)
+        {
+            switch (filter.ToLower())
+            {
+                case "country":
+                    var filters1 = await _context.actors.Select(t => t.Country).Distinct().ToListAsync();
+                    return filters1.ConvertAll<string>(input => input.ToString());
+                    break;
+                default:
+                    return null;
+            }
         }
     }
 }

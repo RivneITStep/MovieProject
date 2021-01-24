@@ -11,6 +11,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MovieProject.DTO.Models.Review;
 
 namespace MovieProject.Api.Controllers
 {
@@ -37,11 +38,11 @@ namespace MovieProject.Api.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<ResultDTO> AddReview([FromBody] ReviewDTO model)
+        public async Task<ResultDTO> AddReview([FromBody] ReviewAddDTO model)
         {
             try
             {
-                var review = _mapper.Map<ReviewDTO, Review>(model);
+                var review = _mapper.Map<ReviewAddDTO, Review>(model);
                 await _context.reviews.AddAsync(review);
                 await _context.SaveChangesAsync();
                 return new ResultDTO

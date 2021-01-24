@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MovieProject.DTO.Models.Movie;
 
 namespace MovieProject.Api.Controllers
 {
@@ -35,9 +36,9 @@ namespace MovieProject.Api.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<ResultDTO> AddMovie([FromBody] MovieDTO model)
+        public async Task<ResultDTO> AddMovie([FromBody] MovieAddDTO model)
         {
-            var movie = _mapper.Map<MovieDTO,Movie>(model);
+            var movie = _mapper.Map<MovieAddDTO,Movie>(model);
             await _context.movies.AddAsync(movie);
             await _context.SaveChangesAsync();
             try
@@ -119,6 +120,25 @@ namespace MovieProject.Api.Controllers
                 Status = 200,
                 Message = "Deleted"
             };
+        }
+
+        [HttpGet("filter/{filter}")]
+        public async Task<IEnumerable<string>> GetFilterList(string filter)
+        {
+            switch (filter.ToLower())
+            {
+                case "country":
+                    var filters1 = await _context.movies.Select(t => t.Country).Distinct().ToListAsync();
+                    return filters1;
+                case "genre":
+                    var filters2 = await _context.movies.Select(t => t.Genre).Distinct().ToListAsync();
+                    return filters2;
+                case "year":
+                    var filters3 = await _context.movies.Select(t => t.Year).Distinct().ToListAsync();
+                    return filters3.ConvertAll<string>(input => input.ToString());
+                default:
+                    return null;
+            }
         }
     }
 }

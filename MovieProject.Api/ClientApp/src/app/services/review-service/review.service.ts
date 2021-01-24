@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ApiResult } from 'src/app/Models/result.model';
-import { ReviewAddModel } from 'src/app/Models/reviewadd.model';
+import { ApiResult } from 'src/app/models/result.model';
+import { ReviewAddModel } from 'src/app/models/reviewadd.model';
 
 @Injectable({
   providedIn: 'root'

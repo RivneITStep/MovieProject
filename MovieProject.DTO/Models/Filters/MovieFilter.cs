@@ -10,6 +10,5 @@ namespace MovieProject.DTO.Models.Filters
         public string Country { get; set; } = String.Empty;
         public string Genre { get; set; } = String.Empty;
         public int Year { get; set; } = 0;
-        public float Rating { get; set; } = 0;
     }
 }

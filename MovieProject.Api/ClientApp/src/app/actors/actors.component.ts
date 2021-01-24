@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { ActorModel } from './../Models/actor.model';
+import { ActorModel } from '../models/actor.model';
 import { ActorService } from './../services/actor-service/actor.service';
 import { Component, OnInit } from '@angular/core';
 import { PaginationControlsComponent } from 'ngx-pagination';

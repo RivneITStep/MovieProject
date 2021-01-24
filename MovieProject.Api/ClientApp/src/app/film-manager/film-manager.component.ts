@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { MovieModel } from '../Models/movie.model';
-import { MovieAddModel } from '../Models/movieadd.model';
-import { MovieEditModel } from '../Models/movieedit.model';
-import { ApiResult } from '../Models/result.model';
+import { MovieModel } from '../models/movie.model';
+import { MovieAddModel } from '../models/movieadd.model';
+import { MovieEditModel } from '../models/movieedit.model';
+import { ApiResult } from '../models/result.model';
 import { MovieService } from '../services/movie-service/movie.service';
 
 @Component({

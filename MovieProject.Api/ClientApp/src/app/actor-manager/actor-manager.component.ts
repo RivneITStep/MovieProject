@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NotifierService } from 'angular-notifier';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { ActorModel } from '../Models/actor.model';
-import { ActorAddModel } from '../Models/actoradd.model';
-import { MovieModel } from '../Models/movie.model';
-import { ApiResult } from '../Models/result.model';
+import { ActorModel } from '../models/actor.model';
+import { ActorAddModel } from '../models/actoradd.model';
+import { MovieModel } from '../models/movie.model';
+import { ApiResult } from '../models/result.model';
 import { ActorService } from '../services/actor-service/actor.service';
 
 @Component({

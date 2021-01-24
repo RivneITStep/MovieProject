@@ -1,6 +1,6 @@
 import { ApiService } from './../core/api.service';
 import { Component, OnInit } from '@angular/core';
-import { RegisterModel } from '../Models/register.model';
+import { RegisterModel } from '../models/register.model';
 import { NotifierService } from 'angular-notifier';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';

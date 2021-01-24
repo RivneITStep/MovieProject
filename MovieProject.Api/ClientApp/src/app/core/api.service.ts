@@ -1,9 +1,9 @@
-import { RegisterModel } from './../Models/register.model';
-import { SignInModel } from './../Models/login.model';
+import { RegisterModel } from '../models/register.model';
+import { SignInModel } from '../models/login.model';
 import{ Injectable, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ApiResult } from '../Models/result.model';
+import { ApiResult } from '../models/result.model';
 
 @Injectable({
     providedIn: 'root'

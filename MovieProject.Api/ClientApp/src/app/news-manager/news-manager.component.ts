@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NotifierService } from 'angular-notifier';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { ArticleModel } from '../Models/article.model';
-import { ApiResult } from '../Models/result.model';
+import { ArticleModel } from '../models/article.model';
+import { ApiResult } from '../models/result.model';
 import { ArticleService } from '../services/article-service/article.service';
 
 @Component({
