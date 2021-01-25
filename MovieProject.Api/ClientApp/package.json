@@ -24,6 +24,7 @@
     "@vime/angular": "^5.0.27",
     "angular-notifier": "^6.0.1",
     "angular-star-rating": "^4.0.0-beta.3",
+    "aos": "^2.3.4",
     "bootstrap": "^4.6.0",
     "jquery": "^3.5.1",
     "jwt-decode": "^3.1.2",

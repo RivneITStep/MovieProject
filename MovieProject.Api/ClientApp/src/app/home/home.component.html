@@ -1,104 +1,115 @@
-<div class="upper-block">
-    <div class="spacer-block"></div>
-    <div class="welcome-film-block">
-        <div class="spacer-block"></div>
-        <p class="welcome-film-title">The Jungle Book</p>
-        <div class="about-welcome-film">
-            <p class="welcome-film-block-desc">
-                After a threat from the tiger Shere Khan forces him to flee the jungle,
-                a man-cub named Mowgli embarks on a journey of
-                self discovery with the help of panther Bagheera and free-spirited bear Baloo.
-            </p>
-            <div class="spacer-block"></div>
-            <button class="check-welcome-film">Check</button>
-        </div>
-    </div>
-</div>
-
-<div class="article-block">
-    <div class="first-article-block">
-        <div>
-            <img class="grid-image"
-                src="https://i.guim.co.uk/img/media/f6530cd140d9cccf9697f2925da6438f44d214ed/0_188_5653_3392/master/5653.jpg?width=620&quality=85&auto=format&fit=max&s=039e9707604bf10f7d67e7ee9ef87c98"
-                alt="">
-            <h2 class="article-title">Harrowing ordeal of Guantánamo prisoner comes to the big screen</h2>
-        </div>
-
-    </div>
-    <div>
-        <h2 class="article-title">Actual news</h2>
-        <hr class="hrhr-white">
-        <p class="news-text">
-            Breaking movie news and rumors about everything in the world of comics and beyond. From animated favorites
-            to live-action blockbusters
-        </p>
-    </div>
-    <button class="btn-watch-more">Watch more news</button>
-</div>
-
-<div class="presentation-block">
-    <div class="presentation-text">
-        <h2 class="presentation-title">Watch film trailers for free</h2>
-        <hr>
-        <p class="presentation-p">
-            A trailer (also known as a preview or coming attraction) is a commercial
-            advertisement for a feature film that will be exhibited in the future at
-            a cinema, the result of creative and technical work. The term "trailer"
-            dates back to the distribution of movies on reels of film. The reels were
-            always distributed un-rewound (the theater about to show the film first
-            had to rewind it, as early experience showed the danger of expecting an
-            incoming film to have been rewound). Therefore, the end of
-            the movie was the most accessible part, to which previews were spliced, "trailing" the film
-        </p>
-    </div>
-    <video controls autoplay muted class="welcome-trailer">
-        <source src="https://kino-teatr.ua/public/main/films/trailer_6254.mp4" type="video/mp4">
-    </video>
-</div>
-
-<div class="middle-block">
-    <ul class="category-nav">
-        <li>Actors</li>
-        <li>Films</li>
-        <li>News</li>
-        <li class="spacer-block"></li>
-    </ul>
-    <hr class="hr-dark">
-    <div class="actors">
-        <div>
-            <img class="grid-image"
-                src="https://avatars.mds.yandex.net/get-kinopoisk-image/1600647/430042eb-ee69-4818-aed0-a312400a26bf/300x450"
-                alt="">
-        </div>
-        <div>
-            <img class="grid-image"
-                src="https://avatars.mds.yandex.net/get-kinopoisk-image/1629390/8ab9a119-dd74-44f0-baec-0629797483d7/300x450"
-                alt="">
-        </div>
-        <div>
-            <img class="grid-image"
-                src="https://avatars.mds.yandex.net/get-kinopoisk-image/1629390/943ddbde-5a37-4d8a-a3c5-2979aac18915/300x450"
-                alt="">
-        </div>
-        <div>
-            <img class="grid-image"
-                src="https://avatars.mds.yandex.net/get-kinopoisk-image/1773646/0e1384ae-6367-4bba-9e5d-d91c6625371e/300x450"
-                alt="">
-        </div>
-        <div>
-            <img class="grid-image"
-                src="https://avatars.mds.yandex.net/get-kinopoisk-image/1898899/211e880d-c183-43aa-83b0-13c08109eaf7/300x450"
-                alt="">
-        </div>
-        <div>
-            <img class="grid-image"
-                src="https://avatars.mds.yandex.net/get-kinopoisk-image/1946459/83a758fc-d3f9-485a-b75f-530fb611d63c/300x450"
-                alt="">
-        </div>
-        <div>
-            <button class="btn-watch-more">Watch more</button>
+<div class="background">
+    <div class="pimg1">
+        <div class="ptext ptext-title">
+            <span data-aos="zoom-in-up" data-aos-duration="3000" class="brd title section-one-grid">
+                <img class="title-img" src="../../assets/images/popcorn.png" alt="">
+                Movie Project
+                <p class="under-title-text">
+                    cinematography portal
+                </p>
+            </span>
         </div>
     </div>
 
+    <section class="section section-light">
+        <div data-aos="fade-up" class="section-one-block">
+            <div class="section-one-block-item studios">
+                <img class="welcome-img" src="../../assets/images/fisher.jpg" alt="">
+            </div>
+            <div  class="section-one-block-item">
+                <p class="about-studios">Review and rate movies and serials from worldwide famous filming studios. 
+                    Also read the reviews of other users which will help you to decide whether to watch the movie or not. 
+                    Enjoy short and clear descriptions of movies to save your precious time
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <div class="pimg2">
+        <div class="ptext">
+            <div class="brd">
+                Actual movies and serials
+            </div>
+        </div>
+    </div>
+
+    <section class="section section-light">
+        <div data-aos="fade-up" data-aos-duration="2000" class="movies">
+            <div class="movie">
+                <img src="{{movies[0].pictureUrl}}" alt="" class="movie-image">
+            </div>
+            <div class="movie">
+                <img src="{{movies[1].pictureUrl}}" alt="" class="movie-image">
+            </div>
+            <div class="movie">
+                <img src="{{movies[2].pictureUrl}}" alt="" class="movie-image">
+            </div>
+            <div class="movie">
+                <img src="{{movies[3].pictureUrl}}" alt="" class="movie-image">
+            </div>
+            <div class="movie">
+                <img src="{{movies[4].pictureUrl}}" alt="" class="movie-image">
+            </div>
+            <div class="movie">
+                <img src="{{movies[5].pictureUrl}}" alt="" class="movie-image">
+            </div>
+        </div>
+    </section>
+
+    <div class="pimg3">
+        <div class="ptext">
+            <span class="brd">
+                World Famous Actors
+            </span>
+        </div>
+    </div>
+
+    <section  class="section section-light">
+        <div data-aos="fade-up" data-aos-duration="2000" class="actors">
+            <div class="actor">
+                <img src="{{actors[0].pictureUrl}}" alt="" class="actor-image">
+            </div>
+            <div class="actor">
+                <img src="{{actors[1].pictureUrl}}" alt="" class="actor-image">
+            </div>
+            <div class="actor">
+                <img src="{{actors[2].pictureUrl}}" alt="" class="actor-image">
+            </div>
+            <div class="actor">
+                <img src="{{actors[3].pictureUrl}}" alt="" class="actor-image">
+            </div>
+            <div class="actor">
+                <img src="{{actors[4].pictureUrl}}" alt="" class="actor-image">
+            </div>
+            <div class="actor">
+                <img src="{{actors[5].pictureUrl}}" alt="" class="actor-image">
+            </div>
+        </div>
+    </section>
 
 </div>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+    AOS.init({
+  // Global settings:
+  disable: false, // accepts following values: 'phone', 'tablet', 'mobile', boolean, expression or function
+  startEvent: 'DOMContentLoaded', // name of the event dispatched on the document, that AOS should initialize on
+  initClassName: 'aos-init', // class applied after initialization
+  animatedClassName: 'aos-animate', // class applied on animation
+  useClassNames: false, // if true, will add content of `data-aos` as classes on scroll
+  disableMutationObserver: false, // disables automatic mutations' detections (advanced)
+  debounceDelay: 50, // the delay on debounce used while resizing window (advanced)
+  throttleDelay: 99, // the delay on throttle used while scrolling the page (advanced)
+  
+
+  // Settings that can be overridden on per-element basis, by `data-aos-*` attributes:
+  offset: 120, // offset (in px) from the original trigger point
+  delay: 0, // values from 0 to 3000, with step 50ms
+  duration: 400, // values from 0 to 3000, with step 50ms
+  easing: 'ease', // default easing for AOS animations
+  once: false, // whether animation should happen only once - while scrolling down
+  mirror: false, // whether elements should animate out while scrolling past them
+  anchorPlacement: 'top-bottom', // defines which position of the element regarding to window should trigger the animation
+
+});
+</script>

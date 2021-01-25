@@ -3,6 +3,9 @@ import { MovieService } from './../services/movie-service/movie.service';
 import { HttpClient } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { Component, OnInit } from '@angular/core';
+import { AOS } from 'aos';
+import { ActorModel } from '../models/actor/actor.model';
+import { ActorService } from '../services/actor-service/actor.service';
 
 @Component({
   selector: 'app-home',
@@ -11,18 +14,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private movieService: MovieService) { }
-  headMovies: MovieModel[] = [];
-
-  donateOnClick(event){
-    window.open("https://www.liqpay.ua/checkout/i73130420823", "_blank");
-  }
+  constructor(private movieService: MovieService, private actorService: ActorService) { }
+  movies: MovieModel[] = [];
+  actors: ActorModel[] = [];
 
   ngOnInit() {
     this.movieService.getMovies().subscribe(
       (data: MovieModel[]) => {
-        this.headMovies = data;
-        console.log(this.headMovies[0].name);
+        this.movies = data;
+        console.log(this.movies[0].name);
+      }
+    );
+    this.actorService.getActors().subscribe(
+      (data: ActorModel[]) => {
+        this.actors = data;
       }
     );
   }
