@@ -26,14 +26,26 @@ import { LoginComponent } from './login/login.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { TestComponent } from './test/test.component';
-import { StarRatingModule } from 'angular-star-rating';
+import {AccordionModule} from 'primeng/accordion';     //accordion and accordion tab
+import {MenuItem} from 'primeng/api';           
+import {TabViewModule} from 'primeng/tabview';
+import { ActorManagerComponent } from './actor-manager/actor-manager.component';
+import {TableModule} from 'primeng/table';
+import {ButtonModule} from 'primeng/button';
+import {SplitButtonModule} from 'primeng/splitbutton';
+import {DialogModule} from 'primeng/dialog';
+import {InputTextModule} from 'primeng/inputtext';
+import {DropdownModule} from 'primeng/dropdown';
+import {InputTextareaModule} from 'primeng/inputtextarea';
+
+
 
 const notifierOptions: NotifierOptions = {
   position: {horizontal: { position: 'right' }, vertical: { position: 'bottom' }}
 };
 
 @NgModule({
-  declarations: [														
+  declarations: [															
     AppComponent,
       HomeComponent,
       RegisterComponent,
@@ -45,7 +57,8 @@ const notifierOptions: NotifierOptions = {
       MoviepageComponent,
       LoginComponent,
       AdminPanelComponent,
-      TestComponent
+      TestComponent,
+      ActorManagerComponent
    ],
   imports: [
     DemoNgZorroAntdModule,
@@ -61,7 +74,14 @@ const notifierOptions: NotifierOptions = {
     AppRoutingModule,
     RouterModule,
     BrowserAnimationsModule,
-    StarRatingModule
+    AccordionModule,
+    TabViewModule,
+    TableModule,
+    ButtonModule,
+    SplitButtonModule,
+    DialogModule,
+    DropdownModule,
+    InputTextModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -32,7 +32,7 @@ export class ActorService {
   }
 
   deleteActor(id: number){
-    return this.http.delete<ApiResult>(this.baseUrl);
+    return this.http.delete<ApiResult>(this.baseUrl + '/' + id);
   }
 
   addActorMovies(id: number, movie_id: number){
