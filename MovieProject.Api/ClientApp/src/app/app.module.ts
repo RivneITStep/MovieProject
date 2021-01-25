@@ -24,11 +24,9 @@ import { MoviepageComponent } from './moviepage/moviepage.component';
 import { ApiService } from './core/api.service';
 import { LoginComponent } from './login/login.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
-import { ActorManagerComponent } from './actor-manager/actor-manager.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { FilmManagerComponent } from './film-manager/film-manager.component';
-import { NewsManagerComponent } from './news-manager/news-manager.component';
 import { TestComponent } from './test/test.component';
+import { StarRatingModule } from 'angular-star-rating';
 
 const notifierOptions: NotifierOptions = {
   position: {horizontal: { position: 'right' }, vertical: { position: 'bottom' }}
@@ -47,9 +45,6 @@ const notifierOptions: NotifierOptions = {
       MoviepageComponent,
       LoginComponent,
       AdminPanelComponent,
-      ActorManagerComponent,
-      FilmManagerComponent,
-      NewsManagerComponent,
       TestComponent
    ],
   imports: [
@@ -65,7 +60,8 @@ const notifierOptions: NotifierOptions = {
     HttpClientModule,
     AppRoutingModule,
     RouterModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    StarRatingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

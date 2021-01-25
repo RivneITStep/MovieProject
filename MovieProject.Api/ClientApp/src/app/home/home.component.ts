@@ -1,4 +1,4 @@
-import { MovieModel } from '../models/movie.model';
+import { MovieModel } from '../models/movie/movie.model';
 import { MovieService } from './../services/movie-service/movie.service';
 import { HttpClient } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.movieService.getAllMovies().subscribe(
+    this.movieService.getMovies().subscribe(
       (data: MovieModel[]) => {
         this.headMovies = data;
         console.log(this.headMovies[0].name);

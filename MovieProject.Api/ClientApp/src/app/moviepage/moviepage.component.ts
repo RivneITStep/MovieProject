@@ -2,9 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../core/api.service';
-import { ActorModel } from '../models/actor.model';
-import { MovieModel } from '../models/movie.model';
-import { ReviewModel } from '../models/review.model';
 import { UserModel } from '../models/user.model';
 import { MovieService } from '../services/movie-service/movie.service';
 import { UserService } from '../services/user-service/user.service';
@@ -13,6 +10,10 @@ import { ReviewService } from '../services/review-service/review.service';
 import { ApiResult } from '../models/result.model';
 import { NotifierService } from 'angular-notifier';
 import { ThrowStmt } from '@angular/compiler';
+import { MovieModel } from '../models/movie/movie.model';
+import { ActorModel } from '../models/actor/actor.model';
+import { ReviewModel } from '../models/review/review.model';
+
 
 @Component({
   selector: 'app-moviepage',
@@ -21,115 +22,95 @@ import { ThrowStmt } from '@angular/compiler';
 })
 export class MoviepageComponent implements OnInit {
 
-  constructor(private notifier: NotifierService, private activateRoute: ActivatedRoute, private movieService: MovieService, private apiService: ApiService, private userService: UserService, private reviewService: ReviewService) {
+  constructor(private notifier: NotifierService, private reviewService: ReviewService, private activateRoute: ActivatedRoute, private movieService: MovieService, private userService: UserService, private apiService: ApiService) {
     this.id = activateRoute.snapshot.params['id'];
-    this.isLoggedIn = this.apiService.isLoggedIn();
-
-    if (this.isLoggedIn === true) {
-      const token = localStorage.getItem('token');
-      const jwtData = token.split('.')[1];
-      const decodedJwtJsonData = window.atob(jwtData);
-      const decodedJwtData = JSON.parse(decodedJwtJsonData);
-      this.userService.getUser(decodedJwtData.id).subscribe(
-        (data: UserModel) => {
-          this.username = data.email;
-        }
-      );
-    }
   }
 
   id: number;
-  thisUrl: string;
+  mark: number;s
+
   movie: MovieModel = new MovieModel();
-  movieActors: ActorModel[] = [];
-  isLoggedIn: boolean;
-  review: ReviewAddModel = new ReviewAddModel();
+  review: ReviewModel = new ReviewModel();
+
   reviews: ReviewModel[] = [];
+  actors: ActorModel[] = [];
   users: UserModel[] = [];
-  username: string;
-  isError: boolean = false;
+  
+  getCurrentUserId() {
+    const token = localStorage.getItem('token');
+    const jwtData = token.split('.')[1];
+    const decodedJwtJsonData = window.atob(jwtData);
+    const decodedJwtData = JSON.parse(decodedJwtJsonData);
+    return decodedJwtData.id;
+  }
 
-  postComment() {
-    if (this.isLoggedIn) {
-      const token = localStorage.getItem('token');
-      const jwtData = token.split('.')[1];
-      const decodedJwtJsonData = window.atob(jwtData);
-      const decodedJwtData = JSON.parse(decodedJwtJsonData);
-      this.review.userId = decodedJwtData.id;
-      this.review.movieId = this.id;
-
-      if (this.review.title === null) {
-        this.isError = true;
-        this.notifier.notify('error', 'Enter title');
-      }
-      if (this.review.text === null) {
-        this.isError = true;
-        this.notifier.notify('error', 'Enter text');
-      }
-
-      if (this.isError === false) {
+  postReview() {
+    if(this.apiService.isLoggedIn()) {
+      if (this.review.text != null && this.review.title != null) {
+        this.review.movieId = this.id;
+        this.review.userId = this.getCurrentUserId();
         this.reviewService.addReview(this.review).subscribe(
           (data: ApiResult) => {
-            if (data.status == 200) {
-              this.notifier.notify('success', 'Comment posted');
-            } else {
-              this.notifier.notify('error', 'Error');
+            if(data.status == 200){
+              this.reviews.push(this.review);
+              this.notifier.notify('success','Review added');
+            }else{
+              this.notifier.notify('success','Server error');
             }
           }
         );
-        window.location.reload();
+      }else{
+        this.notifier.notify('error','Enter review title and text');
       }
-      this.isError = false;
-    } else {
-      this.notifier.notify('error','Please log-in to post your comment');
+    }else{
+      this.notifier.notify('error','Please log-in');
     }
   }
 
-  getReviewUserName(id: string) {
-    var name;
-    this.users.forEach(element => {
-      if(element.id == id){
-        name = element.email;
+  rateMovie(){
+    this.movieService.rateMovie(this.id, this.mark).subscribe(
+      (data: ApiResult) => {
+        if(data.status == 200){
+          this.movieService.getMovie(this.id).subscribe(
+            (data: MovieModel) => {
+              this.movie = data;
+            }
+          );
+          this.notifier.notify('success','Rated');
+        }else{
+          this.notifier.notify('error','Server error');
+        }
       }
-    });
-    if(name == null){
-      return name;
-    }else{
-      return name.match(/^([^@]*)@/)[1];
-    }
+    );
+  }
+
+  getUserName(userId: string) {
+    let email = this.users.find(t => t.id == userId).email;
+    return email.substring(0, email.lastIndexOf("@"));
   }
 
   ngOnInit() {
-    this.review.title = null;
-    this.review.text = null;
     this.movieService.getMovie(this.id).subscribe(
       (data: MovieModel) => {
         this.movie = data;
-        console.log(data.name);
+        document.getElementsByTagName('video')[0].src = this.movie.trailerUrl;
       }
     );
-
-    this.movieService.getMovieActors(this.id).subscribe(
-      (data: ActorModel[]) => {
-        this.movieActors = data;
-        console.log(data[0].name);
-      }
-    );
-
     this.reviewService.getMovieReviews(this.id).subscribe(
       (data: ReviewModel[]) => {
         this.reviews = data;
-        console.log(this.reviews[0].title);
       }
     );
-
+    this.movieService.getMovieActors(this.id).subscribe(
+      (data: ActorModel[]) => {
+        this.actors = data;
+      }
+    );
     this.userService.getUsers().subscribe(
       (data: UserModel[]) => {
         this.users = data;
-        console.log(this.users[0].email);
       }
     );
-
   }
 
 }

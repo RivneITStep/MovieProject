@@ -156,14 +156,23 @@
 
 .review-block{
     padding: 50px 5%;
+    background-color: rgb(30,30,30);
 }
 
 .comment{
     display: grid;
     grid-template-columns: 100px 1fr;
-    background-color: rgb(30,30,30);
-    padding: 15px;
     border-radius: 15px;
+    padding: 5px;
+    margin-bottom: 25px;
+    transition-property: all;
+    transition-delay: .25s;
+    transition-duration: .25s;
+}
+
+
+.comment:hover{
+    transform: scale(1.1);
 }
 
 .user-avatar{
@@ -177,9 +186,6 @@
     font-family: 'Montserrat',sans-serif;
 }
 
-.comment{
-    margin-bottom: 10px;
-}
 
 .comment-title{
     font-weight: 500;
@@ -236,4 +242,52 @@
 
 .comment-warn{
     text-align: center;
+}
+
+.movie-trailer{
+    display: block;
+    max-width: 100%;
+    margin: 50px auto;
+}
+
+
+
+.rate-system{
+    float: left;
+    margin-bottom: 50px;
+    width: 100px;
+    height: 50px;
+}
+
+.mark-inter-block{
+    margin: 25px 0;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+}
+
+.movie-current-rating{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 50px;
+    color: white;
+    font-weight: 600;
+}
+
+.film-rate-header{
+    margin-top: 25px;
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    font-size: 24px;
+    font-weight: 400;
+}
+
+.btn-rate{
+    border: none;
+    padding: 5px;
+    font-size: 18px;
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    background-color: #49C6E5;
+    border-radius: 10px;
+    margin-left: 10px;
+    margin-bottom: 50px;
 }

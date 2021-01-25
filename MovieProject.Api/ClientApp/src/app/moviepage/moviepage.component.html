@@ -1,6 +1,17 @@
 <div class="background">
   <div class="upper-block">
-    <img class="film-image" src="{{movie.pictureUrl}}" alt="">
+    <div>
+      <img class="film-image" src="{{movie.pictureUrl}}" alt="">
+      <p class="film-rate-header">Movie rating: </p>
+      <div class="mark-inter-block">
+        <img class="film-rating-img" width="100px" src="https://www.flaticon.com/premium-icon/icons/svg/921/921902.svg">
+        <h5 class="movie-current-rating">{{movie.rating.toFixed(2)}}</h5>
+      </div>
+      <p class="film-rate-header">Rate movie:</p>
+      <nz-rate [(ngModel)]="mark"></nz-rate>
+      <button class="btn-rate" (click)="rateMovie()">Rate</button>
+    </div>
+    
     <div class="film-info">
       <p class="film-name">{{movie.name}}</p>
       <p class="film-original-name">{{movie.originalName}}</p>
@@ -39,9 +50,13 @@
           <td>{{movie.length}}</td>
         </tr>
       </table>
+      <hr class="hr-white">
     </div>
   </div>
   <div class="middle-block">
+    <video class="movie-trailer" controls>
+      <source  type="video/mp4">
+    </video>
     <p class="desc-header">Description:</p>
     <hr>
     <p class="desc">{{movie.description}}</p>
@@ -51,24 +66,24 @@
     <hr class="hr-white">
     <div class="film-actors">
       <div class="actors">
-        <div class="actor" *ngFor="let item of movieActors">
-          <img class="grid-image" src="{{item.pictureUrl}}" alt="">
-          <p class="actor-name">{{item.name}}</p>
+        <div class="actor" *ngFor="let data of actors">
+          <img class="grid-image" src="{{data.pictureUrl}}" alt="">
+          <p class="actor-name">{{data.name}} {{data.surname}}</p>
         </div>
       </div>
     </div>
 
   </div>
   <div class="review-block">
-    <div class="comment" *ngFor="let item of reviews">
+    <div class="comment" *ngFor="let data of reviews">
       <div class="user">
         <img class="user-avatar" src="https://cdn.iconscout.com/icon/free/png-256/avatar-370-456322.png" alt="">
-        <p class="user-name">{{getReviewUserName(item.userId)}}</p>
+        <p class="user-name">{{getUserName(data.userId)}}</p>
       </div>
       <div class="comment-content">
-        <p class=" comment-title">{{item.title}}</p>
+        <p class="comment-title">{{data.title}}</p>
         <hr class="hr-white">
-        <p class="comment-text">{{item.text}}</p>
+        <p class="comment-text">{{data.text}}</p>
       </div>
 
     </div>
@@ -78,11 +93,11 @@
           <p class="comment-header">Write comment:</p>
           <hr class="hr-white">
         </div>
-        <input nzInput [(ngModel)]="review.title" class="write-commment-title" type="text" placeholder="Title">
-        <textarea [(ngModel)]="review.text" rows="5" class="write-commment-text" type="text"
+        <input [(ngModel)]="review.title" nzInput class="write-commment-title" type="text" placeholder="Title">
+        <textarea [(ngModel)]="review.text"  rows="5" class="write-commment-text" type="text"
           placeholder="Comment"></textarea>
       </div>
-      <button class="comment-btn" (click)="postComment()">Post</button>
+      <button (click)="postReview()" class="comment-btn">Post</button>
     </div>
   </div>
 </div>

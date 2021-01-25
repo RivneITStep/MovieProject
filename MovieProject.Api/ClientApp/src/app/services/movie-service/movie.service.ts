@@ -1,10 +1,11 @@
 import { Observable } from 'rxjs';
 import { ApiResult } from 'src/app/models/result.model';
-import { MovieModel } from '../../models/movie.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { MovieAddModel } from 'src/app/models/movieadd.model';
-import { MovieEditModel } from 'src/app/models/movieedit.model';
+import { MovieModel } from 'src/app/models/movie/movie.model';
+import { MovieAddModel } from 'src/app/models/movie/movie-add.model'
+import { ActorModel } from 'src/app/models/actor/actor.model';
+
 
 
 @Injectable({
@@ -15,17 +16,15 @@ export class MovieService {
 constructor(private http: HttpClient) { }
   baseUrl = location.origin + '/api/movie';
 
-  getAllMovies(){
-    console.log(this.baseUrl);
+  getMovies(){
     return this.http.get(this.baseUrl);
   }
 
-  
   getMovie(id: number): Observable<MovieModel>{
     return this.http.get<MovieModel>(this.baseUrl + '/' + id);
   }
 
-  editMovie(model: MovieEditModel){
+  editMovie(model: MovieModel){
     return this.http.post<ApiResult>(this.baseUrl + '/edit', model);
   }
 
@@ -37,16 +36,16 @@ constructor(private http: HttpClient) { }
     return this.http.delete<ApiResult>(this.baseUrl + '/' + id);
   }
 
-  getMovieActors(id: number){
-    return this.http.get(this.baseUrl + '/' + id + '/actors');
+  addMovieActor(id: number, actorId: number){
+    return this.http.post<ApiResult>(this.baseUrl + '/' + id + '/' + actorId, null);
   }
 
-  getActorAvailableMovies(id: number){
-    return this.http.get(this.baseUrl + '/' + id + '/available');
+  getMovieActors(id: number): Observable<ActorModel[]>{
+    return this.http.get<ActorModel[]>(this.baseUrl + '/actors/' + id);
   }
 
-  addFilmActor(movie_id: number, actor_id: number){
-    return this.http.post<ApiResult>(this.baseUrl + '/' + movie_id + '/actor/' + actor_id, null);
+  rateMovie(id: number, mark: number){
+    return this.http.post<ApiResult>(this.baseUrl + '/rate/' + id + '/' + mark, null);
   }
 
 }

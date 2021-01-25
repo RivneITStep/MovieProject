@@ -121,5 +121,19 @@ namespace MovieProject.Api.Controllers
                 Message = "Deleted"
             };
         }
+        
+        //Additional
+        /// <summary>
+        /// Thist GET method returns Review models by movie ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("movie/{id}")]
+        public async Task<IEnumerable<ReviewDTO>> GetReviewsByMovieId([FromRoute] int id)
+        {
+            var movie = await _context.movies.SingleOrDefaultAsync(t => t.Id == id);
+            var reviews = movie.Reviews.ToList();
+            return _mapper.Map<List<Review>, List<ReviewDTO>>(reviews);
+        }
     }
 }

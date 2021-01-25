@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { MovieModel } from '../models/movie.model';
+import { MovieModel } from '../models/movie/movie.model';
 import { MovieService } from '../services/movie-service/movie.service';
 
 @Component({
@@ -30,7 +30,7 @@ export class MoviesComponent implements OnInit {
 
 
   ngOnInit() {
-    this.movieService.getAllMovies().subscribe(
+    this.movieService.getMovies().subscribe(
       (data: MovieModel[]) =>{
         this.movies = data;
         console.log(this.movies[0].name);

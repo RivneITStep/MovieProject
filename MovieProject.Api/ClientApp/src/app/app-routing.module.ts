@@ -10,9 +10,6 @@ import { NotLoginGuard } from './guards/notLogin.guard';
 import { AdminGuard } from './guards/admin.guard';
 import { LoginComponent } from './login/login.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
-import { ActorManagerComponent } from './actor-manager/actor-manager.component';
-import { FilmManagerComponent } from './film-manager/film-manager.component';
-import { NewsManagerComponent } from './news-manager/news-manager.component';
 import { TestComponent } from './test/test.component';
 
 const routes: Routes = [
@@ -24,9 +21,6 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent, pathMatch: 'full', canActivate: [NotLoginGuard] },
   { path: 'login', component: LoginComponent, pathMatch: 'full', canActivate: [NotLoginGuard] },
   { path: 'admin-panel', component: AdminPanelComponent, pathMatch: 'full' },
-  { path: 'admin-panel/actor-manager', component: ActorManagerComponent, pathMatch: 'full' },
-  { path: 'admin-panel/film-manager', component: FilmManagerComponent, pathMatch: 'full' },
-  { path: 'admin-panel/news-manager', component: NewsManagerComponent, pathMatch: 'full' },
   { path: 'test', component: TestComponent, pathMatch: 'full'}
 ]
 

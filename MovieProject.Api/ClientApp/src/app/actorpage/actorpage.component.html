@@ -26,49 +26,7 @@
         </tr>
       </table>
       <div class="admin-add-actor-photo">
-        <button *ngIf="isAdmin" (click)="showModal2()" class="btn-manager">Add photo</button>
-        <nz-modal nzWidth="800px" [(nzVisible)]="isVisible2" nzTitle="Add actor film" (nzOnCancel)="handleCancel2()"
-          (nzOnOk)="handleOk2()">
-          <ng-container *nzModalContent>
-            <div class="add-actor-photo">
-              <input nz-input [(ngModel)]="photoAddActor.pictureUrl" type="url">
-              <button class="btn-manager" (click)="addPhotoToActor()">Add</button>
-            </div>
-          </ng-container>
-        </nz-modal>
-
-        <button *ngIf="isAdmin" (click)="showModal()" class="btn-manager">Add film</button>
-        <nz-modal nzWidth="800px" [(nzVisible)]="isVisible" nzTitle="Add actor film" (nzOnCancel)="handleCancel()"
-          (nzOnOk)="handleOk()">
-          <ng-container *nzModalContent>
-            <div class="add-actor-film">
-              <nz-table #basicTable [nzData]="availableMovies">
-                <thead>
-                  <tr>
-                    <th>Id</th>
-                    <th>
-                      
-                    </th>
-                    <th>Name</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let data of basicTable.data">
-                    <td>{{data.id}}</td>
-                    <td>
-                      <img src="{{data.pictureUrl}}" alt="">
-                    </td>
-                    <td>{{data.name}}</td>
-                    <td>
-                      <a (click)="addFilmToActor(data.id)">Add</a>
-                    </td>
-                  </tr>
-                </tbody>
-              </nz-table>
-            </div>
-          </ng-container>
-        </nz-modal>
+        
       </div>
     </div>
   </div>
@@ -82,7 +40,7 @@
   <div class="inter-block">
     <p class="actor-films-header">Films:</p>
     <div class="films">
-      <div class="film" *ngFor="let item of actorMovies">
+      <div (click)="checkFilm(item.id)" class="film" *ngFor="let item of actor">
         <img class="actor-film-image" src="{{item.pictureUrl}}" alt="">
         <p class="film-name">{{item.name}}</p>
       </div>
@@ -92,7 +50,7 @@
     <p class="actor-photos-title">Actor photos:</p>
     <hr class="actor-hr">
     <div class="actor-photos">
-      <img *ngFor="let item of actorPhotos" class="gallery-grid-image" src="{{item.pictureUrl}}" alt="">
+      <img class="gallery-grid-image" src="" alt="">
     </div>
   </div>
 </div>

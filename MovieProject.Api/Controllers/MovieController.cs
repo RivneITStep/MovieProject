@@ -9,9 +9,13 @@ using MovieProject.DTO.Models;
 using MovieProject.DTO.Models.Filters;
 using MovieProject.DTO.Models.Result;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Internal;
+using MovieProject.DTO.Models.Actor;
 using MovieProject.DTO.Models.Movie;
 
 namespace MovieProject.Api.Controllers
@@ -121,7 +125,12 @@ namespace MovieProject.Api.Controllers
                 Message = "Deleted"
             };
         }
-
+        
+        /// <summary>
+        /// This GET method returns unique column data from Movie database table
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <returns></returns>
         [HttpGet("filter/{filter}")]
         public async Task<IEnumerable<string>> GetFilterList(string filter)
         {
@@ -139,6 +148,70 @@ namespace MovieProject.Api.Controllers
                 default:
                     return null;
             }
+        }
+        
+        /// <summary>
+        /// This GET method returns Movie`s actors by it`s ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("actors/{id}")]
+        public async Task<IEnumerable<ActorDTO>> GetMovieActors([FromRoute] int id)
+        {
+            var movie = await _context.movies.SingleOrDefaultAsync(t => t.Id == id);
+            var actors = movie.Actors.ToList();
+            return _mapper.Map<List<Actor>, List<ActorDTO>>(actors);
+        }
+
+        [HttpPost("{id}/{actorid}")]
+        public async Task<ResultDTO> AddMovieActor([FromRoute] int id, [FromRoute] int actorid)
+        {
+            try
+            {
+                var movie = await _context.movies.SingleOrDefaultAsync(t => t.Id == id);
+                var actor = await _context.actors.SingleOrDefaultAsync(t => t.Id == actorid);
+                movie.Actors.Add(actor);
+                await _context.SaveChangesAsync();
+                return new ResultDTO
+                {
+                    Status = 200,
+                    Message = "Posted"
+                };
+            }
+            catch (Exception ex)
+            {
+                List<string> temp = new List<string>();
+                temp.Add(ex.Message);
+                return new ResultErrorDTO
+                {
+                    Status = 500,
+                    Message = "Error",
+                    Errors = temp
+                };
+            }
+        }
+
+        [HttpPost("rate/{id}/{mark}")]
+        public async Task<ResultDTO> RateMovieById([FromRoute] int id, [FromRoute] int mark)
+        {
+            var movie = await _context.movies.SingleOrDefaultAsync(t => t.Id == id);
+            if (movie.Rating == 0)
+            {
+                movie.Rating = mark;
+            }
+            else
+            {
+                movie.Rating += mark;
+                movie.Rating /= 2;
+            }
+
+            await _context.SaveChangesAsync();
+            
+            return new ResultDTO
+            {
+                Status = 200,
+                Message = "Edited"
+            };
         }
     }
 }

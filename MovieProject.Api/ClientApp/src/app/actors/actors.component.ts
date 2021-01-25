@@ -1,10 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { ActorModel } from '../models/actor.model';
 import { ActorService } from './../services/actor-service/actor.service';
 import { Component, OnInit } from '@angular/core';
 import { PaginationControlsComponent } from 'ngx-pagination';
+import { ActorModel } from '../models/actor/actor.model';
 
 @Component({
   selector: 'app-actors',
@@ -34,13 +34,11 @@ export class ActorsComponent implements OnInit {
 
   ngOnInit() {
     this.thisUrl = this.router.url;
-    this.actorService.getAllActor().subscribe(
-      (list: ActorModel[]) => {
-        this.actors = list;
-        this.count = list.length;
-        console.log(this.actors[0].name);
+    this.actorService.getActors().subscribe(
+      (data: ActorModel[]) => {
+        this.actors = data;
       }
-    )
+    );
   }
 
 }

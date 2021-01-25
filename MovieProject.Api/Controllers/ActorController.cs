@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MovieProject.DTO.Models.Actor;
+using MovieProject.DTO.Models.Movie;
 
 namespace MovieProject.Api.Controllers
 {
@@ -140,6 +141,47 @@ namespace MovieProject.Api.Controllers
                     break;
                 default:
                     return null;
+            }
+        }
+        
+        /// <summary>
+        /// This GET method return Actor`s movies by it`s ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("movies/{id}")]
+        public async Task<IEnumerable<MovieDTO>> GetActorMovies([FromRoute] int id)
+        {
+            var actor = await _context.actors.SingleOrDefaultAsync(t => t.Id == id);
+            var movies = actor.Movies.ToList();
+            return _mapper.Map<List<Movie>, List<MovieDTO>>(movies);
+        }
+        
+        [HttpPost("{id}/{movieid}")]
+        public async Task<ResultDTO> AddActorMovie([FromRoute] int id, [FromRoute] int movieid)
+        {
+            try
+            {
+                var actor = await _context.actors.SingleOrDefaultAsync(t => t.Id == id);
+                var movie = await _context.movies.SingleOrDefaultAsync(t => t.Id == movieid);
+                actor.Movies.Add(movie);
+                await _context.SaveChangesAsync();
+                return new ResultDTO
+                {
+                    Status = 200,
+                    Message = "Posted"
+                };
+            }
+            catch (Exception ex)
+            {
+                List<string> temp = new List<string>();
+                temp.Add(ex.Message);
+                return new ResultErrorDTO
+                {
+                    Status = 500,
+                    Message = "Error",
+                    Errors = temp
+                };
             }
         }
     }
