@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { ActorModel } from 'src/app/models/actor/actor.model';
 import { ActorAddModel } from 'src/app/models/actor/actor-add.model';
 import { MovieModel } from 'src/app/models/movie/movie.model';
+import { ActorFilterModel } from 'src/app/models/actor/actor-filter.model';
 
 @Injectable({
   providedIn: 'root'
@@ -41,6 +42,14 @@ export class ActorService {
 
   getActorMovies(id: number): Observable<MovieModel[]>{
     return this.http.get<MovieModel[]>(this.baseUrl + '/movies');
+  }
+
+  getFilterList(filter: string){
+    return this.http.get<string[]>(this.baseUrl + '/filter/' + filter);
+  }
+
+  getActorsByFilterData(model: ActorFilterModel): Observable<ActorModel[]>{
+    return this.http.post<ActorModel[]>(this.baseUrl + '/filter/data', model);
   }
 
 }

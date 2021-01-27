@@ -5,6 +5,8 @@ import { ActorService } from './../services/actor-service/actor.service';
 import { Component, OnInit } from '@angular/core';
 import { PaginationControlsComponent } from 'ngx-pagination';
 import { ActorModel } from '../models/actor/actor.model';
+import { SelectItem, SelectItemGroup } from 'primeng/api';
+import { ActorFilterModel } from '../models/actor/actor-filter.model';
 
 @Component({
   selector: 'app-actors',
@@ -20,16 +22,55 @@ export class ActorsComponent implements OnInit {
   count: number;
   page: number = 1;
 
-  pageChanged(event){
-    this.page = event;
-    let scrollToTop = window.setInterval(() => {
-      let pos = window.pageYOffset;
-      if (pos > 0) {
-          window.scrollTo(0, pos - 500);
-      } else {
-          window.clearInterval(scrollToTop);
+  //Filtering data
+  filterModel: ActorFilterModel = new ActorFilterModel();
+  search: string;
+  filters: string[] = [];
+  selectedFilters: string[] = [];
+
+  searchActor(){
+    if(this.search.length == 0){
+      this.resetActors();
+    }else{
+      this.actors = this.actors.filter(
+        t => {
+          let temp = t.name.toLocaleLowerCase() + ' ' + t.surname.toLocaleLowerCase() + ' ' + t.country.toLocaleLowerCase();
+          return temp.includes(this.search.toLocaleLowerCase());
+        }
+      );
+    }
+  }
+
+  selectFilter(filter: string){
+    this.selectedFilters.push(filter);
+    this.filters.splice(this.filters.indexOf(filter),1);
+    this.filterModel.filter = 'country';
+    this.filterModel.data = this.selectedFilters;
+    this.actorService.getActorsByFilterData(this.filterModel).subscribe(
+      (data: ActorModel[]) => {
+        this.actors = data;
       }
-  }, 16);
+    );
+  }
+
+  removeFilter(filter: string){
+    this.selectedFilters.splice(this.selectedFilters.indexOf(filter),1);
+    this.filters.push(filter);
+    this.filterModel.filter = 'country';
+    this.filterModel.data = this.selectedFilters;
+    this.actorService.getActorsByFilterData(this.filterModel).subscribe(
+      (data: ActorModel[]) => {
+        this.actors = data;
+      }
+    );
+  }
+
+  resetActors(){
+    this.actorService.getActors().subscribe(
+      (data: ActorModel[]) => {
+        this.actors = data;
+      }
+    );
   }
 
   ngOnInit() {
@@ -39,6 +80,14 @@ export class ActorsComponent implements OnInit {
         this.actors = data;
       }
     );
+    
+    this.actorService.getFilterList('country').subscribe(
+      (data: string[]) => {
+        this.filters = data;
+      }
+    );
+
+    
   }
 
 }

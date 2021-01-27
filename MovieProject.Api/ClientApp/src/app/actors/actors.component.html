@@ -1,54 +1,39 @@
-<div class="background">
-  <div class="intro-block">
-    <div class="intro-text">
-      <p class="intro-text-title">
-        Actors
-      </p>
-      <hr class="hr-white">
-      <p class="text-intro">
-        Acting technique is paramount to anyone wanting to be a serious actor. It's quite easy to imitate a character or
-        even an emotion, but where's the depth in that? How can you sustain or repeat again what you might have found
-        intuitively? Do you even know what you did or how you did it?
-        The technique, however, will help you find a character, which in turn informs how you approach the
-        text/script/written word. How do you bring the dialogue alive? How do you know what choices to make? The goal of
-        a trained actor is to become a fully realised three-dimensional character, with a rich backstory. I must believe
-        the character you play is truthful and not a cliche, a caricature, a thin external representation of someone who
-        barely resembles a human being. I must believe what you say is real and that you're not reciting, spouting or
-        commenting.
-      </p>
+<section id="section" class="section section-actors">
+  <div class="actors-filters">
+    <div class="search">
+      <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixButton">
+        <input [(ngModel)]="search" (ngModelChange)="searchActor()" type="text" nz-input placeholder="input search text" />
+      </nz-input-group>
+      <ng-template #suffixButton>
+        <button nz-button nzType="primary" nzSize="large" nzSearch>Search</button>
+      </ng-template>
     </div>
-    <img class="intro-img"
-      src="https://purepng.com/public/uploads/large/purepng.com-tom-cruisetom-cruisetomcruisethomascruise-mapotheramerican-actorproducerimf-agentethan-huntmission-impossible-1701528084526axldn.png"
-      alt="">
-  </div>
-  <hr class="hrhr-black">
-  <div class="content-block">
-    <div>
-      <ul class="actor-filters">
-        <li>
-          Country
-          <ul></ul>
-        </li>
-        <li>
-          Birth year
-          <ul></ul>
-        </li>
-        <li>
-          Count of films
-          <ul></ul>
-        </li>
-      </ul>
+    <div class="filter-tags">
+      <p-chip class="not-selected-chip" *ngFor="let data of filters" label="{{data}}" [removable]="false" (click)="selectFilter(data)"></p-chip>
     </div>
-    <div>
-      <ul class="actors">
-        <li routerLink="{{item.id}}" class="actor" *ngFor="let item of actors | paginate: { id: 'lid', itemsPerPage: 10, currentPage: page, totalItems: count }">
-          <img src="{{item.pictureUrl}}" alt="" class="actor-img">
-          <p class="actor-name">{{item.name}} {{item.surname}}</p>
-          <p class="actor-country">{{item.country}}</p>
-          <img class="actor-like" src="https://www.flaticon.com/svg/static/icons/svg/889/889140.svg" alt="">
-        </li>
-      </ul>
-      <pagination-controls id="lid" maxSize="5" directionLinks="true" (pageChange)="pageChanged($event)"></pagination-controls>
+    <div class="selected-filter-tags">
+      <p-chip styleClass="custom-chip" class="selected-chip" *ngFor="let data of selectedFilters" label="{{data}}" [removable]="true" (onRemove)="removeFilter(data)"></p-chip>
     </div>
   </div>
-</div>
+
+  <nz-table class="actors-table" #basicTable [nzData]="actors">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Name</th>
+        <th>Country</th>
+        <th>Age</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of basicTable.data" routerLink="{{data.id}}">
+        <img class="table-img" [src]="data.pictureUrl" alt="">
+        <td>{{data.name}}</td>
+        <td>{{data.country}}</td>
+        <td>{{data.age}}</td>
+      </tr>
+    </tbody>
+  </nz-table>
+
+
+</section>

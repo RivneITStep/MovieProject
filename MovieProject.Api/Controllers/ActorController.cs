@@ -143,6 +143,20 @@ namespace MovieProject.Api.Controllers
                     return null;
             }
         }
+
+        [HttpPost("filter/data")]
+        public async Task<IEnumerable<ActorDTO>> GetActorsByFilterData([FromBody]ActorFilter model)
+        {
+            var actors = await _context.actors.ToListAsync();
+            switch (model.Filter)
+            {
+                case "country":
+                    var result = actors.Where(t => model.Data.Any(s => s == t.Country)).ToList();
+                    return _mapper.Map<List<Actor>, List<ActorDTO>>(actors);
+                default:
+                    return null;
+            }
+        }
         
         /// <summary>
         /// This GET method return Actor`s movies by it`s ID

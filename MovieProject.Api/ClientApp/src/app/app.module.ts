@@ -37,8 +37,14 @@ import {DialogModule} from 'primeng/dialog';
 import {InputTextModule} from 'primeng/inputtext';
 import {DropdownModule} from 'primeng/dropdown';
 import {InputTextareaModule} from 'primeng/inputtextarea';
-
-
+import {DataViewModule} from 'primeng/dataview';
+import {CardModule} from 'primeng/card';
+import {ListboxModule} from 'primeng/listbox';
+import {CarouselModule} from 'primeng/carousel';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {VirtualScrollerModule} from 'primeng/virtualscroller';
+import { TagModule } from 'primeng/tag';
+import { ChipModule } from 'primeng/chip';
 
 const notifierOptions: NotifierOptions = {
   position: {horizontal: { position: 'right' }, vertical: { position: 'bottom' }}
@@ -81,7 +87,15 @@ const notifierOptions: NotifierOptions = {
     SplitButtonModule,
     DialogModule,
     DropdownModule,
-    InputTextModule
+    InputTextModule,
+    DataViewModule,
+    CardModule,
+    ListboxModule,
+    CarouselModule,
+    MatPaginatorModule,
+    VirtualScrollerModule,
+    TagModule,
+    ChipModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -7,6 +7,7 @@ namespace MovieProject.DTO.Models.Filters
 {
     public class ActorFilter
     {
-        public string Country { get; set; } = String.Empty;
+        public string Filter { get; set; }
+        public List<string> Data { get; set; }
     }
 }
