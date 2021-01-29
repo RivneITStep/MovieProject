@@ -1,0 +1,60 @@
+<div class="tab-menu">
+  <p-tabView>
+    <p-tabPanel header="Actor Manager">
+      <div class="card">
+        <p-table [value]="actors" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+          [rowsPerPageOptions]="[10,25,50]">
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Id</th>
+              <th>Name</th>
+              <th>Country</th>
+              <th>Action</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-customer>
+            <tr>
+              <td>{{customer.id}}</td>
+              <td>{{customer.name}}</td>
+              <td>{{customer.country}}</td>
+              <td>
+                <button class="table-action" pButton type="button" label="Edit" (click)="showDialog(customer.id)"></button>
+                <button class="table-action" pButton type="button" label="Delete" (click)="deleteActor(customer.id)"></button>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="paginatorleft">
+            <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
+          </ng-template>
+          <ng-template pTemplate="paginatorright">
+            <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
+          </ng-template>
+        </p-table>
+        <p-dialog header="Header" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}"
+          [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+          <div class="modal-content">
+            <input [(ngModel)]="selectedActor.name" class="form-item" type="text" pInputText placeholder="Name"/>
+            <input [(ngModel)]="selectedActor.surname" class="form-item" type="text" pInputText placeholder="Surname"/>
+            <input [(ngModel)]="selectedActor.age" class="form-item" type="number" pInputText placeholder="Age"/>
+            <p-dropdown class="form-item" [options]="countries" [(ngModel)]="selectedCountry" optionLabel="name"></p-dropdown>
+            <input [(ngModel)]="selectedActor.countFilms" class="form-item" type="number" pInputText placeholder="Count of films" />
+            <input [(ngModel)]="selectedActor.pictureUrl" class="form-item" type="url" pInputText placeholder="Picture Url" />
+            <input [(ngModel)]="selectedActor.birthYear" class="form-item" type="number" pInputText placeholder="Birth year" />
+            <textarea [(ngModel)]="selectedActor.description" autoResize="autoResize" pInputTextarea placeholder="Description"></textarea>
+            <button class="btn-edit" pButton type="button" label="Edit" (click)="editActor()"></button>
+          </div>
+          <ng-template pTemplate="footer">
+            <p-button icon="pi pi-check" (click)="displayModal=false" label="Ok" styleClass="p-button-text"></p-button>
+          </ng-template>
+        </p-dialog>
+      </div>
+    </p-tabPanel>
+    <p-tabPanel header="Header 2">
+      Content 2
+    </p-tabPanel>
+    <p-tabPanel header="Header 3">
+      Content 3
+    </p-tabPanel>
+  </p-tabView>
+</div>

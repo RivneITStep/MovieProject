@@ -44,25 +44,27 @@ export class ActorsComponent implements OnInit {
   selectFilter(filter: string){
     this.selectedFilters.push(filter);
     this.filters.splice(this.filters.indexOf(filter),1);
-    this.filterModel.filter = 'country';
-    this.filterModel.data = this.selectedFilters;
-    this.actorService.getActorsByFilterData(this.filterModel).subscribe(
-      (data: ActorModel[]) => {
-        this.actors = data;
-      }
-    );
+    if(this.selectedFilters.length > 1){
+      this.resetActors();
+      let temp = this.actors.filter(s => this.selectedFilters.includes(s.country));
+      this.actors = this.actors.concat(temp);
+    }else{
+      this.actors = this.actors.filter(s => this.selectedFilters.includes(s.country));
+    }
+    
+    
+    if(this.selectedFilters.length == 0){
+      this.resetActors();
+    }
   }
 
   removeFilter(filter: string){
     this.selectedFilters.splice(this.selectedFilters.indexOf(filter),1);
     this.filters.push(filter);
-    this.filterModel.filter = 'country';
-    this.filterModel.data = this.selectedFilters;
-    this.actorService.getActorsByFilterData(this.filterModel).subscribe(
-      (data: ActorModel[]) => {
-        this.actors = data;
-      }
-    );
+    this.actors = this.actors.filter(s => this.selectedFilters.includes(s.country));
+    if(this.selectedFilters.length == 0){
+      this.resetActors();
+    }
   }
 
   resetActors(){

@@ -48,6 +48,10 @@ a{
     height: auto;
 }
 
+.auth-element-logout{
+    margin-left: 200px;
+}
+
 @media screen and (max-width: 1000px){
     .my-header a{
         margin-left: 50px;
@@ -57,5 +61,17 @@ a{
 @media screen and (max-width: 800px){
     .my-search{
         width: 50%;
+    }
+}
+
+@media screen and (max-width: 500px){
+    .my-header a{
+        margin-left: 15px;
+    }
+}
+
+@media screen and (max-width: 400px){
+    .my-header a{
+        margin-left: 5px;
     }
 }

@@ -1,39 +1,51 @@
-<section id="section" class="section section-actors">
+<div class="welcome">
+  <p class="welcome-text">
+    Find the actor you search for <i style="font-size: 36px" class="pi pi-search"></i>
+  </p>
+</div>
+
+<div class="actors-header"></div>
+
+<div class="actors-data">
   <div class="actors-filters">
+
     <div class="search">
       <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixButton">
-        <input [(ngModel)]="search" (ngModelChange)="searchActor()" type="text" nz-input placeholder="input search text" />
+        <input [(ngModel)]="search" (ngModelChange)="searchActor()" type="text" nz-input
+          placeholder="input search text" />
       </nz-input-group>
       <ng-template #suffixButton>
         <button nz-button nzType="primary" nzSize="large" nzSearch>Search</button>
       </ng-template>
     </div>
-    <div class="filter-tags">
-      <p-chip class="not-selected-chip" *ngFor="let data of filters" label="{{data}}" [removable]="false" (click)="selectFilter(data)"></p-chip>
-    </div>
-    <div class="selected-filter-tags">
-      <p-chip styleClass="custom-chip" class="selected-chip" *ngFor="let data of selectedFilters" label="{{data}}" [removable]="true" (onRemove)="removeFilter(data)"></p-chip>
+
+    <div class="tags">
+
+      <div class="current-tags">
+        <div class="filter-tags-header">Search by tags: </div>
+        <p-chip styleClass="custom-chip" class="selected-chip" *ngFor="let data of selectedFilters" label="{{data}}"
+          [removable]="true" (onRemove)="removeFilter(data)"></p-chip>
+      </div>
+
+      <div class="filter-tags">
+        <p-chip styleClass="custom-chip-not-selected" *ngFor="let data of filters" label="{{data}}" [removable]="false"
+          (click)="selectFilter(data)"></p-chip>
+      </div>
+
     </div>
   </div>
 
-  <nz-table class="actors-table" #basicTable [nzData]="actors">
-    <thead>
-      <tr>
-        <th></th>
-        <th>Name</th>
-        <th>Country</th>
-        <th>Age</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let data of basicTable.data" routerLink="{{data.id}}">
-        <img class="table-img" [src]="data.pictureUrl" alt="">
-        <td>{{data.name}}</td>
-        <td>{{data.country}}</td>
-        <td>{{data.age}}</td>
-      </tr>
-    </tbody>
-  </nz-table>
+  <div class="actors">
+
+    <div *ngFor="let data of actors" class="actor">
+      <img data-aos="fade-down" data-aos-duration="1000" class="actor-img" src="{{data.pictureUrl}}" alt="">
+      <div data-aos="fade-down" data-aos-duration="1000" class="centered">{{data.name}} {{data.surname}}
+        <div class="centered-child-country">{{data.country}}</div>
+        <div class="centered-child-age">{{data.age}}yo</div>
+      </div>
+    </div>
+
+  </div>
 
 
-</section>
+</div>

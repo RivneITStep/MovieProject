@@ -29,7 +29,7 @@ import { TestComponent } from './test/test.component';
 import {AccordionModule} from 'primeng/accordion';     //accordion and accordion tab
 import {MenuItem} from 'primeng/api';           
 import {TabViewModule} from 'primeng/tabview';
-import { ActorManagerComponent } from './actor-manager/actor-manager.component';
+import {ActorManagerComponent} from './actor-manager/actor-manager.component';
 import {TableModule} from 'primeng/table';
 import {ButtonModule} from 'primeng/button';
 import {SplitButtonModule} from 'primeng/splitbutton';
@@ -43,8 +43,8 @@ import {ListboxModule} from 'primeng/listbox';
 import {CarouselModule} from 'primeng/carousel';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {VirtualScrollerModule} from 'primeng/virtualscroller';
-import { TagModule } from 'primeng/tag';
-import { ChipModule } from 'primeng/chip';
+import {TagModule} from 'primeng/tag';
+import {ChipModule} from 'primeng/chip';
 
 const notifierOptions: NotifierOptions = {
   position: {horizontal: { position: 'right' }, vertical: { position: 'bottom' }}

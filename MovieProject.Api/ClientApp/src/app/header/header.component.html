@@ -5,7 +5,7 @@
   <a class="temp-a" mat-button routerLink="">Home</a>
   <a mat-button routerLink="actors">Actors</a>
   <a mat-button routerLink="movies">Films</a>
-  <a mat-button class="auth-element auth-element-login" *ngIf="isLoggedIn === true" (click)="Logout()">Logout</a>
+  <a mat-button class="auth-element-logout" *ngIf="isLoggedIn === true" (click)="Logout()">Logout</a>
   <a mat-button routerLink="register" class="auth-element auth-element-register"
     *ngIf="isLoggedIn === false">Register</a>
   <a mat-button routerLink="login" color="login" routerLink="login" class="auth-element auth-element-login"

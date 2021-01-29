@@ -1,22 +1,170 @@
-.section{
-    background-color: rgb(29, 29, 29);
-    padding: 50px 5%;
+.actors-header{
+    background: url('../../assets/images/see.jpg') center no-repeat;
+    opacity: 75%;
     background-size: cover;
-    background-position: center;
-    min-height: 100%;
     background-attachment: fixed;
+    height: 400px;
 }
 
-.section-actors{
+.welcome{
+    height: 200px;
+    background-color: rgb(30,30,30);
+    padding: 5%;
+}
+
+.welcome-text{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 36px;
+    font-weight: 500;
+    color: white;
+}
+
+.actors-data{
+    background-color: rgb(29, 29, 29);
+    padding: 50px 5%;
+    min-height: 100%;
+}
+
+.btn-filter{
+    margin-top: 5px;
+}
+
+.actors-filters{
     display: grid;
     grid-template-columns: 1fr;
-    column-gap: 25px;
-    row-gap: 50px;
 }
+
+p-chip:hover{
+    cursor: pointer;
+}
+
+:host ::ng-deep .p-chip.custom-chip{
+    background: rgba(50, 255, 0, 0.5);
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+}
+
+:host ::ng-deep .p-chip.custom-chip-not-selected{
+    background: rgb(200, 200, 200);
+    color: rgb(30,30,30);
+    font-family: 'Montserrat', sans-serif;
+}
+
+.actor{
+    position: relative;
+    text-align: center;
+    transition: width;
+    
+}
+
 .actors{
     display: grid;
-    grid-template-columns: repeat(6,1fr);
-    gap: 20px;
+    grid-template-columns: repeat(5,1fr);
+    row-gap: 50px;
+    column-gap: 5%;
+}
+
+.actor-img{
+    max-width: 100%;
+    border-radius: 0;
+    border-top-left-radius: 10%;
+    border-bottom-left-radius: 5%;
+    transition-duration: 1s;
+    transition-delay: .25s;
+}
+
+.centered{
+    width: 50%;
+    position: absolute;
+    top: 1%;
+    left: 0%;
+    transform: translate(-50%, -50%);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    font-size: 24px;
+    color: white;
+    transform: rotateZ(-5deg);
+    transition: all;
+    transition-duration: .5s;
+}
+
+.centered-child-country{
+    font-size: 20px;
+    font-weight: 600;
+    color: rgb(230, 230, 230);
+}
+
+.centered-child-age{
+    font-size: 18px;
+    font-weight: 400;
+    color: rgb(205, 205, 205);
+}
+
+.actor-img:hover{
+    border-radius: 5px;
+}
+
+.filter-tags-header{
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    font-size: 24px;
+
+}
+
+.filter-tags{ 
+    margin: 25px 0;
+    display: grid;
+    grid-template-columns: repeat(8,1fr);
+}
+
+.current-tags{
+    margin : 25px 0;
+    display: grid;
+    grid-template-columns: 2fr repeat(6,1fr);
+}
+
+@media screen and (max-width: 1400px){
+    .centered{
+        font-size: 18px;
+    }
+
+    .centered-child-age{
+        font-size: 16px;
+    }
+
+    .centered-child-country{
+        font-size: 16px;
+    }
+
+    .welcome-text{
+        padding-top: 5%
+    }
+}
+
+@media screen and (max-width: 1000px){
+    .centered{
+        font-size: 16px;
+        left: 5%;
+    }
+
+
+    .centered-child-age{
+        font-size: 14px;
+    }
+
+    .centered-child-country{
+        font-size: 14px;
+    }
+
+    .actors{
+        grid-template-columns: repeat(3,1fr);
+    }
+}
+
+@media screen and (max-width: 500px){
+    .actors{
+        grid-template-columns: repeat(2,1fr);
+    }
 }
 
 @media screen and (max-width: 1150px){
@@ -29,40 +177,19 @@
     .actors{
         grid-template-columns: repeat(2,1fr);
     }
+
+    .welcome{
+        height: 150px;
+    }
+
+    .welcome-text{
+        padding-top: 50px;
+        font-size: 30px;
+    }
 }
 
-.btn-filter{
-    margin-top: 5px;
-}
-
-.table-img{
-    display: block;
-    object-fit: cover;
-    max-width: 100%;
-    border-radius: 10%;
-    width: 150px;
-    height: 150px;
-    margin: 5px;
-}
-
-.actors-filters{
-    display: grid;
-    grid-template-columns: 1fr 4fr;
-}
-
-th,td{ 
-    font-family: "Montserrat", sans-serif;
-    font-size: 24px;
-    font-weight: 500;
-}
-
-p-chip:hover{
-    cursor: pointer;
-}
-
-:host ::ng-deep .p-chip.custom-chip {
-    background: rgb(32, 158, 0);
-    color: white;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 500;
+@media screen and (max-width: 550px){
+    .welcome-text{
+        font-size: 24px;
+    }
 }

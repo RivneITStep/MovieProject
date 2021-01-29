@@ -33,8 +33,9 @@ html{
 }
 
 .pimg3{
-    background-image: url(../../assets/images/bg3.jpg);
+    background-image: url(../../assets/images/bwbg.jpg);
     min-height: 400px;
+    background-position: bottom;
 }
 
 .section{
