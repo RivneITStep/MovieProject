@@ -17,5 +17,6 @@ namespace MovieProject.DAL
         public DbSet<Review> reviews { get; set; }
         public DbSet<NewsArticle> articles { get; set; }
         public DbSet<FileModel> files { get; set; }
+        public DbSet<Video> videos { get; set; }
     }
 }

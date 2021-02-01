@@ -75,7 +75,8 @@ namespace MovieProject.Api.Controllers
         [HttpGet("{id}")]
         public async Task<MovieDTO> GetMovie([FromRoute] int id)
         {
-            var movie = await _context.movies.SingleOrDefaultAsync(t => t.Id == id);
+            var movie = await _context.movies
+                .SingleOrDefaultAsync(t => t.Id == id);
             return _mapper.Map<Movie, MovieDTO>(movie);
         }
         
@@ -98,7 +99,8 @@ namespace MovieProject.Api.Controllers
         [HttpPost("edit")]
         public async Task<ResultDTO> EditMovie([FromBody] MovieDTO model)
         {
-            var movie = await _context.movies.SingleOrDefaultAsync(t => t.Id == model.Id);
+            var movie = await _context.movies
+                .SingleOrDefaultAsync(t => t.Id == model.Id);
             _mapper.Map(model, movie);
             await _context.SaveChangesAsync();
             return new ResultDTO
@@ -116,7 +118,8 @@ namespace MovieProject.Api.Controllers
         [HttpDelete("{id}")]
         public async Task<ResultDTO> DeleteMovie([FromRoute] int id)
         {
-            var movie = await _context.movies.SingleOrDefaultAsync(t => t.Id == id);
+            var movie = await _context.movies
+                .SingleOrDefaultAsync(t => t.Id == id);
             _context.movies.Remove(movie);
             await _context.SaveChangesAsync();
             return new ResultDTO
@@ -137,13 +140,22 @@ namespace MovieProject.Api.Controllers
             switch (filter.ToLower())
             {
                 case "country":
-                    var filters1 = await _context.movies.Select(t => t.Country).Distinct().ToListAsync();
+                    var filters1 = await _context.movies
+                        .Select(t => t.Country)
+                        .Distinct()
+                        .ToListAsync();
                     return filters1;
                 case "genre":
-                    var filters2 = await _context.movies.Select(t => t.Genre).Distinct().ToListAsync();
+                    var filters2 = await _context.movies
+                        .Select(t => t.Genre)
+                        .Distinct()
+                        .ToListAsync();
                     return filters2;
                 case "year":
-                    var filters3 = await _context.movies.Select(t => t.Year).Distinct().ToListAsync();
+                    var filters3 = await _context.movies
+                        .Select(t => t.Year)
+                        .Distinct()
+                        .ToListAsync();
                     return filters3.ConvertAll<string>(input => input.ToString());
                 default:
                     return null;
@@ -158,7 +170,8 @@ namespace MovieProject.Api.Controllers
         [HttpGet("actors/{id}")]
         public async Task<IEnumerable<ActorDTO>> GetMovieActors([FromRoute] int id)
         {
-            var movie = await _context.movies.SingleOrDefaultAsync(t => t.Id == id);
+            var movie = await _context.movies
+                .SingleOrDefaultAsync(t => t.Id == id);
             var actors = movie.Actors.ToList();
             return _mapper.Map<List<Actor>, List<ActorDTO>>(actors);
         }
@@ -168,8 +181,10 @@ namespace MovieProject.Api.Controllers
         {
             try
             {
-                var movie = await _context.movies.SingleOrDefaultAsync(t => t.Id == id);
-                var actor = await _context.actors.SingleOrDefaultAsync(t => t.Id == actorid);
+                var movie = await _context.movies
+                    .SingleOrDefaultAsync(t => t.Id == id);
+                var actor = await _context.actors
+                    .SingleOrDefaultAsync(t => t.Id == actorid);
                 movie.Actors.Add(actor);
                 await _context.SaveChangesAsync();
                 return new ResultDTO
@@ -194,7 +209,8 @@ namespace MovieProject.Api.Controllers
         [HttpPost("rate/{id}/{mark}")]
         public async Task<ResultDTO> RateMovieById([FromRoute] int id, [FromRoute] int mark)
         {
-            var movie = await _context.movies.SingleOrDefaultAsync(t => t.Id == id);
+            var movie = await _context.movies
+                .SingleOrDefaultAsync(t => t.Id == id);
             if (movie.Rating == 0)
             {
                 movie.Rating = mark;
@@ -212,6 +228,41 @@ namespace MovieProject.Api.Controllers
                 Status = 200,
                 Message = "Edited"
             };
+        }
+
+        [HttpPost("{id}/video")]
+        public async Task<ResultDTO> AddVideoToMovie([FromBody] VideoDTO model, [FromRoute] int id)
+        {
+            try
+            {
+                var movie = await _context.movies
+                    .SingleOrDefaultAsync(t => t.Id == id);
+                movie.Video = _mapper.Map<VideoDTO, Video>(model);
+                await _context.SaveChangesAsync();
+
+                return new ResultDTO
+                {
+                    Status = 200,
+                    Message = "Posted"
+                };
+            }
+            catch (Exception ex)
+            {
+                return new ResultErrorDTO
+                {
+                    Status = 500,
+                    Message = ex.Message
+                };
+            }
+        }
+
+        [HttpGet("{id}/video")]
+        public async Task<VideoDTO> GetMovieVideo([FromRoute] int id)
+        {
+            var movie = await _context.movies
+                .Include(t => t.Video)
+                .SingleOrDefaultAsync(t => t.Id == id);
+            return _mapper.Map<Video, VideoDTO>(movie.Video);
         }
     }
 }

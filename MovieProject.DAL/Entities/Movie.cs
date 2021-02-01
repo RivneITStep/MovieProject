@@ -25,5 +25,6 @@ namespace MovieProject.DAL.Entities
         public float Rating { get; set; }
         public virtual ICollection<Actor> Actors { get; set; }
         public virtual ICollection<Review> Reviews { get; set; } 
+        public virtual Video Video { get; set; }
     }
 }

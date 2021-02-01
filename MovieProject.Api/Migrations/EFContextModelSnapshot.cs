@@ -364,6 +364,9 @@ namespace MovieProject.Api.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
+                    b.Property<double>("Balance")
+                        .HasColumnType("float");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -419,6 +422,31 @@ namespace MovieProject.Api.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("MovieProject.DAL.Entities.Video", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<int>("MovieId")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MovieId")
+                        .IsUnique();
+
+                    b.ToTable("videos");
                 });
 
             modelBuilder.Entity("ActorMovie", b =>
@@ -524,6 +552,17 @@ namespace MovieProject.Api.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("MovieProject.DAL.Entities.Video", b =>
+                {
+                    b.HasOne("MovieProject.DAL.Entities.Movie", "Movie")
+                        .WithOne("Video")
+                        .HasForeignKey("MovieProject.DAL.Entities.Video", "MovieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Movie");
+                });
+
             modelBuilder.Entity("MovieProject.DAL.Entities.Actor", b =>
                 {
                     b.Navigation("Photos");
@@ -532,6 +571,8 @@ namespace MovieProject.Api.Migrations
             modelBuilder.Entity("MovieProject.DAL.Entities.Movie", b =>
                 {
                     b.Navigation("Reviews");
+
+                    b.Navigation("Video");
                 });
 
             modelBuilder.Entity("MovieProject.DAL.Entities.User", b =>

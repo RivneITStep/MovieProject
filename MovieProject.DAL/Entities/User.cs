@@ -8,6 +8,7 @@ namespace MovieProject.DAL.Entities
 {
     public class User : IdentityUser
     {
+        public double Balance { get; set; }
         public virtual ICollection<Review> Reviews { get; set; }
         public virtual ICollection<NewsArticle> NewsArticles { get; set; }
     }
