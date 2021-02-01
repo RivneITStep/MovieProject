@@ -66,7 +66,8 @@ namespace MovieProject.Api.Controllers
             var user = new User()
             {
                 UserName = model.Email,
-                Email = model.Email
+                Email = model.Email,
+                Balance = 0
             };
 
             var result = await _userManager.CreateAsync(user, model.Password);
