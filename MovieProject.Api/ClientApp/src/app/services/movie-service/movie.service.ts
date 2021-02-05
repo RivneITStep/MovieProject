@@ -48,4 +48,8 @@ constructor(private http: HttpClient) { }
     return this.http.post<ApiResult>(this.baseUrl + '/rate/' + id + '/' + mark, null);
   }
 
+  getFilterList(filter: string){
+    return this.http.get<string[]>(this.baseUrl + '/filter/' + filter);
+  }
+
 }

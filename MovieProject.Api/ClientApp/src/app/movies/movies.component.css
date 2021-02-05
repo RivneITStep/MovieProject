@@ -1,79 +1,89 @@
 .background{
-
-}
-
-.upper-block{
     background-color: rgb(30,30,30);
-    box-shadow: 0 10px 50px -2px rgb(30,30,30);
-    padding: 50px 5%;
-    padding-top: 100px;
+    min-height: 100%;
+    padding: 100px 5%;
 }
 
-.movies-header{
-    font-family: 'Montserrat', sans-serif;
-    font-size: 24px;
-    color: white;
+.actor-img{
+    max-width: 100%;
+    border-radius: 0;
+    border-top-left-radius: 10%;
+    border-bottom-left-radius: 5%;
+    transition-duration: 1s;
+    transition-delay: .25s;
 }
 
-.upper-block{
+.actor{
+    position: relative;
+    text-align: center;
+    transition: width;
+    
+}
+
+.actors{
     display: grid;
-    grid-template-columns: 3fr 1fr;
-}
-
-.grid-header-image{
-    width: auto;
-}
-
-.content-block{
-    padding: 0 5%;
-    padding-top: 50px;
-    display: grid;
-    grid-template-columns: 2fr 8fr;
+    grid-template-columns: repeat(5,1fr);
+    row-gap: 50px;
+    column-gap: 5%;
 }
 
 .movie-filters{
-    list-style-type: none;
-    font-family: "Montserrat", sans-serif;
-    font-weight: 500;
-    padding: 0;
-    margin-right: 15px;
-    border-radius: 10px;
-    background-color: rgb(180, 250, 200);
+    padding: 50px 0;
 }
 
-.movie-filters li{
-    padding: 15px;
-    margin-bottom: 30px;
+.search-button{
+    margin-top: 10px;
 }
 
-.hr-white{
-    background-color: white;
-}
-
-.movies-intro{
-    font-size: 36px;
+.filter-title{
+    font-family: 'Montserrat',sans-serif;
     color: white;
-    font-family: "Montserrat", sans-serif;
     font-weight: 500;
-}
-
-.movies-intro-text{
-    padding-right: 50px;
-}
-
-.movies{
-    display: grid;
-    grid-template-columns: repeat(4,1fr);
-    gap: 3%;
-}
-
-.pagination{
-    margin-top: 100px;
-    padding-left: 400px;
-    text-align: center;
-}
-
-.movie-name{
-    font-family: "Montserrat", sans-serif;
     font-size: 24px;
+}
+
+.filter-chip{
+    font-family: 'Montserrat',sans-serif;
+    text-align: center;
+    border-radius: 25px;
+    color: white;
+    background-color: gray;
+    cursor: pointer;
+}
+
+.selected{
+    font-family: 'Montserrat',sans-serif;
+    text-align: center;
+    border-radius: 25px;
+    color: white;
+    background-color: green;
+    cursor: pointer;
+}
+
+.country, .genre, .year{
+    display: grid;
+    grid-template-columns: repeat(12,1fr);
+    gap: 25px;
+}
+
+.search-movie{
+    margin-bottom: 50px;
+}
+
+@media screen and (max-width: 1300px){
+    .actors{
+        grid-template-columns: repeat(3,1fr);
+    }
+}
+
+@media screen and (max-width: 600px){
+    .actors{
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+
+@media screen and (max-width: 400px){
+    .actors{
+        grid-template-columns: 1fr;
+    }
 }
