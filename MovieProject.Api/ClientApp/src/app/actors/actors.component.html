@@ -37,7 +37,7 @@
 
   <div class="actors">
 
-    <div *ngFor="let data of actors" class="actor">
+    <div *ngFor="let data of actors" routerLink="{{data.id}}" class="actor">
       <img data-aos="fade-down" data-aos-duration="1000" class="actor-img" src="{{data.pictureUrl}}" alt="">
       <div data-aos="fade-down" data-aos-duration="1000" class="centered">{{data.name}} {{data.surname}}
         <div class="centered-child-country">{{data.country}}</div>

@@ -31,7 +31,7 @@
             <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
           </ng-template>
         </p-table>
-        <p-dialog header="Header" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}"
+        <p-dialog header="Edit actor" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}"
           [baseZIndex]="10000" [draggable]="false" [resizable]="false">
           <div class="modal-content">
             <input [(ngModel)]="selectedActor.name" class="form-item" type="text" pInputText placeholder="Name"/>
@@ -50,10 +50,56 @@
         </p-dialog>
       </div>
     </p-tabPanel>
-    <p-tabPanel header="Header 2">
-      Content 2
+    <p-tabPanel header="Movie Manager">
+      <div class="card">
+        <p-table [value]="movies" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+          [rowsPerPageOptions]="[10,25,50]">
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Id</th>
+              <th>Name</th>
+              <th>Country</th>
+              <th>Action</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-customer>
+            <tr>
+              <td>{{customer.id}}</td>
+              <td>{{customer.name}}</td>
+              <td>{{customer.country}}</td>
+              <td>
+                <button class="table-action" pButton type="button" label="Edit" (click)="showDialog2(customer.id)"></button>
+                <button class="table-action" pButton type="button" label="Delete" (click)="deleteMovie(customer.id)"></button>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="paginatorleft">
+            <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
+          </ng-template>
+          <ng-template pTemplate="paginatorright">
+            <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
+          </ng-template>
+        </p-table>
+        <p-dialog header="Edit movie" [(visible)]="displayModal2" [modal]="true" [style]="{width: '50vw'}"
+          [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+          <div class="modal-content">
+            <input [(ngModel)]="selectedMovie.name" class="form-item" type="text" pInputText placeholder="Name"/>
+            <input [(ngModel)]="selectedMovie.originalName" class="form-item" type="text" pInputText placeholder="Original name"/>
+            <input [(ngModel)]="selectedMovie.year" class="form-item" type="text" pInputText placeholder="Year"/>
+            <input [(ngModel)]="selectedMovie.genre" class="form-item" type="text" pInputText placeholder="Genre"/>
+            <p-dropdown class="form-item" [options]="countries" [(ngModel)]="selectedCountry" optionLabel="name"></p-dropdown>
+            <input [(ngModel)]="selectedMovie.pictureUrl" class="form-item" type="text" pInputText placeholder="Picture url" />
+            <textarea [(ngModel)]="selectedMovie.description" autoResize="autoResize" pInputTextarea placeholder="Description"></textarea>
+            <button class="btn-edit" pButton type="button" label="Edit" (click)="editMovie()"></button>
+          </div>
+          <ng-template pTemplate="footer">
+            <p-button icon="pi pi-check" (click)="displayModal=false" label="Ok" styleClass="p-button-text"></p-button>
+          </ng-template>
+        </p-dialog>
+      </div>
     </p-tabPanel>
-    <p-tabPanel header="Header 3">
+    <p-tabPanel header="News Manager">
       Content 3
     </p-tabPanel>
   </p-tabView>

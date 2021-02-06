@@ -1,10 +1,10 @@
 <mat-toolbar style="background-color: rgb(30,30,30); color: white;" class="mat-elevation-z8 my-header">
 
-  <span class="logo-text">MovieRate</span>
+  <span class="logo-text">Movie Project</span>
   <div class="spacer"></div>
   <a class="temp-a" mat-button routerLink="">Home</a>
   <a mat-button routerLink="actors">Actors</a>
-  <a mat-button routerLink="movies">Films</a>
+  <a mat-button routerLink="movies">Movies</a>
   <a mat-button class="auth-element-logout" *ngIf="isLoggedIn === true" (click)="Logout()">Logout</a>
   <a mat-button routerLink="register" class="auth-element auth-element-register"
     *ngIf="isLoggedIn === false">Register</a>

@@ -3,9 +3,11 @@ import { NotifierService } from 'angular-notifier';
 import { MenuItem } from 'primeng/api';
 import { ActorModel } from '../models/actor/actor.model';
 import { CountryModel } from '../models/country.model';
+import { MovieModel } from '../models/movie/movie.model';
 import { ApiResult } from '../models/result.model';
 import { ActorService } from '../services/actor-service/actor.service';
 import { CountryService } from '../services/country-service/country.service';
+import { MovieService } from '../services/movie-service/movie.service';
 
 @Component({
   selector: 'app-actor-manager',
@@ -14,13 +16,19 @@ import { CountryService } from '../services/country-service/country.service';
 })
 export class ActorManagerComponent implements OnInit {
 
-  constructor(private notifier: NotifierService, private actorService: ActorService, private countryService: CountryService) { }
+  constructor(private notifier: NotifierService, private actorService: ActorService, private movieService: MovieService, private countryService: CountryService) { }
 
   actors: ActorModel[] = [];
+  movies: MovieModel[] = [];
   countries: CountryModel[] = [];
+
   selectedCountry: CountryModel = new CountryModel();
   selectedActor: ActorModel = new ActorModel();
+  selectedMovie: MovieModel = new MovieModel();
+
   displayModal: boolean = false;
+  displayModal2: boolean = false;
+  displayModal3: boolean = false;
 
 
 
@@ -31,6 +39,53 @@ export class ActorManagerComponent implements OnInit {
         this.selectedActor = data;
       }
     );
+  }
+
+  showDialog2(id: number) {
+    this.displayModal2 = true;
+    this.movieService.getMovie(id).subscribe(
+      (data: MovieModel) => {
+        this.selectedMovie = data;
+      }
+    );
+  }
+
+  editMovie(){
+    if(this.selectedCountry != null){
+      this.selectedMovie.country = this.selectedCountry.name;
+    }
+    this.movieService.editMovie(this.selectedMovie).subscribe(
+      (data: ApiResult) => {
+        if (data.status == 200) {
+          this.movieService.getMovies().subscribe(
+            (data: MovieModel[]) => {
+              this.movies = data;
+            }
+          );
+          this.notifier.notify('success', 'Edited');
+        } else {
+          this.notifier.notify('error', 'Server error');
+        }
+      }
+    );
+  }
+
+  deleteMovie(id: number) {
+    this.movieService.deleteMovie(id).subscribe(
+      (data: ApiResult) => {
+        if (data.status == 200) {
+          this.movieService.getMovies().subscribe(
+            (data: MovieModel[]) => {
+              this.movies = data;
+            }
+          );
+          this.notifier.notify('success', 'Deleted');
+        } else {
+          this.notifier.notify('error', 'Server error');
+        }
+      }
+    );
+
   }
 
   editActor() {
@@ -80,6 +135,11 @@ export class ActorManagerComponent implements OnInit {
     this.actorService.getActors().subscribe(
       (data: ActorModel[]) => {
         this.actors = data;
+      }
+    );
+    this.movieService.getMovies().subscribe(
+      (data: MovieModel[]) => {
+        this.movies = data;
       }
     );
   }

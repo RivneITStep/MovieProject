@@ -54,7 +54,7 @@ p-chip:hover{
     position: relative;
     text-align: center;
     transition: width;
-    
+    cursor: pointer;
 }
 
 .actors{

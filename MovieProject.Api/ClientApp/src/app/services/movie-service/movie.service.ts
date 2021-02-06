@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 import { MovieModel } from 'src/app/models/movie/movie.model';
 import { MovieAddModel } from 'src/app/models/movie/movie-add.model'
 import { ActorModel } from 'src/app/models/actor/actor.model';
+import { VideoModel } from 'src/app/models/video.model';
 
 
 
@@ -50,6 +51,10 @@ constructor(private http: HttpClient) { }
 
   getFilterList(filter: string){
     return this.http.get<string[]>(this.baseUrl + '/filter/' + filter);
+  }
+
+  getMovieVideo(id: number){
+    return this.http.get<VideoModel>(this.baseUrl + '/' + id + '/video');
   }
 
 }
