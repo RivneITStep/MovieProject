@@ -45,13 +45,14 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {VirtualScrollerModule} from 'primeng/virtualscroller';
 import {TagModule} from 'primeng/tag';
 import {ChipModule} from 'primeng/chip';
+import { UserComponent } from './user/user.component';
 
 const notifierOptions: NotifierOptions = {
   position: {horizontal: { position: 'right' }, vertical: { position: 'bottom' }}
 };
 
 @NgModule({
-  declarations: [															
+  declarations: [																
     AppComponent,
       HomeComponent,
       RegisterComponent,
@@ -64,7 +65,8 @@ const notifierOptions: NotifierOptions = {
       LoginComponent,
       AdminPanelComponent,
       TestComponent,
-      ActorManagerComponent
+      ActorManagerComponent,
+      UserComponent
    ],
   imports: [
     DemoNgZorroAntdModule,

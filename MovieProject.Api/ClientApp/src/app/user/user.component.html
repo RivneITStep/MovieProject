@@ -1,0 +1,24 @@
+<div class="background">
+  <div class="user-profile-title">User profile:</div>
+  <hr class="hr-white">
+  <div class="user">
+    <div class="user-media">
+      <img id="user-img" src="{{user.pictureUrl}}" alt="">
+      <input class="url-input" pInputText type="url" [(ngModel)]="user.pictureUrl">
+      <p-button class="edit-btn"(click)="editUser()">Save</p-button>
+    </div>
+    <div class="user-data">
+      <hr class="hr-white">
+      <div class="data"><b>Email:</b> {{user.email}}</div>
+      <div class="data"><b>Balance:</b> {{user.balance}} UAH</div>
+      <p-button class="dep-btn">Deposit</p-button>
+      <hr class="hr-white">
+      <div class="fav-movies-block">
+        <div class="data">Favourite movies:</div>
+        <div class="fav-movies">
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
