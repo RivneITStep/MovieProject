@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MovieProject.DAL;
 
 namespace MovieProject.Api.Migrations
 {
     [DbContext(typeof(EFContext))]
-    partial class EFContextModelSnapshot : ModelSnapshot
+    [Migration("20210207001306_user-fav-movies")]
+    partial class userfavmovies
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -274,10 +276,15 @@ namespace MovieProject.Api.Migrations
                     b.Property<string>("TrailerUrl")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<int>("Year")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("movies");
                 });
@@ -452,21 +459,6 @@ namespace MovieProject.Api.Migrations
                     b.ToTable("videos");
                 });
 
-            modelBuilder.Entity("MovieUser", b =>
-                {
-                    b.Property<int>("MoviesId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UsersId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("MoviesId", "UsersId");
-
-                    b.HasIndex("UsersId");
-
-                    b.ToTable("MovieUser");
-                });
-
             modelBuilder.Entity("ActorMovie", b =>
                 {
                     b.HasOne("MovieProject.DAL.Entities.Actor", null)
@@ -533,6 +525,13 @@ namespace MovieProject.Api.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("MovieProject.DAL.Entities.Movie", b =>
+                {
+                    b.HasOne("MovieProject.DAL.Entities.User", null)
+                        .WithMany("Movies")
+                        .HasForeignKey("UserId");
+                });
+
             modelBuilder.Entity("MovieProject.DAL.Entities.NewsArticle", b =>
                 {
                     b.HasOne("MovieProject.DAL.Entities.User", "User")
@@ -581,21 +580,6 @@ namespace MovieProject.Api.Migrations
                     b.Navigation("Movie");
                 });
 
-            modelBuilder.Entity("MovieUser", b =>
-                {
-                    b.HasOne("MovieProject.DAL.Entities.Movie", null)
-                        .WithMany()
-                        .HasForeignKey("MoviesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MovieProject.DAL.Entities.User", null)
-                        .WithMany()
-                        .HasForeignKey("UsersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("MovieProject.DAL.Entities.Actor", b =>
                 {
                     b.Navigation("Photos");
@@ -610,6 +594,8 @@ namespace MovieProject.Api.Migrations
 
             modelBuilder.Entity("MovieProject.DAL.Entities.User", b =>
                 {
+                    b.Navigation("Movies");
+
                     b.Navigation("NewsArticles");
 
                     b.Navigation("Reviews");

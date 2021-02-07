@@ -9,6 +9,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using MovieProject.DTO.Models.Movie;
 
 namespace MovieProject.Api.Controllers
 {
@@ -21,11 +24,13 @@ namespace MovieProject.Api.Controllers
     {
         private readonly EFContext _context;
         private readonly UserManager<User> _userManager;
+        private readonly IMapper _mapper;
 
-        public UserManagerController(EFContext context, UserManager<User> userManager)
+        public UserManagerController(EFContext context, UserManager<User> userManager, IMapper mapper)
         {
             _context = context;
             _userManager = userManager;
+            _mapper = mapper;
         }
 
         /// <summary>
@@ -98,6 +103,17 @@ namespace MovieProject.Api.Controllers
             model.Email = user.Email;
             model.PictureUrl = user.PictureUrl;
             return model;
+        }
+
+        [HttpGet("{id}/movies")]
+        public async Task<IEnumerable<MovieDTO>> GetUserFavouriteMovies([FromRoute] string id)
+        {
+            var user = await _context.Users
+                .Include(t => t.Movies)
+                .SingleOrDefaultAsync(t => t.Id == id);
+            var movies = user.Movies.ToList();
+            return _mapper.Map<List<Movie>, List<MovieDTO>>(movies);
+
         }
     
         /// <summary>

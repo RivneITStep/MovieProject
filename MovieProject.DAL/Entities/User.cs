@@ -12,5 +12,6 @@ namespace MovieProject.DAL.Entities
         public string PictureUrl { get; set; }
         public virtual ICollection<Review> Reviews { get; set; }
         public virtual ICollection<NewsArticle> NewsArticles { get; set; }
+        public virtual ICollection<Movie> Movies { get; set; }
     }
 }
