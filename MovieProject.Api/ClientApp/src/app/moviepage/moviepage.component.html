@@ -105,6 +105,10 @@
         </p-dialog>
         <p-button class="remove-button" (click) ="displayMovieActors()">Remove actor</p-button>
       </div>
+      <div *ngIf="isLoggedIn" class="movie-actions-panel">
+        <button pButton label="Watch" class="p-button-success" routerLink="watch"></button>
+        <button pButton label="Favourite" class="p-button-help btn-fav" (click)="addToFav()"></button>
+      </div>
     </div>
   </div>
   <div class="middle-block">

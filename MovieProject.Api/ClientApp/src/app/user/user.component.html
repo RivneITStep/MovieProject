@@ -1,4 +1,4 @@
-<div class="background">
+<div *ngIf="isLoggedIn" class="background">
   <div class="user-profile-title">User profile:</div>
   <hr class="hr-white">
   <div class="user">
@@ -8,17 +8,29 @@
       <p-button class="edit-btn"(click)="editUser()">Save</p-button>
     </div>
     <div class="user-data">
-      <hr class="hr-white">
       <div class="data"><b>Email:</b> {{user.email}}</div>
       <div class="data"><b>Balance:</b> {{user.balance}} UAH</div>
       <p-button class="dep-btn">Deposit</p-button>
-      <hr class="hr-white">
+      <hr class="hr-white fav-movie-sep">
       <div class="fav-movies-block">
         <div class="data">Favourite movies:</div>
+        <hr class="hr-white">
         <div class="fav-movies">
-
+          <div *ngFor="let data of movies" class="movie">
+            <img class="movie-img" src="{{data.pictureUrl}}" alt="">
+            <div class="movie-data"><span class="movie-data-title">Name: </span> <b>{{data.name}}</b></div>
+            <div class="movie-data"><span class="movie-data-title">Rating: </span> <b>{{data.rating.toFixed(2)}}</b></div>
+            <div class="actions">
+              <button pButton label="Watch" class="p-button-success btn-watch" (click)="watchMovie(data.id)"></button>
+              <button pButton label="Remove" class="p-button-danger btn-remove" (click)="removeMovie(data.id)"></button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
+</div>
+
+<div *ngIf="!isLoggedIn" class="background">
+  <div class="no-login">Please log-in</div>
 </div>

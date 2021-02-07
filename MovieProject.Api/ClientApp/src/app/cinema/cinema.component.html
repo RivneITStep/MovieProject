@@ -1,0 +1,13 @@
+<div *ngIf="isLoggedIn" class="background">
+  <div class="movie-data">
+    <div class="movie-name">{{movie.name}}</div>
+    <div class="movie-year">{{movie.year}}</div>
+    <hr class="hr-white">
+  </div>
+  <div class="movie-video">
+    <iframe id="movie-video" [src]="getVideoUrl()" width="1600" height="900" frameborder="0" allowfullscreen></iframe> 
+  </div>
+</div>
+<div *ngIf="!isLoggedIn" class="background">
+  <div class="no-login">Please log-in</div>
+</div>

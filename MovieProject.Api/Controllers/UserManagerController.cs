@@ -91,6 +91,21 @@ namespace MovieProject.Api.Controllers
             return _mapper.Map<User, UserDTO>(user);
         }
 
+        [HttpPost("{id}/movies/{movieid}")]
+        public async Task<ResultDTO> AddUserFavouriteMovie([FromRoute] string id, [FromRoute] int movieid)
+        {
+            var user = await _context.Users.Include(t => t.Movies).SingleOrDefaultAsync(t => t.Id == id);
+            var movie = await _context.movies.SingleOrDefaultAsync(t => t.Id == movieid);
+            user.Movies.Add(movie);
+            await _context.SaveChangesAsync();
+
+            return new ResultDTO
+            {
+                Status = 200,
+                Message = "Posted"
+            };
+        }
+
         [HttpGet("{id}/movies")]
         public async Task<IEnumerable<MovieDTO>> GetUserFavouriteMovies([FromRoute] string id)
         {
@@ -99,6 +114,25 @@ namespace MovieProject.Api.Controllers
                 .SingleOrDefaultAsync(t => t.Id == id);
             var movies = user.Movies.ToList();
             return _mapper.Map<List<Movie>, List<MovieDTO>>(movies);
+
+        }
+
+        [HttpDelete("{id}/movies/{movieid}")]
+        public async Task<ResultDTO> DeleteUserFavouriteMovie([FromRoute] string id, [FromRoute] int movieid)
+        {
+            var user = await _context.Users
+                .Include(t => t.Movies)
+                .SingleOrDefaultAsync(t => t.Id == id);
+            var movie = await _context.movies
+                .SingleOrDefaultAsync(t => t.Id == movieid);
+            user.Movies.Remove(movie);
+            await _context.SaveChangesAsync();
+
+            return new ResultDTO
+            {
+                Status = 200,
+                Message = "Deleted"
+            };
 
         }
     

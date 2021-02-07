@@ -1,0 +1,33 @@
+.background{
+    background-color: rgb(30,30,30);
+    min-height: 100%;
+    padding: 50px 5%;
+}
+
+.hr-white{
+    background-color: white;
+}
+
+.movie-video{
+    text-align: center;
+}
+
+.movie-name{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 36px;
+    color: white;
+}
+
+.movie-year{
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+}
+
+.no-login{
+    text-align: center;
+    padding-top: 20%;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    color: gray;
+    font-size: 100px;
+}

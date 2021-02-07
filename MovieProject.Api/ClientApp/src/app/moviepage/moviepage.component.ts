@@ -43,6 +43,18 @@ export class MoviepageComponent implements OnInit {
   display: boolean = false;
   display2: boolean = false;
 
+  addToFav(){
+    this.userService.addUserMovie(this.getCurrentUserId(), this.id).subscribe(
+      (data: ApiResult) => {
+        if(data.status == 200){
+          this.notifier.notify('success','Liked');
+        }else{
+          this.notifier.notify('error','Server error');
+        }
+      }
+    );
+  }
+
   removeMovieActor(id: number) {
     this.movieService.deleteMovieActor(this.id, id).subscribe(
       (data: ApiResult) => {

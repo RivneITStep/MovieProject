@@ -44,4 +44,55 @@
     font-size: 24px;
     color: white;
     line-height: 1.8rem;
+    margin-bottom: 25px;
+}
+
+.fav-movies{
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.movie-img{
+    display: block;
+    max-width: 25%;
+}
+
+.movie{
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr 2fr;
+    margin-top: 10px;
+}
+
+.movie-data{
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.movie-data-title{
+    font-weight: 400;
+}
+
+.btn-remove{
+    
+    float: right;
+}
+
+.btn-watch{
+    margin-left: 10px;
+    float: right;
+}
+
+.fav-movie-sep{
+    margin-bottom: 100px;
+}
+
+.no-login{
+    text-align: center;
+    padding-top: 20%;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    color: gray;
+    font-size: 100px;
 }
