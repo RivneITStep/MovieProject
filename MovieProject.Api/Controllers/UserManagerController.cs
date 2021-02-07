@@ -38,20 +38,11 @@ namespace MovieProject.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public IEnumerable<UserDTO> GetUsers()
+        public async Task<IEnumerable<UserDTO>> GetUsers()
         {
-            List<UserDTO> data = new List<UserDTO>();
-            var dataFromDB = _context.Users.Where(t => t.Email != "admin@gmail.com").ToList();
-            foreach (var item in dataFromDB)
-            {
-                UserDTO temp = new UserDTO();
-                temp.Email = item.Email;
-                temp.Id = item.Id;
-                temp.Balance = item.Balance;
-                temp.PictureUrl = item.PictureUrl;
-                data.Add(temp);
-            }
-            return data;
+            var users = await _context.Users
+                .ToListAsync();
+            return _mapper.Map<List<User>, List<UserDTO>>(users);
         }
 
 
@@ -62,11 +53,11 @@ namespace MovieProject.Api.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpPost("RemoveUser/{id}")]
-        public ResultDTO RemoveUser([FromRoute] string id)
+        public async Task<ResultDTO> RemoveUser([FromRoute] string id)
         {
             try
             {
-                var user = _context.Users.SingleOrDefault(t => t.Id == id);
+                var user = await _context.Users.SingleOrDefaultAsync(t => t.Id == id);
                 _context.Users.Remove(user);
                 return new ResultDTO
                 {
@@ -94,15 +85,10 @@ namespace MovieProject.Api.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public UserDTO GetUser([FromRoute] string id)
+        public async Task<UserDTO> GetUser([FromRoute] string id)
         {
-            var user = _context.Users.SingleOrDefault(t => t.Id == id);
-            UserDTO model = new UserDTO();
-            model.Balance = user.Balance;
-            model.Id = user.Id;
-            model.Email = user.Email;
-            model.PictureUrl = user.PictureUrl;
-            return model;
+            var user = await _context.Users.SingleOrDefaultAsync(t => t.Id == id);
+            return _mapper.Map<User, UserDTO>(user);
         }
 
         [HttpGet("{id}/movies")]
@@ -123,16 +109,16 @@ namespace MovieProject.Api.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost("editUser/{id}")]
-        public ResultDTO EditUser([FromRoute] string id, [FromBody] UserDTO model)
+        public async Task<ResultDTO> EditUser([FromRoute] string id, [FromBody] UserDTO model)
         {
-            var user = _context.Users.SingleOrDefault(t => t.Id == id);
-            user.Email = model.Email;
-            user.PictureUrl = model.PictureUrl;
-            _context.SaveChanges();
+            var user = await _context.Users
+                .SingleOrDefaultAsync(t => t.Id == model.Id);
+            _mapper.Map(model, user);
+            await _context.SaveChangesAsync();
             return new ResultDTO
             {
                 Status = 200,
-                Message = "OK"
+                Message = "Edited"
             };
         }
     }
