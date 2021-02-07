@@ -7,9 +7,11 @@
         <img class="film-rating-img" width="100px" src="https://www.flaticon.com/premium-icon/icons/svg/921/921902.svg">
         <h5 class="movie-current-rating">{{movie.rating.toFixed(2)}}</h5>
       </div>
-      <p class="film-rate-header">Rate movie:</p>
-      <nz-rate [(ngModel)]="mark"></nz-rate>
-      <button class="btn-rate" (click)="rateMovie()">Rate</button>
+      <div *ngIf="isLoggedIn" class="rate-block">
+        <p class="film-rate-header">Rate movie:</p>
+        <nz-rate [(ngModel)]="mark"></nz-rate>
+        <button class="btn-rate" (click)="rateMovie()">Rate</button>
+      </div>
     </div>
     
     <div class="film-info">
@@ -51,6 +53,58 @@
         </tr>
       </table>
       <hr class="hr-white">
+      <div *ngIf="isAdmin" class="admin-panel">
+        <p-dialog header="Available actors" [(visible)]="display">
+          <p-table [value] = "availableActors">
+            <ng-template pTemplate="header">
+              <tr>
+                <th></th>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Add actor</th>
+              </tr>
+            </ng-template>
+            <ng-template let-actor pTemplate="body">
+              <tr>
+                <td>
+                  <img src="{{actor.pictureUrl}}" alt="">
+                </td>
+                <td>{{actor.id}}</td>
+                <td>{{actor.name}} {{actor.surname}}</td>
+                <td>
+                  <p-button (click) = "addMovieActor(actor.id)">Add</p-button>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </p-dialog>
+        <p-button (click) = "displayActors()">Add actor</p-button>
+        <p-dialog header="Available actors" [(visible)]="display2">
+          <p-table [value] = "actors">
+            <ng-template pTemplate="header">
+              <tr>
+                <th></th>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Remove actor</th>
+              </tr>
+            </ng-template>
+            <ng-template let-actor pTemplate="body">
+              <tr>
+                <td>
+                  <img src="{{actor.pictureUrl}}" alt="">
+                </td>
+                <td>{{actor.id}}</td>
+                <td>{{actor.name}} {{actor.surname}}</td>
+                <td>
+                  <p-button (click) = "removeMovieActor(actor.id)">Remove</p-button>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </p-dialog>
+        <p-button class="remove-button" (click) ="displayMovieActors()">Remove actor</p-button>
+      </div>
     </div>
   </div>
   <div class="middle-block">

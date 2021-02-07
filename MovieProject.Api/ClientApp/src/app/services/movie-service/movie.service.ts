@@ -41,8 +41,16 @@ constructor(private http: HttpClient) { }
     return this.http.post<ApiResult>(this.baseUrl + '/' + id + '/' + actorId, null);
   }
 
+  deleteMovieActor(id: number, actorId: number){
+    return this.http.delete<ApiResult>(this.baseUrl + '/' + id + '/' + actorId);
+  }
+
   getMovieActors(id: number): Observable<ActorModel[]>{
     return this.http.get<ActorModel[]>(this.baseUrl + '/actors/' + id);
+  }
+
+  getMovieAvailableActors(id: number): Observable<ActorModel[]>{
+    return this.http.get<ActorModel[]>(this.baseUrl + '/' + id + '/actors/available');
   }
 
   rateMovie(id: number, mark: number){

@@ -206,6 +206,22 @@ namespace MovieProject.Api.Controllers
             }
         }
 
+        [HttpDelete("{id}/{actorid}")]
+        public async Task<ResultDTO> DeleteMovieActor([FromRoute] int id, [FromRoute] int actorid)
+        {
+            var movie = await _context.movies.SingleOrDefaultAsync(t => t.Id == id);
+            var actor = await _context.actors.SingleOrDefaultAsync(t => t.Id == actorid);
+            movie.Actors.Remove(actor);
+            await _context.SaveChangesAsync();
+            
+            return new ResultDTO
+            {
+                Status = 200,
+                Message = "Deleted"
+            };
+        }
+        
+
         [HttpPost("rate/{id}/{mark}")]
         public async Task<ResultDTO> RateMovieById([FromRoute] int id, [FromRoute] int mark)
         {
@@ -263,6 +279,18 @@ namespace MovieProject.Api.Controllers
                 .Include(t => t.Video)
                 .SingleOrDefaultAsync(t => t.Id == id);
             return _mapper.Map<Video, VideoDTO>(movie.Video);
+        }
+
+        [HttpGet("{id}/actors/available")]
+        public async Task<IEnumerable<ActorDTO>> GetAvailableActors([FromRoute] int id)
+        {
+            var movie = await _context.movies
+                .Include(t => t.Actors)
+                .SingleOrDefaultAsync(t => t.Id == id);
+            var actors = await _context.actors
+                .ToListAsync();
+            var result = actors.Except(movie.Actors).ToList();
+            return _mapper.Map<List<Actor>, List<ActorDTO>>(result);
         }
     }
 }
