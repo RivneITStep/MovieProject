@@ -43,6 +43,7 @@ namespace MovieProject.Api.Controllers
                 temp.Email = item.Email;
                 temp.Id = item.Id;
                 temp.Balance = item.Balance;
+                temp.PictureUrl = item.PictureUrl;
                 data.Add(temp);
             }
             return data;
@@ -95,6 +96,7 @@ namespace MovieProject.Api.Controllers
             model.Balance = user.Balance;
             model.Id = user.Id;
             model.Email = user.Email;
+            model.PictureUrl = user.PictureUrl;
             return model;
         }
     
@@ -109,6 +111,7 @@ namespace MovieProject.Api.Controllers
         {
             var user = _context.Users.SingleOrDefault(t => t.Id == id);
             user.Email = model.Email;
+            user.PictureUrl = model.PictureUrl;
             _context.SaveChanges();
             return new ResultDTO
             {
