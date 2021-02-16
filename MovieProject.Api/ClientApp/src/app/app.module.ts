@@ -47,13 +47,16 @@ import {TagModule} from 'primeng/tag';
 import {ChipModule} from 'primeng/chip';
 import { UserComponent } from './user/user.component';
 import { CinemaComponent } from './cinema/cinema.component';
+import { ChatComponent } from './chat/chat.component';
+import { NgxChatboxModule } from 'ngx-chatbox';
+import { HatoolLibModule } from 'hatool';
 
 const notifierOptions: NotifierOptions = {
   position: {horizontal: { position: 'right' }, vertical: { position: 'bottom' }}
 };
 
 @NgModule({
-  declarations: [																	
+  declarations: [																		
     AppComponent,
       HomeComponent,
       RegisterComponent,
@@ -68,7 +71,8 @@ const notifierOptions: NotifierOptions = {
       TestComponent,
       ActorManagerComponent,
       UserComponent,
-      CinemaComponent
+      CinemaComponent,
+      ChatComponent
    ],
   imports: [
     DemoNgZorroAntdModule,
@@ -99,7 +103,9 @@ const notifierOptions: NotifierOptions = {
     MatPaginatorModule,
     VirtualScrollerModule,
     TagModule,
-    ChipModule
+    ChipModule,
+    NgxChatboxModule,
+    HatoolLibModule
   ],
   providers: [],
   bootstrap: [AppComponent]

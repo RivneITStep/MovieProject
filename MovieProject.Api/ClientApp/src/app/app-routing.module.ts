@@ -14,6 +14,7 @@ import { TestComponent } from './test/test.component';
 import { ActorManagerComponent } from './actor-manager/actor-manager.component';
 import { UserComponent } from './user/user.component';
 import { CinemaComponent } from './cinema/cinema.component';
+import { ChatComponent } from './chat/chat.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'admin-panel', component: ActorManagerComponent, pathMatch: 'full', canActivate: [AdminGuard] },
   { path: 'user/profile', component: UserComponent, pathMatch: 'full'},
   { path: 'movies/:id/watch', component: CinemaComponent, pathMatch: 'full'},
+  { path: 'chat', component: ChatComponent, pathMatch: 'full'}
 ]
 
 @NgModule({

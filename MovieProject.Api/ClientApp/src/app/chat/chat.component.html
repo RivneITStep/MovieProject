@@ -1,0 +1,35 @@
+<div *ngIf="isLoggedIn" class="container">
+  <button class="chat-show-btn" *ngIf="isChatHidden" pButton pRipple type="button" icon="pi pi-user" class="p-button-rounded p-button-success" (click)="showChat()"></button>
+  <div id="chat" class="messaging">
+    <div class="inbox_msg">
+      <div class="close-btn">
+        <button pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded p-button-danger" (click)="hideChat()"></button>
+      </div>
+      <div class="mesgs">
+        <div class="msg_history">
+          <div *ngFor="let msg of msgInboxArray">
+            <div class="incoming_msg">
+              <div class="incoming_msg_img"> </div>
+              <div class="received_msg">
+                <div class="received_withd_msg">
+                  <div class="user-name">{{msg.user}}</div>
+                  <p>
+                    {{msg.message}}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="type_msg">
+          <div class="input_msg_write">
+            <input type="text" class="write_msg" [(ngModel)]="msgDto.message" (keydown.enter)="send()"
+              placeholder="Type a message" />
+            <button class="msg_send_btn" type="button" (click)="send()"><i class="fa fa-paper-plane-o"
+                aria-hidden="true"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -21,6 +21,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MovieProject.Api.Hubs;
 
 namespace MovieProject.Api
 {
@@ -37,7 +38,13 @@ namespace MovieProject.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors();
+            services.AddSignalR();
+            services.AddCors(options => options.AddPolicy("CorsPolicy", builder =>
+            {
+                builder.AllowAnyMethod().AllowAnyHeader()
+                    .WithOrigins("http://localhost:5000")
+                    .AllowCredentials();
+            }));
             services.AddDbContext<EFContext>(
                     opt => opt.UseLazyLoadingProxies().UseSqlServer(Configuration["ConnectionString"],
                     b => b.MigrationsAssembly("MovieProject.Api")));
@@ -115,6 +122,7 @@ namespace MovieProject.Api
                 app.UseHsts();
             }
 
+            app.UseCors("CorsPolicy");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             if (!env.IsDevelopment())
@@ -136,6 +144,7 @@ namespace MovieProject.Api
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
+                endpoints.MapHub<ChatHub>("/chatsocket");
             });
 
             app.UseSpa(spa =>
