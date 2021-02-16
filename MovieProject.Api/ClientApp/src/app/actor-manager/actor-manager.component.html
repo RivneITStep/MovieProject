@@ -1,7 +1,22 @@
 <div class="tab-menu">
   <p-tabView>
     <p-tabPanel header="Actor Manager">
+      <div class="add-title">Add actor</div>
+      <div class="modal-content add-actor">
+        <input [(ngModel)]="actor.name" class="form-item" type="text" pInputText placeholder="Name" />
+        <input [(ngModel)]="actor.surname" class="form-item" type="text" pInputText placeholder="Surname" />
+        <input [(ngModel)]="actor.age" class="form-item" type="number" pInputText placeholder="Age" />
+        <p-dropdown class="form-item" [options]="countries" [(ngModel)]="selectedCountry" optionLabel="name">
+        </p-dropdown>
+        <input [(ngModel)]="actor.countFilms" class="form-item" type="number" pInputText placeholder="Count of films" />
+        <input [(ngModel)]="actor.pictureUrl" class="form-item" type="url" pInputText placeholder="Picture Url" />
+        <input [(ngModel)]="actor.birthYear" class="form-item" type="number" pInputText placeholder="Birth year" />
+        <textarea [(ngModel)]="actor.description" autoResize="autoResize" pInputTextarea
+          placeholder="Description"></textarea>
+        <button class="btn-edit" pButton type="button" label="Add actor" (click)="addActor()"></button>
+      </div>
       <div class="card">
+
         <p-table [value]="actors" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
           currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
           [rowsPerPageOptions]="[10,25,50]">
@@ -19,8 +34,10 @@
               <td>{{customer.name}}</td>
               <td>{{customer.country}}</td>
               <td>
-                <button class="table-action" pButton type="button" label="Edit" (click)="showDialog(customer.id)"></button>
-                <button class="table-action" pButton type="button" label="Delete" (click)="deleteActor(customer.id)"></button>
+                <button class="table-action" pButton type="button" label="Edit"
+                  (click)="showDialog(customer.id)"></button>
+                <button class="table-action" pButton type="button" label="Delete"
+                  (click)="deleteActor(customer.id)"></button>
               </td>
             </tr>
           </ng-template>
@@ -34,14 +51,19 @@
         <p-dialog header="Edit actor" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}"
           [baseZIndex]="10000" [draggable]="false" [resizable]="false">
           <div class="modal-content">
-            <input [(ngModel)]="selectedActor.name" class="form-item" type="text" pInputText placeholder="Name"/>
-            <input [(ngModel)]="selectedActor.surname" class="form-item" type="text" pInputText placeholder="Surname"/>
-            <input [(ngModel)]="selectedActor.age" class="form-item" type="number" pInputText placeholder="Age"/>
-            <p-dropdown class="form-item" [options]="countries" [(ngModel)]="selectedCountry" optionLabel="name"></p-dropdown>
-            <input [(ngModel)]="selectedActor.countFilms" class="form-item" type="number" pInputText placeholder="Count of films" />
-            <input [(ngModel)]="selectedActor.pictureUrl" class="form-item" type="url" pInputText placeholder="Picture Url" />
-            <input [(ngModel)]="selectedActor.birthYear" class="form-item" type="number" pInputText placeholder="Birth year" />
-            <textarea [(ngModel)]="selectedActor.description" autoResize="autoResize" pInputTextarea placeholder="Description"></textarea>
+            <input [(ngModel)]="selectedActor.name" class="form-item" type="text" pInputText placeholder="Name" />
+            <input [(ngModel)]="selectedActor.surname" class="form-item" type="text" pInputText placeholder="Surname" />
+            <input [(ngModel)]="selectedActor.age" class="form-item" type="number" pInputText placeholder="Age" />
+            <p-dropdown class="form-item" [options]="countries" [(ngModel)]="selectedCountry" optionLabel="name">
+            </p-dropdown>
+            <input [(ngModel)]="selectedActor.countFilms" class="form-item" type="number" pInputText
+              placeholder="Count of films" />
+            <input [(ngModel)]="selectedActor.pictureUrl" class="form-item" type="url" pInputText
+              placeholder="Picture Url" />
+            <input [(ngModel)]="selectedActor.birthYear" class="form-item" type="number" pInputText
+              placeholder="Birth year" />
+            <textarea [(ngModel)]="selectedActor.description" autoResize="autoResize" pInputTextarea
+              placeholder="Description"></textarea>
             <button class="btn-edit" pButton type="button" label="Edit" (click)="editActor()"></button>
           </div>
           <ng-template pTemplate="footer">
@@ -51,6 +73,26 @@
       </div>
     </p-tabPanel>
     <p-tabPanel header="Movie Manager">
+      <div class="add-title">add movie</div>
+      <div class="modal-content">
+        <input [(ngModel)]="movie.name" class="form-item" type="text" pInputText placeholder="Name" />
+        <input [(ngModel)]="movie.originalName" class="form-item" type="text" pInputText
+          placeholder="Original name" />
+        <input [(ngModel)]="movie.year" class="form-item" type="number" pInputText placeholder="Year" />
+        <input [(ngModel)]="movie.director" class="form-item" type="text" pInputText placeholder="Director" />
+        <input [(ngModel)]="movie.operator" class="form-item" type="text" pInputText placeholder="Operator" />
+        <input [(ngModel)]="movie.budget" class="form-item" type="number" pInputText placeholder="Budget" />
+        <input [(ngModel)]="movie.length" class="form-item" type="number" pInputText placeholder="Length" />
+        <input [(ngModel)]="movie.composer" class="form-item" type="text" pInputText placeholder="Composer" />
+        <input [(ngModel)]="movie.genre" class="form-item" type="text" pInputText placeholder="Genre" />
+        <p-dropdown class="form-item" [options]="countries" [(ngModel)]="selectedCountry" optionLabel="name">
+        </p-dropdown>
+        <input [(ngModel)]="movie.pictureUrl" class="form-item" type="text" pInputText
+          placeholder="Picture url" />
+        <textarea [(ngModel)]="movie.description" autoResize="autoResize" pInputTextarea
+          placeholder="Description"></textarea>
+        <button class="btn-edit" pButton type="button" label="Add movie" (click)="addMovie()"></button>
+      </div>
       <div class="card">
         <p-table [value]="movies" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
           currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
@@ -69,8 +111,10 @@
               <td>{{customer.name}}</td>
               <td>{{customer.country}}</td>
               <td>
-                <button class="table-action" pButton type="button" label="Edit" (click)="showDialog2(customer.id)"></button>
-                <button class="table-action" pButton type="button" label="Delete" (click)="deleteMovie(customer.id)"></button>
+                <button class="table-action" pButton type="button" label="Edit"
+                  (click)="showDialog2(customer.id)"></button>
+                <button class="table-action" pButton type="button" label="Delete"
+                  (click)="deleteMovie(customer.id)"></button>
               </td>
             </tr>
           </ng-template>
@@ -84,13 +128,17 @@
         <p-dialog header="Edit movie" [(visible)]="displayModal2" [modal]="true" [style]="{width: '50vw'}"
           [baseZIndex]="10000" [draggable]="false" [resizable]="false">
           <div class="modal-content">
-            <input [(ngModel)]="selectedMovie.name" class="form-item" type="text" pInputText placeholder="Name"/>
-            <input [(ngModel)]="selectedMovie.originalName" class="form-item" type="text" pInputText placeholder="Original name"/>
-            <input [(ngModel)]="selectedMovie.year" class="form-item" type="text" pInputText placeholder="Year"/>
-            <input [(ngModel)]="selectedMovie.genre" class="form-item" type="text" pInputText placeholder="Genre"/>
-            <p-dropdown class="form-item" [options]="countries" [(ngModel)]="selectedCountry" optionLabel="name"></p-dropdown>
-            <input [(ngModel)]="selectedMovie.pictureUrl" class="form-item" type="text" pInputText placeholder="Picture url" />
-            <textarea [(ngModel)]="selectedMovie.description" autoResize="autoResize" pInputTextarea placeholder="Description"></textarea>
+            <input [(ngModel)]="selectedMovie.name" class="form-item" type="text" pInputText placeholder="Name" />
+            <input [(ngModel)]="selectedMovie.originalName" class="form-item" type="text" pInputText
+              placeholder="Original name" />
+            <input [(ngModel)]="selectedMovie.year" class="form-item" type="text" pInputText placeholder="Year" />
+            <input [(ngModel)]="selectedMovie.genre" class="form-item" type="text" pInputText placeholder="Genre" />
+            <p-dropdown class="form-item" [options]="countries" [(ngModel)]="selectedCountry" optionLabel="name">
+            </p-dropdown>
+            <input [(ngModel)]="selectedMovie.pictureUrl" class="form-item" type="text" pInputText
+              placeholder="Picture url" />
+            <textarea [(ngModel)]="selectedMovie.description" autoResize="autoResize" pInputTextarea
+              placeholder="Description"></textarea>
             <button class="btn-edit" pButton type="button" label="Edit" (click)="editMovie()"></button>
           </div>
           <ng-template pTemplate="footer">
@@ -98,9 +146,6 @@
           </ng-template>
         </p-dialog>
       </div>
-    </p-tabPanel>
-    <p-tabPanel header="News Manager">
-      Content 3
     </p-tabPanel>
   </p-tabView>
 </div>

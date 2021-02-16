@@ -23,9 +23,8 @@ const routes: Routes = [
   { path: 'movies/:id', component: MoviepageComponent, pathMatch: 'full' },
   { path: 'register', component: RegisterComponent, pathMatch: 'full', canActivate: [NotLoginGuard] },
   { path: 'login', component: LoginComponent, pathMatch: 'full', canActivate: [NotLoginGuard] },
-  { path: 'admin-panel', component: AdminPanelComponent, pathMatch: 'full' },
   { path: 'test', component: TestComponent, pathMatch: 'full'},
-  { path: 'admin-panel/actor-manager', component: ActorManagerComponent, pathMatch: 'full'},
+  { path: 'admin-panel', component: ActorManagerComponent, pathMatch: 'full', canActivate: [AdminGuard] },
   { path: 'user/profile', component: UserComponent, pathMatch: 'full'},
   { path: 'movies/:id/watch', component: CinemaComponent, pathMatch: 'full'},
 ]

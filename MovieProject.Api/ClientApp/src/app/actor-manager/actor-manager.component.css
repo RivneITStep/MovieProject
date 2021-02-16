@@ -19,3 +19,15 @@
 .btn-edit{
     margin-top: 10px;
 }
+
+.add-actor{
+    margin-bottom: 25px;
+}
+
+.add-title{
+    font-family: 'Montserrat',sans-serif;
+    font-size: 36px;
+    color: black;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
