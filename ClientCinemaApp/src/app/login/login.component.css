@@ -1,0 +1,69 @@
+.page{
+    padding: 5vh;
+    background: -webkit-linear-gradient(top left, #45766A, #B64251);
+}
+
+.bg{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.section{
+    height: 90vh;
+}
+
+.media{
+    background-image: url('./../../assets/pb.jpg');
+    background-size: cover;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+	box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5)  ; 
+}
+
+.form{
+    background: white;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+	box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5);
+}
+
+.text{
+    margin-top: 200px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 48px;
+}
+
+.text-content{
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.logo-text{
+    margin-top: 1vh;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 48px;
+}
+
+.logo-under-text{
+    padding: 5px;
+    background-color: black;
+    color: white;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.logo-upper-text{
+    background-color: rgb(233, 233, 233);
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    font-weight: 500;
+}
+.auth-input{
+    padding: 5px;
+    font-size: 24px;
+    letter-spacing: 0.1rem;
+    font-family: 'Josefin Sans', sans-serif;
+    width: 50%;
+    margin-bottom: 25px;
+    display: block;
+}

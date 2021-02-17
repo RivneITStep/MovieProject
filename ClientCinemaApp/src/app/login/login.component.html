@@ -1,0 +1,17 @@
+<div class="page">
+  <div class="bg">
+    <div class="section media"></div>
+    <div class="section form">
+      <div class="text-content">
+        <div class="logo-text"><span class="logo-upper-text">MovieProject </span><strong class="logo-under-text">!WATCH</strong></div>
+        <div class="text">Authorisation</div>
+        <hr>
+        <div class="auth">
+          <input [(ngModel)]="user.email" class="auth-input" pInputText type="text" placeholder="Email">
+          <input [(ngModel)]="user.password" class="auth-input" pInputText type="password" placeholder="Password">
+          <button (click)="login()" pButton pRipple type="button" label="Login" class="p-button-raised"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
