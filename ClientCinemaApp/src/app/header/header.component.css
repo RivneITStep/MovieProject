@@ -1,0 +1,38 @@
+.header{
+    background: #232526;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to top, #414345, #232526);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to top, #414345, #232526); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    padding: 10px 1%;
+    display: grid;
+    grid-template-columns: 4fr 3fr 2fr 2fr;
+    position: fixed;
+    width: 100%;
+}
+
+.text{
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 24px;
+}
+
+.logo{
+    text-align: center;
+    font-weight: 600;
+    color: white;
+}
+
+.user-name{
+    color: white;
+    font-size: 12px;
+    align-self: center;
+    font-weight: 300;
+    text-align: right;
+}
+
+.auth{
+    text-align: right;
+    align-self: center;
+    color: whitesmoke;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 300;
+}

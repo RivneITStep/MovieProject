@@ -38,6 +38,14 @@ export class AuthService {
     return false;
   }
 
+  getCurrentUser(){
+    var token = localStorage.getItem('token');
+    if(token != null){
+      return jwt_decode(token) as UserModel;
+    }
+    return new UserModel();
+  }
+
   logout(){
     localStorage.removeItem('token');
     this.loginStatus.emit(false);

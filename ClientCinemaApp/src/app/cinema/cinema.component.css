@@ -1,0 +1,48 @@
+.cinema{
+    background: whitesmoke;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 200px 9fr;
+    padding-top: 44px;
+}
+
+.movie-list-img{
+    display: block;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.media{
+    padding-top: 50px;
+    padding-right: 1%;
+    text-align: center;
+    background: rgb(30,30,30);
+}
+
+.movie-img{
+    margin-left: auto;
+    max-width: 100%;
+    display: block;
+    margin-right: auto;
+    box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.5);
+}
+
+.hr-white{
+    background: white;
+    width: 85%;
+}
+
+.movie-name{
+    text-align: left;
+    margin-left: 7.5%;
+    margin-top: 10px;
+    color: white;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 36px;
+    font-weight: 500;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+}

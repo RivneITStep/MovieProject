@@ -1,0 +1,16 @@
+<div class="cinema">
+  <div class="movies">
+    <p-virtualScroller [value]="movies" scrollHeight="calc(100vh - 44px)">
+      <ng-template pTemplate="Header">Movies to watch</ng-template>
+      <ng-template pTemplate="item" let-data>
+        <img (click)="selectMovie(data.id)" class="movie-list-img" src="{{data.pictureUrl}}" alt="">
+      </ng-template>
+
+    </p-virtualScroller>
+  </div>
+  <div class="media">
+    <div class="movie-name">{{movie.name}}</div>
+    <hr class="hr-white">
+    <iframe width="1280" height="720" frameborder="0" allowfullscreen></iframe>
+  </div>
+</div>

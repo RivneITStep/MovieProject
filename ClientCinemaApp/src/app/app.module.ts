@@ -8,13 +8,19 @@ import {InputTextModule} from 'primeng/inputtext';
 import {ButtonModule} from 'primeng/button';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-
-
+import { CinemaComponent } from './cinema/cinema.component';
+import { HeaderComponent } from './header/header.component';
+import {VirtualScrollerModule} from 'primeng/virtualscroller';
+import {ToastModule} from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
-  declarations: [		
+  declarations: [				
     AppComponent,
-    LoginComponent
+    LoginComponent,
+      CinemaComponent,
+      HeaderComponent
    ],
   imports: [
     BrowserModule,
@@ -22,9 +28,13 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     InputTextModule,
     ButtonModule,
-    HttpClientModule
+    HttpClientModule,
+    VirtualScrollerModule,
+    ToastModule,
+    BrowserAnimationsModule
+    
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
