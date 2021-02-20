@@ -1,10 +1,9 @@
 <div class="background">
   <div class="upper-block">
     <div>
-      <img class="film-image" src="{{movie.pictureUrl}}" alt="">
+      <img class="film-image" [src]="getImg()" alt="">
       <p class="film-rate-header">Movie rating: </p>
       <div class="mark-inter-block">
-        <img class="film-rating-img" width="100px" src="https://www.flaticon.com/premium-icon/icons/svg/921/921902.svg">
         <h5 class="movie-current-rating">{{movie.rating.toFixed(2)}}</h5>
       </div>
       <div *ngIf="isLoggedIn" class="rate-block">

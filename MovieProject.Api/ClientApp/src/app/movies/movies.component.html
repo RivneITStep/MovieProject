@@ -6,35 +6,40 @@
           placeholder="input search text" />
       </nz-input-group>
     </div>
-    
+
     <div class="filter-movie">
       <div class="filter-title">Country:</div>
       <div class="country">
         <div class="filter-chip" *ngFor="let data of filtersCountry" (click)="selectFilterCountry(data)">{{data}}</div>
       </div>
       <div class="country">
-        <div class="filter-chip selected" *ngFor="let data of selectedCountry" (click)="removeFilterCountry(data)">{{data}}</div>
+        <div class="filter-chip selected" *ngFor="let data of selectedCountry" (click)="removeFilterCountry(data)">
+          {{data}}</div>
       </div>
       <div class="filter-title">Genre:</div>
       <div class="genre">
         <div class="filter-chip" *ngFor="let data of filtersGenre" (click)="selectFilterGenre(data)">{{data}}</div>
       </div>
       <div class="genre">
-        <div class="filter-chip selected" *ngFor="let data of selectedGenre" (click)="removeFilterGenre(data)">{{data}}</div>
+        <div class="filter-chip selected" *ngFor="let data of selectedGenre" (click)="removeFilterGenre(data)">{{data}}
+        </div>
       </div>
       <div class="filter-title">Year:</div>
       <div class="year">
         <div class="filter-chip" *ngFor="let data of filtersYear" (click)="selectFilterYear(data)">{{data}}</div>
       </div>
       <div class="year">
-        <div class="filter-chip selected" *ngFor="let data of selectedYear" (click)="removeFilterYear(data)">{{data}}</div>
+        <div class="filter-chip selected" *ngFor="let data of selectedYear" (click)="removeFilterYear(data)">{{data}}
+        </div>
       </div>
     </div>
 
   </div>
   <div class="actors">
     <div *ngFor="let data of movies" class="actor">
-      <img data-aos="fade-down" data-aos-duration="1000" class="actor-img" src="{{data.pictureUrl}}" routerLink="{{data.id}}" alt="">
+      <div data-aos="fade-down" data-aos-duration="1000" class="actor-img"
+        [style.background-image]="getMovieImage(data.pictureUrl)" routerLink="{{data.id}}" alt="">
+      </div>
     </div>
   </div>
 </div>

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { MovieModel } from '../models/movie/movie.model';
 import { MovieService } from '../services/movie-service/movie.service';
 
@@ -10,7 +11,7 @@ import { MovieService } from '../services/movie-service/movie.service';
 })
 export class MoviesComponent implements OnInit {
 
-  constructor(private movieService: MovieService) { }
+  constructor(private movieService: MovieService, private sanitizer: DomSanitizer) { }
 
   filtersCountry: string[] = [];
   filtersGenre: string[] = [];
@@ -106,7 +107,9 @@ export class MoviesComponent implements OnInit {
     }
   }
 
-
+  getMovieImage(img: string){
+    return this.sanitizer.bypassSecurityTrustStyle(`url(${img})`);
+  }
 
   resetMovies(){
     this.movieService.getMovies().subscribe(
@@ -120,7 +123,7 @@ export class MoviesComponent implements OnInit {
     this.movieService.getMovies().subscribe(
       (data: MovieModel[]) =>{
         this.movies = data;
-        console.log(this.movies[0].name);
+        this.movies.forEach(element => element.pictureUrl.replace("'",''));
       }
     );
     this.movieService.getFilterList('country').subscribe(

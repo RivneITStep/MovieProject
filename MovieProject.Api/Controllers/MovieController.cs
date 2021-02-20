@@ -11,12 +11,16 @@ using MovieProject.DTO.Models.Result;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Internal;
 using MovieProject.DTO.Models.Actor;
 using MovieProject.DTO.Models.Movie;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace MovieProject.Api.Controllers
 {

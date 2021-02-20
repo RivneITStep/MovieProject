@@ -27,4 +27,20 @@
     <Folder Include="wwwroot\Files" />
   </ItemGroup>
 
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="publish\web.config" />
+    <_ContentIncludedByDefault Remove="publish\appsettings.Development.json" />
+    <_ContentIncludedByDefault Remove="publish\appsettings.json" />
+    <_ContentIncludedByDefault Remove="publish\ClientApp\angular.json" />
+    <_ContentIncludedByDefault Remove="publish\ClientApp\e2e\tsconfig.json" />
+    <_ContentIncludedByDefault Remove="publish\ClientApp\package-lock.json" />
+    <_ContentIncludedByDefault Remove="publish\ClientApp\package.json" />
+    <_ContentIncludedByDefault Remove="publish\ClientApp\tsconfig.app.json" />
+    <_ContentIncludedByDefault Remove="publish\ClientApp\tsconfig.json" />
+    <_ContentIncludedByDefault Remove="publish\ClientApp\tsconfig.spec.json" />
+    <_ContentIncludedByDefault Remove="publish\ClientApp\tslint.json" />
+    <_ContentIncludedByDefault Remove="publish\MovieProject.Api.deps.json" />
+    <_ContentIncludedByDefault Remove="publish\MovieProject.Api.runtimeconfig.json" />
+  </ItemGroup>
+
 </Project>

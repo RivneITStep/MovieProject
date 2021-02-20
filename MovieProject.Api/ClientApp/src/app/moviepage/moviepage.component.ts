@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SecurityContext } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../core/api.service';
@@ -14,6 +14,7 @@ import { MovieModel } from '../models/movie/movie.model';
 import { ActorModel } from '../models/actor/actor.model';
 import { ReviewModel } from '../models/review/review.model';
 import { ActorService } from '../services/actor-service/actor.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 @Component({
@@ -23,7 +24,7 @@ import { ActorService } from '../services/actor-service/actor.service';
 })
 export class MoviepageComponent implements OnInit {
 
-  constructor(private actorService: ActorService, private notifier: NotifierService, private reviewService: ReviewService, private activateRoute: ActivatedRoute, private movieService: MovieService, private userService: UserService, private apiService: ApiService) {
+  constructor(private sanitizer: DomSanitizer, private actorService: ActorService, private notifier: NotifierService, private reviewService: ReviewService, private activateRoute: ActivatedRoute, private movieService: MovieService, private userService: UserService, private apiService: ApiService) {
     this.id = activateRoute.snapshot.params['id'];
   }
 
@@ -42,6 +43,16 @@ export class MoviepageComponent implements OnInit {
 
   display: boolean = false;
   display2: boolean = false;
+
+  getImg(){
+    let re = /\'/gi;
+    let result = this.movie.pictureUrl.replace(re, '');
+    return this.sanitizer.bypassSecurityTrustResourceUrl(result);
+  }
+
+  getMovieImage(img: string){
+    return this.sanitizer.bypassSecurityTrustStyle(`url(${img})`);
+  }
 
   addToFav(){
     this.userService.addUserMovie(this.getCurrentUserId(), this.id).subscribe(
