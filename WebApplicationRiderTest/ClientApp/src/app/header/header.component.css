@@ -1,0 +1,51 @@
+.nav-menu{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 4fr 1fr 1fr 1fr;
+    column-gap: 5px;
+    padding: 5px 5%;
+    font-family: 'Montserrat', sans-serif;
+    z-index: 99;
+    position: absolute;
+}
+
+.link{
+    cursor: pointer;
+}
+
+.item{
+    align-self: center;
+    font-weight: 500;
+    color: white;
+    outline: none;
+}
+
+.logo{
+    text-align: center;
+}
+
+.logo-text{
+    font-size: 24px;
+    font-weight: 500;
+    color: white;
+}
+
+.auth{
+    text-align: right;
+    cursor: pointer;
+    font-weight: 600;
+    outline: none;
+}
+
+.nav-menu-inverse{
+    transition-duration: .5s;
+    transition-delay: .25s;
+    background: #414770;
+    position: fixed;
+}
+
+@media screen and (max-width: 450px){
+    .item{
+        font-size: 12px;
+    }
+}

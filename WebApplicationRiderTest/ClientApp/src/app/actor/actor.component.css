@@ -1,0 +1,202 @@
+.background{
+    background-color: white;
+}
+
+.upper-block{
+    background-color: rgb(30,30,30);
+    padding: 0 5%;
+    padding-top: 100px;
+    padding-bottom: 50px;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    box-shadow: 0 10px 50px -2px rgb(30,30,30);
+}
+
+.actor-name{
+    font-family: "Montserrat", sans-serif;
+    font-size: 48px;
+    color: white;
+    font-weight: 500
+}
+
+.actor-hr{
+    background-color: white;
+    margin-bottom: 50px;
+}
+
+.actor-th{
+    text-align: left;
+}
+
+.about{
+    font-family: "Montserrat", sans-serif;
+    color: white;
+}
+
+.actor-data{
+    font-family: "Montserrat", sans-serif;
+    font-size: 18px;
+    color: white;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.actor-data tr{
+    line-height: 50px;
+}
+
+.actor-data td{
+    float: right;
+}
+
+.actor-films{
+    padding-left: 30px;
+}
+
+.actor-films-title{
+    font-family: "Montserrat", sans-serif;
+    color: white;
+    font-size: 24px;
+    font-weight: 300;
+}
+
+.actor-films-list{
+    list-style-type: none;
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    font-size: 18px;
+    padding-left: 0;
+}
+
+.actor-films-list li{
+    margin-bottom: 15px;
+}
+
+.actor-grid-image{
+    display: block;
+    max-width: 100%;
+}
+
+@media screen and (max-width: 1400px){
+    .actor-data th, td{
+        font-size: 12px;
+    }
+    .actor-name{
+        font-size: 36px;
+    }
+    
+    .actor-info{
+        padding-left: 5%;
+    }
+}
+
+@media screen and (max-width: 1000px){
+    .actor-name{
+        font-size: 24px;
+    }
+
+    .about{
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 900px){
+    .upper-block{
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .actor-grid-image{
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .actor-info{
+        padding-right: 10px !important;
+        padding-left: 10px !important;
+        border-right: none;
+    }
+
+    .actor-data th{
+        float: left;
+    }
+
+    .actor-films{
+        padding: 0 !important;
+    }
+}
+
+.middle-block{
+    padding: 50px 5%;
+}
+
+.desc-title{
+    font-family: 'Montserrat', sans-serif;
+    color: black;
+    font-size: 36px;
+    font-weight: 500;
+}
+
+.actor-desc{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+}
+
+.lower-block{
+    padding: 50px 5%;
+    background-color: #49C6E5;
+    color: white;
+}
+
+.actor-photos-title{
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    font-size: 36px;
+    font-weight: 500;
+}
+
+.actor-photos{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 1%;
+}
+
+.gallery-grid-image{
+    display: block;
+    object-fit: cover;
+    width:  100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.actor-film-image{
+    display: block;
+    max-width: 100%;
+}
+
+.inter-block{
+    padding: 50px 5%;
+    background-color: rgb(30,30,30);
+}
+
+.films{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.film-name{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    color: white;
+}
+
+.btn-manager{
+    border: none;
+    background-color: #49C6E5;
+    color: white;
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    margin-right: 10px;
+}

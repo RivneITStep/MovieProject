@@ -1,0 +1,18 @@
+<div class="bg">
+  <div class="filters-block">
+    <input class="search" type="text" [(ngModel)]="search">
+    <div class="filter-title">Country:</div>
+    <div class="filters">
+      <div *ngFor="let data of filters" class="filter">
+        <input type="checkbox" [value]="data" (change)="onCheckboxChange($event)">
+        <label class="filter-name">{{data}}</label>
+      </div>
+    </div>
+  </div>
+  <div class="actors-block">
+    <div *ngFor="let data of actors | filter:search" class="actor">
+      <img routerLink="{{data.id}}" class="actor-img" [src]="data.pictureUrl">
+      <div class="actor-name">{{data.name}} {{data.surname}}</div>
+    </div>
+  </div>
+</div>

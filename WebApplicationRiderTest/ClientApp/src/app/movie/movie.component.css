@@ -1,0 +1,96 @@
+.bg{
+    min-height: 100vh;
+    background: #0F2027;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to bottom, #2C5364, #203A43, #0F2027);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, #2C5364, #203A43, #0F2027); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    padding: 50px 5%;
+}
+
+.top{
+    display: grid;
+    column-gap: 5%;
+    grid-template-columns: 3fr 8fr;
+}
+
+.movie-img{
+    display: block;
+    max-width: 100%;
+    border-radius: 5px;
+}
+
+.movie-name{
+    font-size: 48px;
+    font-weight: 500;
+    letter-spacing: 0.1rem;
+}
+
+.movie-original-name{
+    font-size: 24px;
+    color: rgb(226, 226, 226);
+}
+
+.data-table{
+    margin-top: 50px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    row-gap: 25px;
+}
+
+.data-title{
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.data{
+    font-size: 24px;
+    text-align: right;
+}
+
+.hr-mid{
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.desc-title{
+    font-size: 36px;
+
+}
+
+.desc{
+    margin-top: 25px;
+    font-size: 24px;
+}
+
+.movie-actors-title{
+    text-transform: capitalize;
+    font-size: 36px;
+    margin-bottom: 25px;
+}
+
+.movie-actors{
+    display: grid;
+    grid-template-columns: repeat(6,1fr);
+    column-gap: 100px;
+}
+
+.rate{
+    display: grid;
+    grid-template-columns: 8fr 2fr;
+    font-size: 24px;
+}
+
+.rating{
+    text-align: right;
+}
+
+.action{
+    align-self: center;
+}
+
+.rating-text{
+    font-size: 40px;
+    font-weight: 600;
+}

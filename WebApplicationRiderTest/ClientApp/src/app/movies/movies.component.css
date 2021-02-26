@@ -1,0 +1,72 @@
+.bg{
+    min-height: 100vh;
+    padding: 0 5%;
+    padding-top: 50px;
+    display: grid;
+    grid-template-columns: 1fr 8fr;
+    column-gap: 1%;
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    background: #41295a;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to top, #2F0743, #41295a);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to top, #2F0743, #41295a); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.movies{
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+    column-gap: 25px;
+    row-gap: 10px;
+}
+
+.movie-img{
+    display: block;
+    max-width: 100%;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.filters-block{
+    background-color: rgba(0, 0, 0, 0.301);
+    padding: 15px;
+}
+
+.filter-title{
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+.filter-label{
+    font-size: 12px;
+}
+
+.search{
+    display: block;
+    max-width: 100%;
+}
+
+@media screen and (max-width: 1000px){
+    .movies{
+        grid-template-columns: repeat(4,1fr);
+    }
+}
+
+@media screen and (max-width: 600px){
+    .movies{
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .filter-title{
+        font-size: 14px;
+    }
+
+    .filter-label{
+        font-size: 8px;
+    }
+
+    .bg{
+        grid-template-columns: 100px 1fr;
+    }
+
+    
+}

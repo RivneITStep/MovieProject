@@ -1,0 +1,35 @@
+<div class="bg">
+  <div class="filters-block">
+    <input class="search" type="text" [(ngModel)]="search">
+    <div class="filters">
+      <div class="filter-title">Country:</div>
+      <div class="country">
+        <div *ngFor="let data of filtersCountry" class="filter">
+          <input [value]="data" (change)="onCountryChange($event)" type="checkbox">
+          <label class="filter-label">{{data}}</label>
+        </div>
+      </div>
+      <div class="filter-title">Genre:</div>
+      <div class="genre">
+        <div *ngFor="let data of filtersGenre" class="filter">
+          <input [value]="data" (change)="onGenreChange($event)" type="checkbox">
+          <label class="filter-label">{{data}}</label>
+        </div>
+      </div>
+      <div class="filter-title">Year:</div>
+      <div class="year">
+        <div *ngFor="let data of filtersYear" class="filter">
+          <input [value]="data" (change)="onYearChange($event)" type="checkbox">
+          <label class="filter-label">{{data}}</label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="movies-block">
+    <div class="movies">
+      <div routerLink="{{data.id}}" *ngFor="let data of movies | filter:search" class="movie">
+        <img data-aos="fade-out" data-aos-duration="1000" class="movie-img" [src]="getImg(data.pictureUrl)">
+      </div>
+    </div>
+  </div>
+</div>

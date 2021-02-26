@@ -1,0 +1,51 @@
+<div class="bg">
+    <div class="top">
+        <div class="media">
+            <img [src]="getImg(movie.pictureUrl)" class="movie-img">
+        </div>
+        <div class="info">
+            <div class="movie-name">{{movie.name}}</div>
+            <div class="movie-original-name">{{movie.name}}</div>
+            <hr class="hr-white">
+            <div class="data-table">
+                <div class="data-title">Year:</div>
+                <div class="data">{{movie.year}}</div>
+                <div class="data-title">Country:</div>
+                <div class="data">{{movie.country}}</div>
+                <div class="data-title">Genre:</div>
+                <div class="data">{{movie.genre}}</div>
+                <div class="data-title">Director</div>
+                <div class="data">{{movie.director}}</div>
+                <div class="data-title">Budget:</div>
+                <div class="data">{{movie.budget}}$</div>
+                <div class="data-title">Length:</div>
+                <div class="data">{{movie.length}}</div>
+            </div>
+        </div>
+    </div>
+    <hr class="hr-mid">
+    <div class="middle">
+        <div class="rate">
+            <div class="action">
+                <p-rating (onRate)="rateMovie()" [(ngModel)]="rate" [cancel]="false"></p-rating>
+                <div class="movie-rating-title">Current movie rating:</div>
+                <div class="rating-text">{{movie.rating.toFixed(2)}}</div>
+            </div>
+            <div class="rating">
+                
+            </div>
+        </div>
+        <hr class="hr-mid">
+        <div class="desc-title">Description:</div>
+        <div class="desc">{{movie.description}}</div>
+        <hr class="hr-mid">
+        <div *ngIf="hasActors" class="movie-actors-title">{{movie.name}} actors:</div>
+        <div *ngIf="hasActors" class="movie-actors">
+            <div *ngFor="let data of movieActors" class="actor">
+                <img class="movie-img" [src]="getImg(data.pictureUrl)">
+            </div>
+        </div>
+        <hr *ngIf="hasActors" class="hr-mid">
+    </div>
+
+</div>

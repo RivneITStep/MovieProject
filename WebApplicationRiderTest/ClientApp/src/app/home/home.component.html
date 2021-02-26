@@ -1,0 +1,115 @@
+<div class="background">
+  <div class="pimg1">
+      <div class="ptext ptext-title">
+          <span data-aos="zoom-in-up" data-aos-duration="3000" class="brd title section-one-grid">
+              <img class="title-img" src="../../assets/images/popcorn.png" alt="">
+              Movie Project
+              <p class="under-title-text">
+                  cinematography portal
+              </p>
+          </span>
+      </div>
+  </div>
+
+  <section class="section section-light">
+      <div data-aos="fade-up" class="section-one-block">
+          <div class="section-one-block-item studios">
+              <img class="welcome-img" src="../../assets/images/fisher.jpg" alt="">
+          </div>
+          <div  class="section-one-block-item">
+              <p class="about-studios">Review and rate movies and serials from worldwide famous filming studios. 
+                  Also read the reviews of other users which will help you to decide whether to watch the movie or not. 
+                  Enjoy short and clear descriptions of movies to save your precious time
+              </p>
+          </div>
+      </div>
+  </section>
+
+  <div class="pimg2">
+      <div class="ptext">
+          <div class="brd">
+              Actual movies and serials
+          </div>
+      </div>
+  </div>
+
+  <section class="section section-light2">
+      <div data-aos="fade-up" data-aos-duration="2000" class="movies">
+          <div class="movie">
+              <img [src]="getImg(movies[0].pictureUrl)" class="movie-image">
+          </div>
+          <div class="movie">
+              <img [src]="getImg(movies[1].pictureUrl)" class="movie-image">
+          </div>
+          <div class="movie">
+              <img [src]="getImg(movies[2].pictureUrl)" class="movie-image">
+          </div>
+          <div class="movie">
+              <img [src]="getImg(movies[3].pictureUrl)" class="movie-image">
+          </div>
+          <div class="movie">
+              <img [src]="getImg(movies[4].pictureUrl)" class="movie-image">
+          </div>
+          <div class="movie">
+              <img [src]="getImg(movies[5].pictureUrl)" class="movie-image">
+          </div>
+      </div>
+  </section>
+
+  <div class="pimg3">
+      <div class="ptext">
+          <span class="brd">
+              World Famous Actors
+          </span>
+      </div>
+  </div>
+
+  <section  class="section section-light3">
+      <div data-aos="fade-up" data-aos-duration="2000" class="actors">
+          <div class="actor">
+              <img src="{{actors[0].pictureUrl}}" alt="" class="actor-image">
+          </div>
+          <div class="actor">
+              <img src="{{actors[1].pictureUrl}}" alt="" class="actor-image">
+          </div>
+          <div class="actor">
+              <img src="{{actors[2].pictureUrl}}" alt="" class="actor-image">
+          </div>
+          <div class="actor">
+              <img src="{{actors[3].pictureUrl}}" alt="" class="actor-image">
+          </div>
+          <div class="actor">
+              <img src="{{actors[4].pictureUrl}}" alt="" class="actor-image">
+          </div>
+          <div class="actor">
+              <img src="{{actors[5].pictureUrl}}" alt="" class="actor-image">
+          </div>
+      </div>
+  </section>
+
+</div>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+  AOS.init({
+// Global settings:
+disable: false, // accepts following values: 'phone', 'tablet', 'mobile', boolean, expression or function
+startEvent: 'DOMContentLoaded', // name of the event dispatched on the document, that AOS should initialize on
+initClassName: 'aos-init', // class applied after initialization
+animatedClassName: 'aos-animate', // class applied on animation
+useClassNames: false, // if true, will add content of `data-aos` as classes on scroll
+disableMutationObserver: false, // disables automatic mutations' detections (advanced)
+debounceDelay: 50, // the delay on debounce used while resizing window (advanced)
+throttleDelay: 99, // the delay on throttle used while scrolling the page (advanced)
+
+
+// Settings that can be overridden on per-element basis, by `data-aos-*` attributes:
+offset: 120, // offset (in px) from the original trigger point
+delay: 0, // values from 0 to 3000, with step 50ms
+duration: 400, // values from 0 to 3000, with step 50ms
+easing: 'ease', // default easing for AOS animations
+once: false, // whether animation should happen only once - while scrolling down
+mirror: false, // whether elements should animate out while scrolling past them
+anchorPlacement: 'top-bottom', // defines which position of the element regarding to window should trigger the animation
+
+});
+</script>

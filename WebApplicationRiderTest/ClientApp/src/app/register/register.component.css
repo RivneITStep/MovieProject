@@ -1,0 +1,75 @@
+.bg{
+    height: 100vh;
+    padding: 20vh 35%;
+    background: #D3CCE3;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #E9E4F0, #D3CCE3);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #E9E4F0, #D3CCE3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.login-form{
+    height: 60vh;
+    background-color: white;
+    border-radius: 15px;
+    -webkit-box-shadow: 5px 5px 15px 5px #000000; 
+    box-shadow: 5px 5px 15px 5px #00000010;
+    display: block;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.title{
+    padding-top: 30%;
+    font-size: 36px;
+    font-weight: 500;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.auth-input{
+    margin-bottom: 25px;
+    width: 55%;
+    font-size: 20px;
+}
+
+.auth-btn{
+    border: none;
+    box-shadow: 5px 5px 15px 5px #00000025;
+    text-transform: uppercase;
+    padding: 10px;
+    font-family: 18px;
+    color: white;
+    font-weight: 600;
+    background: #667db6;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to bottom, #667db6, #0082c8, #0082c8, #667db6);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, #667db6, #0082c8, #0082c8, #667db6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    border-radius: 5px;
+    width: 55%;
+}
+
+@media screen and (max-width: 1200px){
+    .title{
+        font-size: 24px;
+    }
+}
+
+@media screen and (max-width: 1000px){
+    .bg{
+        padding: 20vh 20%;
+    }
+}
+
+@media screen and (max-width: 700px){
+    .login-form{
+        height: 40vh;
+    }
+}
+
+@media screen and (max-width: 400px){
+    .title{
+        font-size: 14px;
+    }
+
+    .bg{
+        padding: 20vh 10%;
+    }
+}

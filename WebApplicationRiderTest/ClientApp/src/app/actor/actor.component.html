@@ -1,0 +1,56 @@
+<div class="background">
+  <div class="upper-block">
+    <div class="actor-photo">
+      <img class="actor-grid-image" src="{{actor.pictureUrl}}" alt="">
+    </div>
+    <div class="actor-info">
+      <p class="actor-name">{{actor.name}} {{actor.surname}}</p>
+      <p class="about">About actor:</p>
+      <hr class="actor-hr">
+      <table class="actor-data">
+        <tr>
+          <th class="actor-th">Country:</th>
+          <td>{{actor.country}}</td>
+        </tr>
+        <tr>
+          <th class="actor-th">Age</th>
+          <td>{{actor.age}}</td>
+        </tr>
+        <tr>
+          <th class="actor-th">Count of films:</th>
+          <td>{{actor.countFilms}}</td>
+        </tr>
+        <tr>
+          <th class="actor-th">Birth year:</th>
+          <td>{{actor.birthYear}}</td>
+        </tr>
+      </table>
+      <div class="admin-add-actor-photo">
+        
+      </div>
+    </div>
+  </div>
+  <div class="middle-block">
+    <p class="desc-title">Description:</p>
+    <hr>
+    <p class="actor-desc">
+      {{actor.description}}
+    </p>
+  </div>
+  <div class="inter-block">
+    <p class="actor-films-header">Films:</p>
+    <div class="films">
+      <div (click)="checkFilm(item.id)" class="film" *ngFor="let item of actor">
+        <img class="actor-film-image" src="{{item.pictureUrl}}" alt="">
+        <p class="film-name">{{item.name}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="lower-block">
+    <p class="actor-photos-title">Actor photos:</p>
+    <hr class="actor-hr">
+    <div class="actor-photos">
+      <img class="gallery-grid-image" src="" alt="">
+    </div>
+  </div>
+</div>

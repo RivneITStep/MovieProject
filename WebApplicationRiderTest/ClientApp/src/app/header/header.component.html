@@ -1,0 +1,19 @@
+<div (scroll)="onWindowScroll($event)" class="nav-menu">
+  <div routerLink="" class="link item">Home</div>
+  <div routerLink="actors" class="link item">Actors</div>
+  <div routerLink="movies" class="link item">Movies</div>
+  <div class="logo">
+    <div class="logo-text">MP</div>
+  </div>
+  <div class="panel item">
+    <div *ngIf="isAdmin" class="admin-item">panel</div>
+  </div>
+  <div class="auth item">
+    <div *ngIf="isLoggedIn" class="user-name">{{user.email}}</div>
+    <div routerLink="login" *ngIf="!isLoggedIn" class="auth-text">Login</div>
+  </div>
+  <div class="auth item">
+    <div routerLink="register" *ngIf="!isLoggedIn" class="auth-text">Register</div>
+    <div (click)="Logout()" *ngIf="isLoggedIn" class="auth-text">Logout</div>
+  </div>
+</div>
