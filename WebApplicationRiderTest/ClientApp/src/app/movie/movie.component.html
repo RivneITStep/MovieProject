@@ -19,7 +19,63 @@
                 <div class="data-title">Budget:</div>
                 <div class="data">{{movie.budget}}$</div>
                 <div class="data-title">Length:</div>
-                <div class="data">{{movie.length}}</div>
+                <div class="data">{{movie.length}}min</div>
+            </div>
+            <div class="trailer">
+                <button (click)="showTrailer()" pButton type="button" label="Watch trailer"></button>
+                <p-dialog header="{{movie.name}} trailer" [(visible)]="display3">
+                    <video controls class="movie-trailer">
+                        <source [src]="movie.trailerUrl">
+                    </video>
+                </p-dialog>
+            </div>
+            <div *ngIf="isAdmin" class="admin-panel">
+                <button (click)="showActorManager()" class="admin-btn p-button-help" pButton type="button" label="Add actor"></button>
+                <p-dialog header="Add actor" [(visible)]="display">
+                    <p-table [value]="movieAvailableActors">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th style="width: 5%;">Id</th>
+                                <th>Photo</th>
+                                <th>Name</th>
+                                <th>Action</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-data>
+                            <tr>
+                                <td>{{data.id}}</td>
+                                <td><img class="movie-img" src="{{data.pictureUrl}}" alt=""></td>
+                                <td>{{data.name}} {{data.surname}}</td>
+                                <td>
+                                    <button (click)="addMovieActor(data.id)" pButton type="button" label="Add"></button>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </p-dialog>
+                <button (click)="showActorManager2()" class="admin-btn p-button-help" pButton type="button" label="Delete actor"></button>
+                <p-dialog header="Delete actor" [(visible)]="display2">
+                    <p-table [value]="movieActors">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th style="width: 5%;">Id</th>
+                                <th>Photo</th>
+                                <th>Name</th>
+                                <th>Action</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-data>
+                            <tr>
+                                <td>{{data.id}}</td>
+                                <td><img class="movie-img" src="{{data.pictureUrl}}" alt=""></td>
+                                <td>{{data.name}} {{data.surname}}</td>
+                                <td>
+                                    <button (click)="deleteMovieActor(data.id)" pButton type="button" label="Delete"></button>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </p-dialog>
             </div>
         </div>
     </div>
@@ -46,6 +102,24 @@
             </div>
         </div>
         <hr *ngIf="hasActors" class="hr-mid">
+        <div class="movie-reviews-title">Reviews:</div>
+        <div class="movie-reviews">
+            <div *ngFor="let data of movieReviews" class="review">
+                <div class="review-user">
+                    <img class="user-img" [src]="getUserImg()">
+                </div>
+                
+                <div class="review-data">
+                    <div class="review-title">{{data.title}}</div>
+                    <div class="review-text">{{data.text}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="movie-review-write">
+            <input [(ngModel)]="review.title" placeholder="Title" type="text" class="movie-review-write-title">
+            <textarea [(ngModel)]="review.text" placeholder="Text" class="movie-review-write-text" cols="30" rows="10"></textarea>
+            <button (click)="sendReview()" class="comment-btn" type="button" pButton label="Comment"></button>
+        </div>
     </div>
 
 </div>

@@ -21,7 +21,9 @@ import { ActorComponent } from './actor/actor.component';
 import { MoviesComponent } from './movies/movies.component';
 import { MovieComponent } from './movie/movie.component';
 import {RatingModule} from 'primeng/rating';
-
+import {ButtonModule} from 'primeng/button';
+import {Table, TableModule} from 'primeng/table';
+import {DialogModule} from 'primeng/dialog';
 
 @NgModule({
   declarations: [							
@@ -39,10 +41,13 @@ import {RatingModule} from 'primeng/rating';
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     BrowserAnimationsModule,
     ToastModule,
+    TableModule,
     NgxSpinnerModule,
     Ng2SearchPipeModule,
     CommonModule,
+    DialogModule,
     HttpClientModule,
+    ButtonModule,
     RatingModule,
     FormsModule,
     RouterModule.forRoot([

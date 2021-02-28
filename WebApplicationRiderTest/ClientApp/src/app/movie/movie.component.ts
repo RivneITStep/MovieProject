@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { User } from 'oidc-client';
 import { MessageService } from 'primeng/api';
 import { ApiService } from '../core/api.service';
 import { ActorModel } from '../models/actor.model';
@@ -13,6 +14,8 @@ import { ActorService } from '../services/actor.service';
 import { MovieService } from '../services/movie.service';
 import { ReviewService } from '../services/review.service';
 import { UserService } from '../services/user.service';
+import jwt_decode from 'jwt-decode';
+import { PhotoService } from '../services/photo.service';
 
 @Component({
   selector: 'app-movie',
@@ -21,15 +24,98 @@ import { UserService } from '../services/user.service';
 })
 export class MovieComponent implements OnInit {
 
-  constructor(private messageService: MessageService, private sanitizer: DomSanitizer, private actorService: ActorService, private reviewService: ReviewService, private activateRoute: ActivatedRoute, private movieService: MovieService, private userService: UserService, private apiService: ApiService) {
+  constructor(private photoService: PhotoService, private messageService: MessageService, private sanitizer: DomSanitizer, private actorService: ActorService, private reviewService: ReviewService, private activateRoute: ActivatedRoute, private movieService: MovieService, private userService: UserService, private apiService: ApiService) {
     this.id = activateRoute.snapshot.params['id'];
   }
 
   id: number;
+  currentUserId: string;
+  isAdmin: boolean;
+  display: boolean = false;
+  display2: boolean = false;
+  display3: boolean = false;
+
+
+  users: UserModel[] = [];
   movie: MovieModel = new MovieModel();
   movieActors: ActorModel[] = [];
+  movieAvailableActors: ActorModel[] = [];
+  movieReviews: ReviewModel[] = [];
   hasActors: boolean;
+  review: ReviewModel = new ReviewModel();
   rate: number;
+
+  showActorManager(){
+    this.display = true;
+  }
+
+  showActorManager2(){
+    this.display2 = true;
+  }
+
+  showTrailer(){
+    this.display3 = true;
+  }
+
+  deleteMovieActor(id: number){
+    this.movieService.deleteMovieActor(this.id, id).subscribe(
+      (data: ApiResult) => {
+        if(data.status == 200){
+          this.movieService.getMovieActors(this.id).subscribe(
+            (data: ActorModel[]) => {
+              this.movieActors = data;
+            }
+          );
+          this.messageService.add({severity:'success', summary:'Notify', detail:'Actor deleted'});
+        }else{
+          this.messageService.add({severity:'error', summary:'Notify', detail:'Server error'});
+        }
+      }
+    );
+  }
+
+  addMovieActor(id: number){
+    this.movieService.addMovieActor(this.id, id).subscribe(
+      (data: ApiResult) => {
+        if(data.status == 200){
+          this.movieService.getMovieAvailableActors(this.id).subscribe(
+            (data: ActorModel[]) => {
+              this.movieAvailableActors = data;
+            }
+          );
+          this.movieService.getMovieActors(this.id).subscribe(
+            (data: ActorModel[]) => {
+              this.movieActors = data;
+            }
+          );
+          this.messageService.add({severity:'success', summary:'Notify', detail:'Actor added to movie'});
+        }else{
+          this.messageService.add({severity:'success', summary:'Notify', detail:'Server error'});
+        }
+      }
+    );
+  }
+
+  sendReview(){
+    if(this.review.text === '' || this.review.title === ''){
+      this.messageService.add({severity:'error', summary:'Notify', detail:'Enter all fields'});
+    }else{
+      this.review.movieId = this.id;
+      this.review.userId = this.currentUserId;
+      this.reviewService.addReview(this.review).subscribe(
+        (data: ApiResult) => {
+          if(data.status == 200){
+            this.messageService.add({severity:'success', summary:'Notify', detail:'Review posted'});
+            this.reviewService.getMovieReviews(this.id).subscribe(
+              (data: ReviewModel[]) => {
+                this.movieReviews = data;
+              }
+            );
+          }
+        } 
+      );
+    }
+  }
 
   rateMovie() {
     this.movieService.rateMovie(this.id, this.rate).subscribe(
@@ -38,11 +124,20 @@ export class MovieComponent implements OnInit {
           this.movieService.getMovie(this.id).subscribe(
             (data: MovieModel) => {
               this.movie = data;
+              
             }
           );
         }
       }
     );
+  }
+
+  getUserName(id: string){
+    return this.users.find(x => x.id === id).email.replace(/@[^@]+$/, '');
+  }
+
+  getUserImg(){
+    return 'https://cdn3.iconfinder.com/data/icons/avatars-round-flat/33/avat-01-512.png';
   }
 
   getImg(url: string){
@@ -68,6 +163,23 @@ export class MovieComponent implements OnInit {
         }
       }
     );
+    this.reviewService.getMovieReviews(this.id).subscribe(
+      (data: ReviewModel[]) => {
+        this.movieReviews = data;
+      }
+    );
+    this.currentUserId = (jwt_decode(localStorage.getItem('token')) as UserModel).id;
+    this.userService.getUsers().subscribe(
+      (data: UserModel[]) => {
+        this.users = data;
+      }
+    );
+    this.movieService.getMovieAvailableActors(this.id).subscribe(
+      (data : ActorModel[]) => {
+        this.movieAvailableActors = data;
+      }
+    );
+    this.isAdmin = this.apiService.isAdmin();
   }
 
 }
