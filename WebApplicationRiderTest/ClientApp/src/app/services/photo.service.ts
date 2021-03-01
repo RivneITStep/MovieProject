@@ -11,14 +11,18 @@ import { ApiResult } from '../models/result.model';
 export class PhotoService {
 
   constructor(private http: HttpClient) { }
-  baseUrl = '/api/photo';
+  baseUrl = '/api/actor';
   
   addActorPhoto(model: PhotoAddModel){
-    return this.http.post<ApiResult>(this.baseUrl + '/actor', model);
+    return this.http.post<ApiResult>(this.baseUrl + '/photos/' + model.actorId, model);
   }
 
-  getActorPhoto(model: PhotoAddModel): Observable<PhotoModel>{
-    return this.http.get<PhotoModel>(this.baseUrl + '/actor/' + model.actorId);
+  getActorPhotos(id: number): Observable<PhotoModel[]>{
+    return this.http.get<PhotoModel[]>(this.baseUrl + '/photos/' + id);
+  }
+
+  deleteActorPhoto(id: number, photoId: number){
+    return this.http.delete<ApiResult>(this.baseUrl + '/photos/' + id + '/' + photoId);
   }
 
 }

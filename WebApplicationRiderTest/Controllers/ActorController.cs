@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using WebApplicationRiderTest.DTO.Actor;
 using WebApplicationRiderTest.DTO.Filters;
 using WebApplicationRiderTest.DTO.Movie;
+using WebApplicationRiderTest.DTO.Photo;
 using WebApplicationRiderTest.DTO.Result;
 using WebApplicationRiderTest.EF;
 using WebApplicationRiderTest.EF.Entities;
@@ -163,6 +164,58 @@ namespace WebApplicationRiderTest.Controllers
             var actor = await _context.actors.SingleOrDefaultAsync(t => t.Id == id);
             var movies = actor.Movies.ToList();
             return _mapper.Map<List<Movie>, List<MovieDTO>>(movies);
+        }
+
+        [HttpGet("photos/{id}")]
+        public async Task<IEnumerable<PhotoDTO>> GetActorPhotos([FromRoute] int id)
+        {
+            var actor = await _context.actors.SingleOrDefaultAsync(t => t.Id == id);
+            var photos = actor.Photos.ToList();
+            return _mapper.Map<List<Photo>, List<PhotoDTO>>(photos);
+        }
+        
+        [HttpPost("photos/{id}")]
+        public async Task<ResultDTO> AddActorPhoto([FromRoute] int id, [FromBody] PhotoDTO model)
+        {
+            try
+            {
+                var actor = await _context.actors.SingleOrDefaultAsync(t => t.Id == id);
+                var photo = _mapper.Map<PhotoDTO, Photo>(model);
+                actor.Photos.Add(photo);
+                await _context.SaveChangesAsync();
+
+                return new ResultDTO
+                {
+                    Status = 200,
+                    Message = "Posted"
+                };
+            }
+            catch (Exception ex)
+            {
+                List<string> temp = new List<string>();
+                temp.Add(ex.Message);
+                return new ResultErrorDTO
+                {
+                    Status = 500,
+                    Message = "Error",
+                    Errors = temp
+                };
+            }
+        }
+
+        [HttpDelete("photos/{id}/{photoId}")]
+        public async Task<ResultDTO> DeleteActorPhoto([FromRoute] int id, [FromRoute] int photoId)
+        {
+            var actor = await _context.actors.SingleOrDefaultAsync(t => t.Id == id);
+            var photo = await _context.photos.SingleOrDefaultAsync(t => t.Id == photoId);
+            actor.Photos.Remove(photo);
+            await _context.SaveChangesAsync();
+
+            return new ResultDTO
+            {
+                Status = 200,
+                Message = "Deleted"
+            };
         }
         
         [HttpPost("{id}/{movieid}")]

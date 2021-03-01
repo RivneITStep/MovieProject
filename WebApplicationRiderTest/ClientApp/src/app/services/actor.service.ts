@@ -39,7 +39,7 @@ export class ActorService {
   }
 
   getActorMovies(id: number): Observable<MovieModel[]>{
-    return this.http.get<MovieModel[]>(this.baseUrl + '/movies');
+    return this.http.get<MovieModel[]>(this.baseUrl + '/movies/' + id);
   }
 
   getFilterList(filter: string){

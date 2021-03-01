@@ -31,6 +31,7 @@ export class MovieComponent implements OnInit {
   id: number;
   currentUserId: string;
   isAdmin: boolean;
+  isLoggedIn: boolean;
   display: boolean = false;
   display2: boolean = false;
   display3: boolean = false;
@@ -180,6 +181,7 @@ export class MovieComponent implements OnInit {
       }
     );
     this.isAdmin = this.apiService.isAdmin();
+    this.isLoggedIn = this.apiService.isLoggedIn();
   }
 
 }

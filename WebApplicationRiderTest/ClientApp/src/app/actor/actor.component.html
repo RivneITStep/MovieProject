@@ -1,56 +1,78 @@
-<div class="background">
-  <div class="upper-block">
-    <div class="actor-photo">
-      <img class="actor-grid-image" src="{{actor.pictureUrl}}" alt="">
+<div class="bg">
+  <div class="top">
+    <div class="media">
+      <img class="actor-img" [src]="actor.pictureUrl">
     </div>
-    <div class="actor-info">
-      <p class="actor-name">{{actor.name}} {{actor.surname}}</p>
-      <p class="about">About actor:</p>
-      <hr class="actor-hr">
-      <table class="actor-data">
-        <tr>
-          <th class="actor-th">Country:</th>
-          <td>{{actor.country}}</td>
-        </tr>
-        <tr>
-          <th class="actor-th">Age</th>
-          <td>{{actor.age}}</td>
-        </tr>
-        <tr>
-          <th class="actor-th">Count of films:</th>
-          <td>{{actor.countFilms}}</td>
-        </tr>
-        <tr>
-          <th class="actor-th">Birth year:</th>
-          <td>{{actor.birthYear}}</td>
-        </tr>
-      </table>
-      <div class="admin-add-actor-photo">
-        
+    <div class="info">
+      <div class="actor-name">{{actor.name}} {{actor.surname}}</div>
+      <hr class="hr-white">
+      <div class="actor-data">
+        <div class="data-title">Country:</div>
+        <div class="data">{{actor.country}}</div>
+        <div class="data-title">Age:</div>
+        <div class="data">{{actor.age}}</div>
+        <div class="data-title">Birth year:</div>
+        <div class="data">{{actor.birthYear}}</div>
+        <div class="data-title">Films count:</div>
+        <div class="data">{{actor.countFilms}}</div>
+        <div *ngIf="isAdmin" class="admin-panel">
+          <button (click)="showPhotoAddManager()" pButton type="button" class="p-button-help photo-btn"
+            label="Add photo"></button>
+          <p-dialog header="Photo delete manager" [(visible)]="display2">
+            <div class="actor-add-photo">
+              <input placeholder="Photo url" pInput type="text" class="url-input"
+                [(ngModel)]="photoAddActor.pictureUrl" />
+              <button (click)="addActorPhoto()" pButton type="button" label="Post" class="p-button-info"></button>
+            </div>
+          </p-dialog>
+          <button (click)="showPhotoDeleteManager()" pButton type="button" class="p-button-help"
+            label="Delete photo"></button>
+          <p-dialog header="Photo add manager" [(visible)]="display">
+            <p-table [value]="actorPhotos">
+              <ng-template pTemplate="header">
+                <tr>
+                  <th style="width: 5%;">Id</th>
+                  <th>Photo</th>
+                  <th>Action</th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-data>
+                <tr>
+                  <td>{{data.id}}</td>
+                  <td><img class="actor-data-img" src="{{data.pictureUrl}}" alt=""></td>
+                  <td>
+                    <button (click)="deleteActorPhoto(data.id)" pButton type="button" label="Delete"></button>
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </p-dialog>
+        </div>
       </div>
+      <hr class="hr-white">
     </div>
   </div>
-  <div class="middle-block">
-    <p class="desc-title">Description:</p>
-    <hr>
-    <p class="actor-desc">
-      {{actor.description}}
-    </p>
-  </div>
-  <div class="inter-block">
-    <p class="actor-films-header">Films:</p>
-    <div class="films">
-      <div (click)="checkFilm(item.id)" class="film" *ngFor="let item of actor">
-        <img class="actor-film-image" src="{{item.pictureUrl}}" alt="">
-        <p class="film-name">{{item.name}}</p>
-      </div>
-    </div>
-  </div>
-  <div class="lower-block">
-    <p class="actor-photos-title">Actor photos:</p>
-    <hr class="actor-hr">
-    <div class="actor-photos">
-      <img class="gallery-grid-image" src="" alt="">
-    </div>
+  <div class="mid">
+    <div class="actors-title">Description:</div>
+    <hr class="hr-white">
+    <div class="desc">{{actor.description}}</div>
+    <div class="actors-title">{{actor.name}}`s photos:</div>
+    <hr class="hr-white">
+    <p-carousel [numScroll]="1" [value]="actorPhotos">
+      <ng-template let-data pTemplate="item">
+        <div class="actor-carousel">
+          <img class="actor-carousel-img" [src]="data.pictureUrl">
+        </div>
+      </ng-template>
+    </p-carousel>
+    <div class="actors-title">{{actor.name}}`s movies:</div>
+    <hr class="hr-white">
+    <p-carousel [numVisible]="4" [numScroll]="4" [value]="actorMovies" [responsiveOptions]="responsiveOptions">
+      <ng-template let-data pTemplate="item">
+        <div class="actor-carousel">
+          <img class="actor-carousel-img-movie" [src]="getImg(data.pictureUrl)">
+        </div>
+      </ng-template>
+    </p-carousel>
   </div>
 </div>

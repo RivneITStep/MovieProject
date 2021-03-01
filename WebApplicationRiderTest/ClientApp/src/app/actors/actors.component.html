@@ -10,7 +10,7 @@
     </div>
   </div>
   <div class="actors-block">
-    <div *ngFor="let data of actors | filter:search" class="actor">
+    <div data-aos="fade out" data-aos-duration="1000" *ngFor="let data of actors | filter:search" class="actor">
       <img routerLink="{{data.id}}" class="actor-img" [src]="data.pictureUrl">
       <div class="actor-name">{{data.name}} {{data.surname}}</div>
     </div>

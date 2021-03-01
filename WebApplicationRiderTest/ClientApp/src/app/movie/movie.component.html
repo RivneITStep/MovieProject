@@ -115,7 +115,7 @@
                 </div>
             </div>
         </div>
-        <div class="movie-review-write">
+        <div *ngIf="isLoggedIn" class="movie-review-write">
             <input [(ngModel)]="review.title" placeholder="Title" type="text" class="movie-review-write-title">
             <textarea [(ngModel)]="review.text" placeholder="Text" class="movie-review-write-text" cols="30" rows="10"></textarea>
             <button (click)="sendReview()" class="comment-btn" type="button" pButton label="Comment"></button>

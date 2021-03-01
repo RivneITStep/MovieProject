@@ -23,6 +23,7 @@ import { MovieComponent } from './movie/movie.component';
 import {RatingModule} from 'primeng/rating';
 import {ButtonModule} from 'primeng/button';
 import {Table, TableModule} from 'primeng/table';
+import {Carousel, CarouselModule} from 'primeng/carousel';
 import {DialogModule} from 'primeng/dialog';
 
 @NgModule({
@@ -48,6 +49,7 @@ import {DialogModule} from 'primeng/dialog';
     DialogModule,
     HttpClientModule,
     ButtonModule,
+    CarouselModule,
     RatingModule,
     FormsModule,
     RouterModule.forRoot([
