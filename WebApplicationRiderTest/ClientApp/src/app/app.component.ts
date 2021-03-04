@@ -2,6 +2,8 @@ import { AotSummaryResolver } from '@angular/compiler';
 import { Component } from '@angular/core';
 import AOS from 'aos';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ConfirmationService } from 'primeng/api';
+import { ApiService } from './core/api.service';
 
 @Component({
   selector: 'app-root',
@@ -9,10 +11,12 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class AppComponent {
   title = 'app';
+  isAdmin: boolean;
 
-  public constructor(private spinner: NgxSpinnerService){ }
+  public constructor(private spinner: NgxSpinnerService, private apiService: ApiService){ }
 
   ngOnInit(){
     AOS.init();
+    this.isAdmin = this.apiService.isAdmin();
   }
 }

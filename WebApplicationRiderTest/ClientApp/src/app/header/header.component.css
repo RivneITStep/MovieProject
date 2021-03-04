@@ -20,6 +20,10 @@
     outline: none;
 }
 
+.admin-item{
+    cursor: pointer;
+}
+
 .logo{
     text-align: center;
 }
@@ -42,6 +46,29 @@
     transition-delay: .25s;
     background: #414770;
     position: fixed;
+}
+
+.add{
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.manager-input{
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.manager-title{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 36px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.form{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 15px;
 }
 
 @media screen and (max-width: 450px){

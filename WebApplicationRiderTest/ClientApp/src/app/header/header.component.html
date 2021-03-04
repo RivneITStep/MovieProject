@@ -6,7 +6,7 @@
     <div class="logo-text">MP</div>
   </div>
   <div class="panel item">
-    <div *ngIf="isAdmin" class="admin-item">panel</div>
+    <div *ngIf="isAdmin" (click)="showAdminPanel()" class="admin-item">panel</div>
   </div>
   <div class="auth item">
     <div *ngIf="isLoggedIn" class="user-name">{{user.email}}</div>
@@ -17,3 +17,42 @@
     <div (click)="Logout()" *ngIf="isLoggedIn" class="auth-text">Logout</div>
   </div>
 </div>
+
+<p-dialog header="Admin panel" [(visible)]="display">
+  <div class="form">
+    <div class="actor-manager">
+      <div class="add">
+        <div class="manager-title">Add actor</div>
+        <input [(ngModel)]="actorAdd.name" type="text" class="p-inputtext-lg manager-input" placeholder="Name" pInputText />
+        <input [(ngModel)]="actorAdd.surname" type="text" class="p-inputtext-lg manager-input" placeholder="Surname" pInputText />
+        <input [(ngModel)]="actorAdd.country" type="text" class="p-inputtext-lg manager-input" placeholder="Country" pInputText />
+        <textarea [(ngModel)]="actorAdd.description" placeholder="Description" class="manager-input" cols="30" rows="5"></textarea>
+        <input [(ngModel)]="actorAdd.age" type="number" class="p-inputtext-lg manager-input" placeholder="Age" pInputText />
+        <input [(ngModel)]="actorAdd.birthYear" type="number" class="p-inputtext-lg manager-input" placeholder="Birth year" pInputText />
+        <input [(ngModel)]="actorAdd.countFilms" type="number" class="p-inputtext-lg manager-input" placeholder="Count of films" pInputText />
+        <input [(ngModel)]="actorAdd.pictureUrl" type="text" class="p-inputtext-lg manager-input" placeholder="Birth year" pInputText />
+        <button (click)="addActor()" pButton type="button" label="Post"></button>
+      </div>
+    </div>
+    <div class="movie-manager">
+      <div class="add">
+        <div class="manager-title">Add movie</div>
+        <input [(ngModel)]="movieAdd.name" type="text" class="p-inputtext-lg manager-input" placeholder="Name" pInputText />
+        <input [(ngModel)]="movieAdd.originalName" type="text" class="p-inputtext-lg manager-input" placeholder="Original name" pInputText />
+        <textarea [(ngModel)]="movieAdd.description" placeholder="Description" class="manager-input" cols="30" rows="5"></textarea>
+        <input [(ngModel)]="movieAdd.year" type="number" class="p-inputtext-lg manager-input" placeholder="Year" pInputText />
+        <input [(ngModel)]="movieAdd.country" type="text" class="p-inputtext-lg manager-input" placeholder="Country" pInputText />
+        <input [(ngModel)]="movieAdd.director" type="text" class="p-inputtext-lg manager-input" placeholder="Director" pInputText />
+        <input [(ngModel)]="movieAdd.operator" type="text" class="p-inputtext-lg manager-input" placeholder="Operator" pInputText />
+        <input [(ngModel)]="movieAdd.composer" type="text" class="p-inputtext-lg manager-input" placeholder="Composer" pInputText />
+        <input [(ngModel)]="movieAdd.genre" type="text" class="p-inputtext-lg manager-input" placeholder="Genre" pInputText />
+        <input [(ngModel)]="movieAdd.budget" type="number" class="p-inputtext-lg manager-input" placeholder="Budget" pInputText />
+        <input [(ngModel)]="movieAdd.length" type="number" class="p-inputtext-lg manager-input" placeholder="Length" pInputText />
+        <input [(ngModel)]="movieAdd.countViews" type="number" class="p-inputtext-lg manager-input" placeholder="Count of views" pInputText />
+        <input [(ngModel)]="movieAdd.pictureUrl" type="text" class="p-inputtext-lg manager-input" placeholder="Picture url" pInputText />
+        <input [(ngModel)]="movieAdd.trailerUrl" type="text" class="p-inputtext-lg manager-input" placeholder="Trailer url" pInputText />
+        <button (click)="addMovie()" pButton type="button" label="Post"></button>
+      </div>
+    </div>
+  </div>
+</p-dialog>

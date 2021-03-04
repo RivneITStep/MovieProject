@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './login/login.component';
 import {ToastModule} from 'primeng/toast';
-import { FilterService, MessageService } from 'primeng/api';
+import { ConfirmationService, FilterService, MessageService } from 'primeng/api';
 import { RegisterComponent } from './register/register.component';
 import { NoLoginGuard } from './guards/nologin.guard';
 import { ActorsComponent } from './actors/actors.component';
@@ -25,9 +25,10 @@ import {ButtonModule} from 'primeng/button';
 import {Table, TableModule} from 'primeng/table';
 import {Carousel, CarouselModule} from 'primeng/carousel';
 import {DialogModule} from 'primeng/dialog';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
 
 @NgModule({
-  declarations: [							
+  declarations: [								
     AppComponent,
     HomeComponent,
       HeaderComponent,
@@ -47,6 +48,7 @@ import {DialogModule} from 'primeng/dialog';
     Ng2SearchPipeModule,
     CommonModule,
     DialogModule,
+    ConfirmDialogModule,
     HttpClientModule,
     ButtonModule,
     CarouselModule,
@@ -65,7 +67,8 @@ import {DialogModule} from 'primeng/dialog';
   providers: [
     MessageService,
     NgxSpinnerService,
-    FilterService
+    FilterService,
+    ConfirmationService
   ],
   bootstrap: [AppComponent]
 })

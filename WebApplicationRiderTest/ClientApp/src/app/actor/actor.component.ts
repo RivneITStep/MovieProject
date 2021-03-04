@@ -2,7 +2,7 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { ApiService } from '../core/api.service';
 import { ActorModel } from '../models/actor.model';
 import { MovieModel } from '../models/movie.model';
@@ -22,7 +22,7 @@ export class ActorComponent implements OnInit {
 
   isAdmin: boolean;
 
-  constructor(private sanitizer: DomSanitizer, private messageService: MessageService, private router: Router, private photoService: PhotoService, private apiService: ApiService, private activateRoute: ActivatedRoute, private actorService: ActorService, private movieService: MovieService) {
+  constructor(private confirmationService: ConfirmationService, private sanitizer: DomSanitizer, private messageService: MessageService, private router: Router, private photoService: PhotoService, private apiService: ApiService, private activateRoute: ActivatedRoute, private actorService: ActorService, private movieService: MovieService) {
     this.id = activateRoute.snapshot.params['id'];
     this.isAdmin = this.apiService.isAdmin();
     this.responsiveOptions = [
@@ -54,6 +54,28 @@ export class ActorComponent implements OnInit {
   actorMovies: MovieModel[] = [];
   photoAddActor: PhotoAddModel = new PhotoAddModel();
 
+  deleteActor(){
+    this.actorService.deleteActor(this.id).subscribe(
+      (data: ApiResult) => {
+        if(data.status == 200){
+          this.messageService.add({ severity: 'success', summary: 'Notify', detail: 'Actor deleted' });
+          
+        }else{
+          this.messageService.add({ severity: 'error', summary: 'Notify', detail: 'Server error' });
+        }
+      }
+    );
+  }
+
+  confirmDelete() {
+    this.confirmationService.confirm({
+      message: 'Are you sure that you want to delete this actor?',
+      accept: () => {
+        this.deleteActor();
+        this.router.navigate['/actors'];
+      }
+    });
+  }
 
   addActorPhoto() {
     if (this.photoAddActor.pictureUrl === '') {
