@@ -59,7 +59,7 @@ export class ActorComponent implements OnInit {
       (data: ApiResult) => {
         if(data.status == 200){
           this.messageService.add({ severity: 'success', summary: 'Notify', detail: 'Actor deleted' });
-          
+          this.router.navigate(['/actors']);
         }else{
           this.messageService.add({ severity: 'error', summary: 'Notify', detail: 'Server error' });
         }
@@ -72,7 +72,7 @@ export class ActorComponent implements OnInit {
       message: 'Are you sure that you want to delete this actor?',
       accept: () => {
         this.deleteActor();
-        this.router.navigate['/actors'];
+        
       }
     });
   }

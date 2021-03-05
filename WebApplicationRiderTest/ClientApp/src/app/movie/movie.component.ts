@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'oidc-client';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { ApiService } from '../core/api.service';
 import { ActorModel } from '../models/actor.model';
 import { MovieModel } from '../models/movie.model';
@@ -16,6 +16,8 @@ import { ReviewService } from '../services/review.service';
 import { UserService } from '../services/user.service';
 import jwt_decode from 'jwt-decode';
 import { PhotoService } from '../services/photo.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { EditableColumn } from 'primeng/table';
 
 @Component({
   selector: 'app-movie',
@@ -24,7 +26,7 @@ import { PhotoService } from '../services/photo.service';
 })
 export class MovieComponent implements OnInit {
 
-  constructor(private photoService: PhotoService, private messageService: MessageService, private sanitizer: DomSanitizer, private actorService: ActorService, private reviewService: ReviewService, private activateRoute: ActivatedRoute, private movieService: MovieService, private userService: UserService, private apiService: ApiService) {
+  constructor(private router: Router, private confirmationService: ConfirmationService ,private photoService: PhotoService, private messageService: MessageService, private sanitizer: DomSanitizer, private actorService: ActorService, private reviewService: ReviewService, private activateRoute: ActivatedRoute, private movieService: MovieService, private userService: UserService, private apiService: ApiService) {
     this.id = activateRoute.snapshot.params['id'];
   }
 
@@ -35,16 +37,39 @@ export class MovieComponent implements OnInit {
   display: boolean = false;
   display2: boolean = false;
   display3: boolean = false;
-
+  display4: boolean = false;
 
   users: UserModel[] = [];
   movie: MovieModel = new MovieModel();
+  movieEdit: MovieModel = new MovieModel();
   movieActors: ActorModel[] = [];
   movieAvailableActors: ActorModel[] = [];
   movieReviews: ReviewModel[] = [];
   hasActors: boolean;
   review: ReviewModel = new ReviewModel();
   rate: number;
+
+  confirmDelete() {
+    this.confirmationService.confirm({
+        message: 'Are you sure that you want to delete this movie?',
+        accept: () => {
+            this.deleteMovie();
+        }
+    });
+  }
+
+  deleteMovie(){
+    this.movieService.deleteMovie(this.id).subscribe(
+      (data: ApiResult) => {
+        if(data.status == 200){
+          this.messageService.add({severity: 'success', summary: 'Notify', detail: 'Movie deleted'});
+          this.router.navigate(['/movies']);
+        }else{
+          this.messageService.add({severity: 'error', summary: 'Notify', detail: 'Server error'});
+        }
+      }
+    );
+  }
 
   showActorManager(){
     this.display = true;
@@ -56,6 +81,32 @@ export class MovieComponent implements OnInit {
 
   showTrailer(){
     this.display3 = true;
+  }
+
+  showEditMovie(){
+    this.movieService.getMovie(this.id).subscribe(
+      (data: MovieModel) => {
+        this.movieEdit = data;
+      }
+    );
+    this.display4 = true;
+  }
+
+  editMovie(){
+    this.movieService.editMovie(this.movieEdit).subscribe(
+      (data: ApiResult) => {
+        if(data.status == 200){
+          this.messageService.add({ severity: 'success', summary: 'Notify', detail: 'Movie edited' });
+          this.movieService.getMovie(this.id).subscribe(
+            (data: MovieModel) => {
+              this.movie = data;
+            }
+          );
+        }else{
+          this.messageService.add({ severity: 'error', summary: 'Notify', detail: 'Server error' });
+        }
+      }
+    );
   }
 
   deleteMovieActor(id: number){

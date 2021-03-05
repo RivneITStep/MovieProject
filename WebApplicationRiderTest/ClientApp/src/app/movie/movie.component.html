@@ -30,7 +30,8 @@
                 </p-dialog>
             </div>
             <div *ngIf="isAdmin" class="admin-panel">
-                <button (click)="showActorManager()" class="admin-btn p-button-help" pButton type="button" label="Add actor"></button>
+                <button (click)="showActorManager()" class="admin-btn p-button-help" pButton type="button"
+                    label="Add actor"></button>
                 <p-dialog header="Add actor" [(visible)]="display">
                     <p-table [value]="movieAvailableActors">
                         <ng-template pTemplate="header">
@@ -53,7 +54,8 @@
                         </ng-template>
                     </p-table>
                 </p-dialog>
-                <button (click)="showActorManager2()" class="admin-btn p-button-help" pButton type="button" label="Delete actor"></button>
+                <button (click)="showActorManager2()" class="admin-btn p-button-help" pButton type="button"
+                    label="Delete actor"></button>
                 <p-dialog header="Delete actor" [(visible)]="display2">
                     <p-table [value]="movieActors">
                         <ng-template pTemplate="header">
@@ -70,12 +72,31 @@
                                 <td><img class="movie-img" src="{{data.pictureUrl}}" alt=""></td>
                                 <td>{{data.name}} {{data.surname}}</td>
                                 <td>
-                                    <button (click)="deleteMovieActor(data.id)" pButton type="button" label="Delete"></button>
+                                    <button (click)="deleteMovieActor(data.id)" pButton type="button"
+                                        label="Delete"></button>
                                 </td>
                             </tr>
                         </ng-template>
                     </p-table>
                 </p-dialog>
+                <button (click)="showEditMovie()" pButton type="button" class="p-button-help admin-btn" label="Edit movie"></button>
+                <p-dialog header="Edit movie" [(visible)]="display4">
+                    <div class="edit">
+                        <input class="edit-input" type="text" pInput [(ngModel)]="movieEdit.name" placeholder="Name">
+                        <input class="edit-input" type="text" pInput [(ngModel)]="movieEdit.originalName" placeholder="Original name">
+                        <input class="edit-input" type="number" pInput [(ngModel)]="movieEdit.year" placeholder="Year">
+                        <input class="edit-input" type="text" pInput [(ngModel)]="movieEdit.genre" placeholder="Genre">
+                        <input class="edit-input" type="text" pInput [(ngModel)]="movieEdit.director" placeholder="Director">
+                        <input class="edit-input" type="number" pInput [(ngModel)]="movieEdit.budget" placeholder="Budget">
+                        <div class="url-input">
+                            <img class="edit-img" [src]="movieEdit.pictureUrl">
+                            <input class="edit-input" type="text" pInput [(ngModel)]="movieEdit.pictureUrl" placeholder="Picture url">
+                        </div>
+                        <button (click)="editMovie()" pButton type="button" label="Edit"></button>
+                    </div>
+                </p-dialog>
+                <button (click)="confirmDelete()" pButton type="button" class="p-button-danger admin-btn" label="Delete movie"></button>
+
             </div>
         </div>
     </div>
@@ -88,7 +109,7 @@
                 <div class="rating-text">{{movie.rating.toFixed(2)}}</div>
             </div>
             <div class="rating">
-                
+
             </div>
         </div>
         <hr class="hr-mid">
@@ -108,7 +129,7 @@
                 <div class="review-user">
                     <img class="user-img" [src]="getUserImg()">
                 </div>
-                
+
                 <div class="review-data">
                     <div class="review-title">{{data.title}}</div>
                     <div class="review-text">{{data.text}}</div>
@@ -117,7 +138,8 @@
         </div>
         <div *ngIf="isLoggedIn" class="movie-review-write">
             <input [(ngModel)]="review.title" placeholder="Title" type="text" class="movie-review-write-title">
-            <textarea [(ngModel)]="review.text" placeholder="Text" class="movie-review-write-text" cols="30" rows="10"></textarea>
+            <textarea [(ngModel)]="review.text" placeholder="Text" class="movie-review-write-text" cols="30"
+                rows="10"></textarea>
             <button (click)="sendReview()" class="comment-btn" type="button" pButton label="Comment"></button>
         </div>
     </div>
