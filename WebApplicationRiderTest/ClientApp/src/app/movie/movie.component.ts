@@ -22,7 +22,7 @@ import { EditableColumn } from 'primeng/table';
 @Component({
   selector: 'app-movie',
   templateUrl: './movie.component.html',
-  styleUrls: ['./movie.component.css']
+  styleUrls: ['./movie.component.css','./movie.media.css']
 })
 export class MovieComponent implements OnInit {
 

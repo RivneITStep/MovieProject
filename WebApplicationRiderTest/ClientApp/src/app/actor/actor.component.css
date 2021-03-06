@@ -28,7 +28,8 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     row-gap: 25px;
-    margin-top: 50px;
+    margin-top: 25px;
+    margin-bottom: 25px;
 }
 
 .data-title{
@@ -55,6 +56,7 @@
 
 .photo-btn{
     margin-right: 10px;
+    margin-top: 5px;
 }
 
 .url-input{
@@ -98,4 +100,21 @@
     border-radius: 5px;
     padding: 5px;
     margin: 0 auto;
+}
+
+.edit{
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.actor-input{
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.actor-edit-img{
+    max-width: 100%;
+    object-fit: cover;
+    width: 300px;
+    height: 400px;
 }

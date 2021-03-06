@@ -1,0 +1,25 @@
+@media screen and (max-width: 1250px){
+    .data, .data-title{
+        font-size: 18px;
+    }
+
+    .actor-name{
+        font-size: 36px;
+    }
+}
+
+@media screen and (max-width: 900px){
+    .top{
+        grid-template-columns: 1fr;
+    }
+    
+    .actor-img{
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 5px;
+    }
+
+    .actor-name{
+        text-align: center;
+    }
+}

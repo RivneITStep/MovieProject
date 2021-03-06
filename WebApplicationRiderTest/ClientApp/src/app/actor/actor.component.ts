@@ -16,7 +16,7 @@ import { PhotoService } from '../services/photo.service';
 @Component({
   selector: 'app-actor',
   templateUrl: './actor.component.html',
-  styleUrls: ['./actor.component.css']
+  styleUrls: ['./actor.component.css','./actor.media.css']
 })
 export class ActorComponent implements OnInit {
 
@@ -46,13 +46,34 @@ export class ActorComponent implements OnInit {
   id: number;
   thisUrl: string;
   actor: ActorModel = new ActorModel();
+  actorEdit: ActorModel = new ActorModel();
+
   display: boolean = false;
   display2: boolean = false;
+  display3: boolean = false;
   responsiveOptions: any;
   availableMovies: MovieModel[] = [];
   actorPhotos: PhotoModel[] = [];
   actorMovies: MovieModel[] = [];
   photoAddActor: PhotoAddModel = new PhotoAddModel();
+
+  editActor(){
+    this.actorService.editActor(this.actorEdit).subscribe(
+      (data: ApiResult) => {
+        if(data.status == 200){
+          this.actorService.getActor(this.id).subscribe(
+            (data: ActorModel) => {
+              this.actor = data;
+            }
+          );
+        }
+      }
+    );
+  }
+
+  showEdit(){
+    this.display3 = true;
+  }
 
   deleteActor(){
     this.actorService.deleteActor(this.id).subscribe(
@@ -146,6 +167,11 @@ export class ActorComponent implements OnInit {
     this.actorService.getActorMovies(this.id).subscribe(
       (data: MovieModel[]) => {
         this.actorMovies = data;
+      }
+    );
+    this.actorService.getActor(this.id).subscribe(
+      (data: ActorModel) => {
+        this.actorEdit = data;
       }
     );
 

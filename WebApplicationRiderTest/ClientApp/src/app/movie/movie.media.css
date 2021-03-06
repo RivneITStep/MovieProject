@@ -1,0 +1,71 @@
+@media screen and (max-width: 1250px){
+    .data, .data-title{
+        font-size: 18px;
+    }
+
+    .movie-name{
+        font-size: 36px;
+    }
+
+    .movie-original-name{
+        font-size: 20px;
+    }
+}
+
+@media screen and (max-width: 1000px){
+    .movie-actors{
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media screen and (max-width: 900px){
+    .top{
+        grid-template-columns: 1fr;
+    }
+
+    .movie-img{
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .movie-name, .movie-original-name{
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 650px){
+    .user-img{
+        width: 50px;
+        height: 50px;
+    }
+
+    .movie-actors{
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .review{
+        column-gap: 5px;
+    }
+
+    .review-title{
+        font-size: 18px;
+    }
+
+    .movie-review-write-title{
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 450px){
+    .desc{
+        font-size: 18px;
+    }
+
+    .movie-actors{
+        grid-template-columns: 1fr;
+    }
+
+    .desc-title, .movie-reviews-title, .movie-actors-title{
+        font-size: 24px;
+    }
+}
