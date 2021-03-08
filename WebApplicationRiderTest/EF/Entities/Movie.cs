@@ -23,6 +23,7 @@ namespace WebApplicationRiderTest.EF.Entities
         public string PictureUrl { get; set; }
         public string TrailerUrl { get; set; }
         public float Rating { get; set; }
+        public bool HasVideo { get; set; }
         public virtual ICollection<Actor> Actors { get; set; }
         public virtual ICollection<Review> Reviews { get; set; } 
         public virtual ICollection<User> Users { get; set; }

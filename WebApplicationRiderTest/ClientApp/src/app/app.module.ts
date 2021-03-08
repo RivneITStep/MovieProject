@@ -26,9 +26,11 @@ import {Table, TableModule} from 'primeng/table';
 import {Carousel, CarouselModule} from 'primeng/carousel';
 import {DialogModule} from 'primeng/dialog';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import { ProfileComponent } from './profile/profile.component';
+import { NgxFileDropModule } from 'ngx-file-drop';
 
 @NgModule({
-  declarations: [								
+  declarations: [									
     AppComponent,
     HomeComponent,
       HeaderComponent,
@@ -37,7 +39,8 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
       ActorsComponent,
       ActorComponent,
       MoviesComponent,
-      MovieComponent
+      MovieComponent,
+      ProfileComponent
    ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -53,6 +56,7 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
     ButtonModule,
     CarouselModule,
     RatingModule,
+    NgxFileDropModule,
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -61,7 +65,8 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
       { path: 'actors', component: ActorsComponent},
       { path: 'actors/:id', component: ActorComponent},
       { path: 'movies', component: MoviesComponent},
-      { path: 'movies/:id', component: MovieComponent}
+      { path: 'movies/:id', component: MovieComponent},
+      { path: 'profile', component: ProfileComponent }
     ])
   ],
   providers: [

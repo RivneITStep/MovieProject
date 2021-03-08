@@ -1,13 +1,12 @@
 .bg{
     height: 100vh;
-    padding: 20vh 35%;
+    padding: 100px 35%;
     background: #D3CCE3;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #E9E4F0, #D3CCE3);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #E9E4F0, #D3CCE3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .login-form{
-    height: 60vh;
     background-color: white;
     border-radius: 15px;
     -webkit-box-shadow: 5px 5px 15px 5px #000000; 
@@ -44,6 +43,7 @@
     background: linear-gradient(to bottom, #667db6, #0082c8, #0082c8, #667db6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     border-radius: 5px;
     width: 55%;
+    margin-bottom: 50px;
 }
 
 @media screen and (max-width: 1200px){

@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -9,10 +10,12 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using WebApplicationRiderTest.EF;
 using WebApplicationRiderTest.EF.Entities;
+using WebApplicationRiderTest.Helper;
 using WebApplicationRiderTest.Interfaces;
 using WebApplicationRiderTest.MappingProfiles;
 using WebApplicationRiderTest.Services;
@@ -101,7 +104,13 @@ namespace WebApplicationRiderTest
             }
 
             app.UseHttpsRedirection();
+            app.UseDefaultFiles();
             app.UseStaticFiles();
+            app.UseFileServer(
+                new FileServerOptions()
+                {
+                    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot"))
+                });
             if (!env.IsDevelopment())
             {
                 app.UseSpaStaticFiles();
@@ -111,6 +120,8 @@ namespace WebApplicationRiderTest
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseSwagger();
+            
+            SeederDatabase.SeedData(app.ApplicationServices, env, Configuration);
             app.UseSwaggerUI(options =>
             {
                 options.SwaggerEndpoint("/swagger/v1/swagger.json","Swagger API");

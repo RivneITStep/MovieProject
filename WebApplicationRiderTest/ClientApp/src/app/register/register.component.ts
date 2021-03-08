@@ -17,7 +17,7 @@ export class RegisterComponent implements OnInit {
   user: RegisterModel = new RegisterModel();
 
   Register(){
-    if(this.user.email == null || this.user.password == null){
+    if(this.user.email == null || this.user.password == null || this.user.country == null || this.user.gender == null || this.user.age == null){
       this.messageService.add({severity:'error', summary:'Notify', detail:'Some fields are empty'});
     }else if(this.confirm == null){
       this.messageService.add({severity:'error', summary:'Notify', detail:'Please confirm password'});

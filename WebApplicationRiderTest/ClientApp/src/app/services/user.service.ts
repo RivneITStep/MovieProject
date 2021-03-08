@@ -37,4 +37,12 @@ export class UserService {
     return this.http.post<ApiResult>(this.baseUrl + '/editUser/' + id, model);
   }
 
+  getUserImg(id: string){
+    return this.http.get(this.baseUrl + '/user/image/' + id);
+  }
+
+  addUserImg(id: string, form: FormData){
+    return this.http.post(this.baseUrl + '/upload/image/' + id, form);
+  }
+
 }

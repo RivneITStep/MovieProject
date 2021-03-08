@@ -1,8 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Net.Http.Headers;
+using System.Net.Mime;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -21,12 +26,14 @@ namespace WebApplicationRiderTest.Controllers
         private readonly EFContext _context;
         private readonly UserManager<User> _userManager;
         private readonly IMapper _mapper;
+        private IHostingEnvironment _env;
 
-        public UserManagerController(EFContext context, UserManager<User> userManager, IMapper mapper)
+        public UserManagerController(EFContext context, UserManager<User> userManager, IMapper mapper, IHostingEnvironment env)
         {
             _context = context;
             _userManager = userManager;
             _mapper = mapper;
+            _env = env;
         }
 
         /// <summary>
@@ -139,10 +146,10 @@ namespace WebApplicationRiderTest.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost("editUser/{id}")]
-        public async Task<ResultDTO> EditUser([FromRoute] string id, [FromBody] UserDTO model)
+        public async Task<ResultDTO> EditUser([FromRoute] string id, [FromBody] UserEditDTO model)
         {
             var user = await _context.Users
-                .SingleOrDefaultAsync(t => t.Id == model.Id);
+                .SingleOrDefaultAsync(t => t.Id == id);
             _mapper.Map(model, user);
             await _context.SaveChangesAsync();
             return new ResultDTO
@@ -150,6 +157,81 @@ namespace WebApplicationRiderTest.Controllers
                 Status = 200,
                 Message = "Edited"
             };
+        }
+
+        [HttpGet("user/image/{id}")]
+        public async Task<string> GetUserImage([FromRoute]string id)
+        {
+            var user = await _context.Users.SingleOrDefaultAsync(t => t.Id == id);
+            string filepath = _env.WebRootPath + @"\Images\" + user.PictureUrl;
+            var file = Image.FromFile(filepath);
+            using (MemoryStream m = new MemoryStream())
+            {
+                file.Save(m, file.RawFormat);
+                byte[] imageBytes = m.ToArray();
+
+                // Convert byte[] to Base64 String
+                string base64String = Convert.ToBase64String(imageBytes);
+                return base64String;
+            }
+        }
+        
+        [HttpPost("upload/image/{id}"), DisableRequestSizeLimit]
+        public async Task<ResultDTO> Upload(string id)
+        {
+            try
+            {
+                var user = await _context.Users.SingleOrDefaultAsync(t => t.Id == id);
+                var file = Request.Form.Files[0];
+                var folderName = Path.Combine("wwwroot", "Images");
+                var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+                if (file.Length > 0)
+                {
+                    var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+
+                    var ext = Path.GetExtension(fileName);
+                    var newFileName = Guid.NewGuid().ToString() + ext;
+                    if (user.PictureUrl != null)
+                    {
+                        var pathToDelete = Path.Combine(pathToSave, user.PictureUrl);
+                        if (System.IO.File.Exists(pathToDelete))
+                        { 
+                            System.IO.File.Delete(pathToDelete);
+                        } 
+                    }
+                    
+                    user.PictureUrl = newFileName;
+                    var fullPath = Path.Combine(pathToSave, newFileName);
+                    using (var stream = new FileStream(fullPath, FileMode.Create))
+                    {
+                        file.CopyTo(stream);
+                    }
+
+                    await _context.SaveChangesAsync();
+                    
+                    return new ResultDTO
+                    {
+                        Status = 200,
+                        Message = "Posted"
+                    };
+                }
+                else
+                {
+                    return new ResultDTO
+                    {
+                        Status = 500,
+                        Message = "Not found"
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                return new ResultDTO
+                {
+                    Status = 500,
+                    Message = ex.Message
+                };
+            }
         }
     }
 }

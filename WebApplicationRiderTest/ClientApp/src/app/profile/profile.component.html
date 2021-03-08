@@ -1,0 +1,15 @@
+<div class="bg">
+  <div class="media">
+    <img class="user-img" [src]="getUserImg()">
+    <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
+    <button pButton type="button" label="Select file"  (click)="fileInput.click()"></button>
+  </div>
+  <div class="info">
+    <div class="title">Your profile:</div>
+    <hr>
+    <div class="data"><strong>Email:</strong> {{user.email}}</div>
+    <div class="data"><strong>Gender:</strong> {{user.gender}}</div>
+    <div class="data"><strong>Country:</strong> {{user.country}}</div>
+    <div class="data"><strong>Age:</strong> {{user.age}}</div>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+.bg{
+    font-family: 'Montserrat', sans-serif;
+    background: #6441A5;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to top, #2a0845, #6441A5);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to top, #2a0845, #6441A5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    min-height: 100vh;
+    padding: 50px 5%;
+    display: grid;
+    grid-template-columns: 2fr 8fr;
+    column-gap: 5%;
+}
+
+.user-img{
+    max-width: 100%;
+    max-height: 400px;
+    width: 300px;
+    object-fit: cover;
+    display: block;
+}
+
+.data{
+    margin-top: 50px;
+    font-size: 24px;
+    color: white;
+}
+
+.title{
+    font-size: 30px;
+    font-weight: 500;
+    color: white;
+}

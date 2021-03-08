@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using WebApplicationRiderTest.DTO.Actor;
 using WebApplicationRiderTest.DTO.Movie;
 using WebApplicationRiderTest.DTO.Result;
@@ -248,6 +249,7 @@ namespace WebApplicationRiderTest.Controllers
                 var movie = await _context.movies
                     .SingleOrDefaultAsync(t => t.Id == id);
                 movie.Video = _mapper.Map<VideoDTO, Video>(model);
+                movie.HasVideo = true;
                 await _context.SaveChangesAsync();
 
                 return new ResultDTO

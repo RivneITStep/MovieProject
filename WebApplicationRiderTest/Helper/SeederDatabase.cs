@@ -36,25 +36,16 @@ namespace WebApplicationRiderTest.Helper
                     Name = "User"
                 }).Result;
             }
-
-
+            
             string email = "admin@gmail.com";
             var admin = new User
             {
                 Email = email,
                 UserName = email
             };
-            var user = new User
-            {
-                Email = "cuanid236316@gmail.com",
-                UserName = "cuanid236316@gmail.com"
-            };
 
             var resultAdmin = userManager.CreateAsync(admin, "Qwerty1-").Result;
             resultAdmin = userManager.AddToRoleAsync(admin, "Admin").Result;
-
-            var resultUser = userManager.CreateAsync(user, "Qwerty1-").Result;
-            resultUser = userManager.AddToRoleAsync(user, "User").Result;
 
         }
     }

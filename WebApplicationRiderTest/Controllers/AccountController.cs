@@ -60,6 +60,9 @@ namespace WebApplicationRiderTest.Controllers
             var user = new User()
             {
                 UserName = model.Email,
+                Country = model.Country,
+                Age = model.Age,
+                Gender = model.Gender,
                 Email = model.Email,
                 Balance = 0
             };

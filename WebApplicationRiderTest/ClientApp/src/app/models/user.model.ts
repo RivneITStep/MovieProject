@@ -3,6 +3,9 @@ export class UserModel{
     public email: string;
     public pictureUrl: string;
     public balance: number;
+    public country: string;
+    public gender: string;
+    public age: number;
 
     constructor(){
         this.id = null;
