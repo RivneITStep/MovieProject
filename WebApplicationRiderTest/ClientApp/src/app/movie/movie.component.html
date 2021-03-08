@@ -22,12 +22,13 @@
                 <div class="data">{{movie.length}}min</div>
             </div>
             <div class="trailer">
-                <button (click)="showTrailer()" pButton type="button" label="Watch trailer"></button>
+                <button (click)="showTrailer()" class="trailer-btn" pButton type="button" label="Watch trailer"></button>
                 <p-dialog header="{{movie.name}} trailer" [(visible)]="display3">
                     <video controls class="movie-trailer">
                         <source [src]="movie.trailerUrl">
                     </video>
                 </p-dialog>
+                <p-toggleButton (onChange)="favChange($event)" [(ngModel)]="fav" offIcon="pi pi-star-o" onIcon="pi ; pi-star"></p-toggleButton>
             </div>
             <div *ngIf="isAdmin" class="admin-panel">
                 <button (click)="showActorManager()" class="admin-btn p-button-help" pButton type="button"

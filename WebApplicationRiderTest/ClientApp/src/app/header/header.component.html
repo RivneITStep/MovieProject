@@ -9,7 +9,7 @@
     <div *ngIf="isAdmin" (click)="showAdminPanel()" class="admin-item">panel</div>
   </div>
   <div class="auth item">
-    <div *ngIf="isLoggedIn" class="user-name">{{user.email}}</div>
+    <div routerLink="profile" *ngIf="isLoggedIn" class="user-name">{{user.email}}</div>
     <div routerLink="login" *ngIf="!isLoggedIn" class="auth-text">Login</div>
   </div>
   <div class="auth item">

@@ -28,6 +28,8 @@ import {DialogModule} from 'primeng/dialog';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import { ProfileComponent } from './profile/profile.component';
 import { NgxFileDropModule } from 'ngx-file-drop';
+import {ToggleButtonModule} from 'primeng/togglebutton';
+
 
 @NgModule({
   declarations: [									
@@ -56,6 +58,7 @@ import { NgxFileDropModule } from 'ngx-file-drop';
     ButtonModule,
     CarouselModule,
     RatingModule,
+    ToggleButtonModule,
     NgxFileDropModule,
     FormsModule,
     RouterModule.forRoot([

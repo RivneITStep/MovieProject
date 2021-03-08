@@ -15,6 +15,9 @@ export class HomeComponent {
 
 
   ngOnInit() {
-
+    var list = document.getElementsByClassName('video');
+    for(var i = 0; i < list.length; i++){
+      (list[i] as HTMLVideoElement).muted = true;
+    }
   }
 }

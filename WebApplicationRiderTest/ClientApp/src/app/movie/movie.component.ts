@@ -22,16 +22,18 @@ import { EditableColumn } from 'primeng/table';
 @Component({
   selector: 'app-movie',
   templateUrl: './movie.component.html',
-  styleUrls: ['./movie.component.css','./movie.media.css']
+  styleUrls: ['./movie.component.css', './movie.media.css']
 })
 export class MovieComponent implements OnInit {
 
-  constructor(private router: Router, private confirmationService: ConfirmationService ,private photoService: PhotoService, private messageService: MessageService, private sanitizer: DomSanitizer, private actorService: ActorService, private reviewService: ReviewService, private activateRoute: ActivatedRoute, private movieService: MovieService, private userService: UserService, private apiService: ApiService) {
+  constructor(private router: Router, private confirmationService: ConfirmationService, private photoService: PhotoService, private messageService: MessageService, private sanitizer: DomSanitizer, private actorService: ActorService, private reviewService: ReviewService, private activateRoute: ActivatedRoute, private movieService: MovieService, private userService: UserService, private apiService: ApiService) {
     this.id = activateRoute.snapshot.params['id'];
   }
 
   id: number;
   currentUserId: string;
+
+  fav: boolean;
   isAdmin: boolean;
   isLoggedIn: boolean;
   display: boolean = false;
@@ -40,6 +42,8 @@ export class MovieComponent implements OnInit {
   display4: boolean = false;
 
   users: UserModel[] = [];
+  favMovies: MovieModel[] = [];
+
   movie: MovieModel = new MovieModel();
   movieEdit: MovieModel = new MovieModel();
   movieActors: ActorModel[] = [];
@@ -51,39 +55,39 @@ export class MovieComponent implements OnInit {
 
   confirmDelete() {
     this.confirmationService.confirm({
-        message: 'Are you sure that you want to delete this movie?',
-        accept: () => {
-            this.deleteMovie();
-        }
+      message: 'Are you sure that you want to delete this movie?',
+      accept: () => {
+        this.deleteMovie();
+      }
     });
   }
 
-  deleteMovie(){
+  deleteMovie() {
     this.movieService.deleteMovie(this.id).subscribe(
       (data: ApiResult) => {
-        if(data.status == 200){
-          this.messageService.add({severity: 'success', summary: 'Notify', detail: 'Movie deleted'});
+        if (data.status == 200) {
+          this.messageService.add({ severity: 'success', summary: 'Notify', detail: 'Movie deleted' });
           this.router.navigate(['/movies']);
-        }else{
-          this.messageService.add({severity: 'error', summary: 'Notify', detail: 'Server error'});
+        } else {
+          this.messageService.add({ severity: 'error', summary: 'Notify', detail: 'Server error' });
         }
       }
     );
   }
 
-  showActorManager(){
+  showActorManager() {
     this.display = true;
   }
 
-  showActorManager2(){
+  showActorManager2() {
     this.display2 = true;
   }
 
-  showTrailer(){
+  showTrailer() {
     this.display3 = true;
   }
 
-  showEditMovie(){
+  showEditMovie() {
     this.movieService.getMovie(this.id).subscribe(
       (data: MovieModel) => {
         this.movieEdit = data;
@@ -92,44 +96,44 @@ export class MovieComponent implements OnInit {
     this.display4 = true;
   }
 
-  editMovie(){
+  editMovie() {
     this.movieService.editMovie(this.movieEdit).subscribe(
       (data: ApiResult) => {
-        if(data.status == 200){
+        if (data.status == 200) {
           this.messageService.add({ severity: 'success', summary: 'Notify', detail: 'Movie edited' });
           this.movieService.getMovie(this.id).subscribe(
             (data: MovieModel) => {
               this.movie = data;
             }
           );
-        }else{
+        } else {
           this.messageService.add({ severity: 'error', summary: 'Notify', detail: 'Server error' });
         }
       }
     );
   }
 
-  deleteMovieActor(id: number){
+  deleteMovieActor(id: number) {
     this.movieService.deleteMovieActor(this.id, id).subscribe(
       (data: ApiResult) => {
-        if(data.status == 200){
+        if (data.status == 200) {
           this.movieService.getMovieActors(this.id).subscribe(
             (data: ActorModel[]) => {
               this.movieActors = data;
             }
           );
-          this.messageService.add({severity:'success', summary:'Notify', detail:'Actor deleted'});
-        }else{
-          this.messageService.add({severity:'error', summary:'Notify', detail:'Server error'});
+          this.messageService.add({ severity: 'success', summary: 'Notify', detail: 'Actor deleted' });
+        } else {
+          this.messageService.add({ severity: 'error', summary: 'Notify', detail: 'Server error' });
         }
       }
     );
   }
 
-  addMovieActor(id: number){
+  addMovieActor(id: number) {
     this.movieService.addMovieActor(this.id, id).subscribe(
       (data: ApiResult) => {
-        if(data.status == 200){
+        if (data.status == 200) {
           this.movieService.getMovieAvailableActors(this.id).subscribe(
             (data: ActorModel[]) => {
               this.movieAvailableActors = data;
@@ -140,31 +144,55 @@ export class MovieComponent implements OnInit {
               this.movieActors = data;
             }
           );
-          this.messageService.add({severity:'success', summary:'Notify', detail:'Actor added to movie'});
-        }else{
-          this.messageService.add({severity:'success', summary:'Notify', detail:'Server error'});
+          this.messageService.add({ severity: 'success', summary: 'Notify', detail: 'Actor added to movie' });
+        } else {
+          this.messageService.add({ severity: 'success', summary: 'Notify', detail: 'Server error' });
         }
       }
     );
   }
 
-  sendReview(){
-    if(this.review.text === '' || this.review.title === ''){
-      this.messageService.add({severity:'error', summary:'Notify', detail:'Enter all fields'});
-    }else{
+  sendReview() {
+    if (this.review.text === '' || this.review.title === '') {
+      this.messageService.add({ severity: 'error', summary: 'Notify', detail: 'Enter all fields' });
+    } else {
       this.review.movieId = this.id;
       this.review.userId = this.currentUserId;
       this.reviewService.addReview(this.review).subscribe(
         (data: ApiResult) => {
-          if(data.status == 200){
-            this.messageService.add({severity:'success', summary:'Notify', detail:'Review posted'});
+          if (data.status == 200) {
+            this.messageService.add({ severity: 'success', summary: 'Notify', detail: 'Review posted' });
             this.reviewService.getMovieReviews(this.id).subscribe(
               (data: ReviewModel[]) => {
                 this.movieReviews = data;
               }
             );
           }
-        } 
+        }
+      );
+    }
+  }
+
+  favChange(e) {
+    if (e.checked == true) {
+      this.userService.addUserMovie(this.currentUserId, this.id).subscribe(
+        (data: ApiResult) => {
+          if (data.status == 200) {
+            console.log('success');
+          } else {
+            console.log('error');
+          }
+        }
+      );
+    } else {
+      this.userService.deleteUserMovie(this.currentUserId, this.id).subscribe(
+        (data: ApiResult) => {
+          if (data.status == 200) {
+            console.log('success');
+          } else {
+            console.log('error');
+          }
+        }
       );
     }
   }
@@ -176,7 +204,7 @@ export class MovieComponent implements OnInit {
           this.movieService.getMovie(this.id).subscribe(
             (data: MovieModel) => {
               this.movie = data;
-              
+
             }
           );
         }
@@ -184,21 +212,21 @@ export class MovieComponent implements OnInit {
     );
   }
 
-  getUserName(id: string){
+  getUserName(id: string) {
     return this.users.find(x => x.id === id).email.replace(/@[^@]+$/, '');
   }
 
-  getUserImg(){
+  getUserImg() {
     return 'https://cdn3.iconfinder.com/data/icons/avatars-round-flat/33/avat-01-512.png';
   }
 
-  getImg(url: string){
+  getImg(url: string) {
     let re = /\'/gi;
     let result = url.replace(re, '');
     return this.sanitizer.bypassSecurityTrustResourceUrl(result);
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.movieService.getMovie(this.id).subscribe(
       (data: MovieModel) => {
         this.movie = data;
@@ -208,9 +236,9 @@ export class MovieComponent implements OnInit {
     this.movieService.getMovieActors(this.id).subscribe(
       (data: ActorModel[]) => {
         this.movieActors = data;
-        if(data.length < 1){
+        if (data.length < 1) {
           this.hasActors = false;
-        }else{
+        } else {
           this.hasActors = true;
         }
       }
@@ -227,10 +255,29 @@ export class MovieComponent implements OnInit {
       }
     );
     this.movieService.getMovieAvailableActors(this.id).subscribe(
-      (data : ActorModel[]) => {
+      (data: ActorModel[]) => {
         this.movieAvailableActors = data;
       }
     );
+
+    this.userService.getUserMovies(this.currentUserId).subscribe(
+      (data: MovieModel[]) => {
+        this.favMovies = data;
+      }
+    );
+
+    setTimeout(() => {
+      this.fav = false;
+      for (var i = 0; i < this.favMovies.length; i++) {
+        if (this.favMovies[i].id === this.movie.id) {
+          this.fav = true;
+          break;
+        }
+      }
+      console.log(this.fav);
+    }, 1000);
+
+
     this.isAdmin = this.apiService.isAdmin();
     this.isLoggedIn = this.apiService.isLoggedIn();
   }

@@ -2,14 +2,29 @@
   <div class="media">
     <img class="user-img" [src]="getUserImg()">
     <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
-    <button pButton type="button" label="Select file"  (click)="fileInput.click()"></button>
+    <button class="p-button-info upload-btn" pButton type="button" label="Select file" (click)="fileInput.click()"></button>
   </div>
   <div class="info">
     <div class="title">Your profile:</div>
     <hr>
-    <div class="data"><strong>Email:</strong> {{user.email}}</div>
-    <div class="data"><strong>Gender:</strong> {{user.gender}}</div>
-    <div class="data"><strong>Country:</strong> {{user.country}}</div>
-    <div class="data"><strong>Age:</strong> {{user.age}}</div>
+    <div class="data-table">
+      <strong class="data">Email:</strong>
+      <div class="data" [textContent]="user.email" (input)="user.email=$event.target.textContent" contenteditable="true"></div>
+      <strong class="data">Gender:</strong>
+      <div class="data" [textContent]="user.gender" (input)="user.gender=$event.target.textContent" contenteditable="true"></div>
+      <strong class="data">Country:</strong>
+      <div class="data" [textContent]="user.country" (input)="user.country=$event.target.textContent" contenteditable="true"></div>
+      <strong class="data">Age:</strong>
+      <div class="data" [(textContent)]="user.age" (input)="user.age=$event.target.textContent" contenteditable="true"></div>
+      <button (click)="editUser()" pButton type="button" class="p-button-help save-btn" label="Save"></button>
+    </div>
+    <hr>
+    <div class="fav-movie-title">Favourite movies:</div>
+    <hr>
+    <div class="fav-movies">
+      <div *ngFor="let data of favMovies" class="movie">
+        <img (click)="redirect(data.id)" [src]="data.pictureUrl" class="movie-img">
+      </div>
+    </div>
   </div>
 </div>
