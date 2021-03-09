@@ -29,10 +29,11 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import { ProfileComponent } from './profile/profile.component';
 import { NgxFileDropModule } from 'ngx-file-drop';
 import {ToggleButtonModule} from 'primeng/togglebutton';
+import { CinemaComponent } from './cinema/cinema.component';
 
 
 @NgModule({
-  declarations: [									
+  declarations: [										
     AppComponent,
     HomeComponent,
       HeaderComponent,
@@ -42,7 +43,8 @@ import {ToggleButtonModule} from 'primeng/togglebutton';
       ActorComponent,
       MoviesComponent,
       MovieComponent,
-      ProfileComponent
+      ProfileComponent,
+      CinemaComponent
    ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -69,7 +71,8 @@ import {ToggleButtonModule} from 'primeng/togglebutton';
       { path: 'actors/:id', component: ActorComponent},
       { path: 'movies', component: MoviesComponent},
       { path: 'movies/:id', component: MovieComponent},
-      { path: 'profile', component: ProfileComponent }
+      { path: 'profile', component: ProfileComponent },
+      { path: 'cinema', component: CinemaComponent }
     ])
   ],
   providers: [

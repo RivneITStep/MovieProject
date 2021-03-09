@@ -288,5 +288,43 @@ namespace WebApplicationRiderTest.Controllers
             var result = actors.Except(movie.Actors).ToList();
             return _mapper.Map<List<Actor>, List<ActorDTO>>(result);
         }
+
+        [HttpGet("cinema")]
+        public async Task<IEnumerable<MovieCinemaDTO>> GetCinemaMovies()
+        {
+            var movies = await _context.movies.ToListAsync();
+            var result = new List<MovieCinemaDTO>();
+            foreach (var el in movies)
+            {
+                if (el.HasVideo)
+                {
+                    var temp = new MovieCinemaDTO
+                    {
+                        Id = el.Id,
+                        Name = el.Name,
+                        PictureUrl = el.PictureUrl,
+                        TrailerUrl = el.TrailerUrl,
+                        Url = el.Video.Url
+                    };
+                    result.Add(temp);
+                }
+            }
+
+            return result;
+        }
+
+        [HttpGet("cinema/{id}")]
+        public async Task<MovieCinemaDTO> GetCinemaMovie([FromRoute] int id)
+        {
+            var movie = await _context.movies.SingleOrDefaultAsync(t => t.Id == id);
+            return new MovieCinemaDTO
+            {
+                Id = movie.Id,
+                Name = movie.Name,
+                PictureUrl = movie.PictureUrl,
+                TrailerUrl = movie.TrailerUrl,
+                Url = movie.Video.Url
+            };
+        }
     }
 }

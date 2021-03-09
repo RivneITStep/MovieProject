@@ -1,0 +1,24 @@
+<div class="bg">
+  <div class="top">
+    <img class="welcome-img" src="../../assets/images/treef.png" alt="">
+    <div class="info">
+      <div class="title">MP Cinema</div>
+      <div class="text">Watch your favourite films and serials. Here you can find anything you want. Project is actual
+        and content is updating everyday. So, just enjoy your time</div>
+      <div class="studios">
+        <img src="../../assets/images/studios.png" alt="">
+        <div class="mtext">and others...</div>
+      </div>
+    </div>
+  </div>
+  <div class="mid">
+    <div class="movies-title">Movies:</div>
+    <hr>
+    <div class="movies">
+      <div *ngFor="let data of movies" class="movie">
+        <img class="movie-img" [src]="data.pictureUrl">
+      </div>
+    </div>
+    
+  </div>
+</div>

@@ -1,0 +1,75 @@
+.bg{
+    min-height: 100vh;
+    font-family: 'Montserrat', sans-serif;
+
+}
+
+.top{
+    padding: 50px 5%;
+    height: 650px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    background: #41295a;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to bottom, #2F0743, #41295a);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, #2F0743, #41295a); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.mid{
+    background: #485563;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to bottom, #29323c, #485563);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, #29323c, #485563); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    padding: 50px 5%;
+}
+
+.welcome-img{
+    max-width:100%;
+    max-height:100%;
+}
+
+.info{
+    margin-top: 50px;
+}
+
+.title{
+    color: white;
+    font-size: 48px;
+    font-weight: 500;
+}
+
+.text{
+    margin-top: 30px;
+    color: white;
+    font-size: 36px;
+}
+
+.studios{
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: 7fr 3fr;
+}
+
+.mtext{
+    color: white;
+    font-size: 24px;
+    align-self: end;
+    text-align: right;
+}
+
+.movies-title{
+    font-size: 24px;
+    color: white;
+}
+
+.movies{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    column-gap: 5%;
+    row-gap: 25px;
+}
+
+.movie-img{
+    max-width: 100%;
+    display: block;
+}
