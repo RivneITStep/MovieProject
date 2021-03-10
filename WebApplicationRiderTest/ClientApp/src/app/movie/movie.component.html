@@ -96,6 +96,13 @@
                         <button (click)="editMovie()" pButton type="button" label="Edit"></button>
                     </div>
                 </p-dialog>
+                <button (click)="showAddVideo()" pButton type="button" class="p-button-help admin-btn" label="Add video"></button>
+                <p-dialog header="Add video" [(visible)]="display5">
+                    <div class="edit">
+                        <input [(ngModel)]="videoAdd.url" type="text" pInput class="edit-input" placeholder="Video url">
+                        <button pButton type="button" (click)="addMovieVideo()" label="Post"></button>
+                    </div>
+                </p-dialog>
                 <button (click)="confirmDelete()" pButton type="button" class="p-button-danger admin-btn" label="Delete movie"></button>
 
             </div>

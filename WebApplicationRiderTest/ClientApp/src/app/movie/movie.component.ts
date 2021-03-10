@@ -18,6 +18,7 @@ import jwt_decode from 'jwt-decode';
 import { PhotoService } from '../services/photo.service';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { EditableColumn } from 'primeng/table';
+import { VideoModel } from '../models/video.model';
 
 @Component({
   selector: 'app-movie',
@@ -40,6 +41,7 @@ export class MovieComponent implements OnInit {
   display2: boolean = false;
   display3: boolean = false;
   display4: boolean = false;
+  display5: boolean = false;
 
   users: UserModel[] = [];
   favMovies: MovieModel[] = [];
@@ -52,6 +54,21 @@ export class MovieComponent implements OnInit {
   hasActors: boolean;
   review: ReviewModel = new ReviewModel();
   rate: number;
+  videoAdd: VideoModel = new VideoModel();
+
+  addMovieVideo(){
+    this.videoAdd.id = 0;
+    this.videoAdd.price = 0;
+    this.movieService.addMovieVideo(this.id, this.videoAdd).subscribe(
+      (data: ApiResult) => {
+        if(data.status == 200){
+          this.messageService.add({ severity: 'success', summary: 'Notify', detail: 'Video added' });
+        }else{
+          this.messageService.add({ severity: 'error', summary: 'Notify', detail: 'Server error' });
+        }
+      }
+    );
+  }
 
   confirmDelete() {
     this.confirmationService.confirm({
@@ -85,6 +102,10 @@ export class MovieComponent implements OnInit {
 
   showTrailer() {
     this.display3 = true;
+  }
+
+  showAddVideo(){
+    this.display5 = true;
   }
 
   showEditMovie() {

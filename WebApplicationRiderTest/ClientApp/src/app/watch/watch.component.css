@@ -1,0 +1,103 @@
+.bg{
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    min-height: 100vh;
+    padding-top: 50px;
+    background: #7F7FD5;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to top, #91EAE4, #86A8E7, #7F7FD5);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to top, #91EAE4, #86A8E7, #7F7FD5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.top{
+    padding: 0 5%;
+}
+
+.trailer-title{
+    font-size: 24px;
+    font-weight: 500;
+    color: white;
+}
+
+.movie-name{
+    font-size: 48px;
+    font-weight: 600;
+    color: white;
+}
+
+.movie-original-name{
+    font-size: 24px;
+    color: rgb(230, 230, 230);
+}
+
+.bottom{
+    padding: 25px 5%;
+    background: #0F2027;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to bottom, #2C5364, #203A43, #0F2027);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, #2C5364, #203A43, #0F2027); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    min-height: 50vh;
+
+}
+
+.mid{
+    padding: 25px 5%;
+    display: grid;
+    grid-template-columns: 3fr 8fr;
+    column-gap: 15px;
+}
+
+.movie-img{
+    display: block;
+    border-radius: 5px;
+    max-width: 100%;
+}
+
+video{
+    width: 100%    !important;
+    height: auto   !important;
+}
+
+.movie-title{
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.r-container{
+    position: relative;
+    overflow: hidden;
+    padding-top: 56.25%;
+}
+
+.r-iframe{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+@media screen and (max-width: 1000px){
+    .mid{
+        grid-template-columns: 1fr;
+    }
+
+    .movie-img{
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .movie-name, .movie-original-name{
+        text-align: center;
+    }
+
+}
+
+@media screen and (max-width: 400px){
+    .movie-name{
+        font-size: 36px;
+    }
+
+    .movie-original-name{
+        font-size: 18px;
+    }
+}

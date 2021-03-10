@@ -30,10 +30,11 @@ import { ProfileComponent } from './profile/profile.component';
 import { NgxFileDropModule } from 'ngx-file-drop';
 import {ToggleButtonModule} from 'primeng/togglebutton';
 import { CinemaComponent } from './cinema/cinema.component';
+import { WatchComponent } from './watch/watch.component';
 
 
 @NgModule({
-  declarations: [										
+  declarations: [											
     AppComponent,
     HomeComponent,
       HeaderComponent,
@@ -44,7 +45,8 @@ import { CinemaComponent } from './cinema/cinema.component';
       MoviesComponent,
       MovieComponent,
       ProfileComponent,
-      CinemaComponent
+      CinemaComponent,
+      WatchComponent
    ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -72,7 +74,8 @@ import { CinemaComponent } from './cinema/cinema.component';
       { path: 'movies', component: MoviesComponent},
       { path: 'movies/:id', component: MovieComponent},
       { path: 'profile', component: ProfileComponent },
-      { path: 'cinema', component: CinemaComponent }
+      { path: 'cinema', component: CinemaComponent },
+      { path: 'cinema/:id', component: WatchComponent}
     ])
   ],
   providers: [

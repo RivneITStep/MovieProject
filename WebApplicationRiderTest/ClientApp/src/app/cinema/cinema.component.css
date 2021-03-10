@@ -6,7 +6,7 @@
 
 .top{
     padding: 50px 5%;
-    height: 650px;
+    height: auto;
 
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -71,5 +71,49 @@
 
 .movie-img{
     max-width: 100%;
+    border-radius: 5px;
+    cursor: pointer;
     display: block;
+}
+
+
+@media screen and (max-width: 1250px){
+    .title{
+        font-size: 36px;
+    }
+
+    .text{
+        font-size: 24px;
+    }
+
+    .top{
+        height: 500px;
+    }
+
+    .movies{
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media screen and (max-width: 900px){
+    .top{
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+
+    .movies{
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    
+}
+
+@media screen and (max-width: 500px){
+    .movies{
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .studios-img{
+        width: 200px;
+    }
 }

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ActorModel } from '../models/actor.model';
+import { CinemaModel } from '../models/cinema.model';
 import { MovieAddModel } from '../models/movie-add.model';
 import { MovieModel } from '../models/movie.model';
 import { ApiResult } from '../models/result.model';
@@ -61,6 +62,18 @@ export class MovieService {
 
   getMovieVideo(id: number){
     return this.http.get<VideoModel>(this.baseUrl + '/' + id + '/video');
+  }
+
+  addMovieVideo(id: number, model: VideoModel){
+    return this.http.post<ApiResult>(this.baseUrl + '/' + id + '/video', model);
+  }
+
+  getCinemaMovies(): Observable<CinemaModel[]>{
+    return this.http.get<CinemaModel[]>(this.baseUrl + '/cinema');
+  }
+
+  getCinemaMovie(id: number): Observable<CinemaModel>{
+    return this.http.get<CinemaModel>(this.baseUrl + '/cinema/' + id);
   }
 
 }

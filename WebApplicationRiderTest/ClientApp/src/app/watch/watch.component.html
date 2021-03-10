@@ -1,0 +1,23 @@
+<div class="bg">
+  <div class="top">
+    <div class="movie-name">{{movie.name}}</div>
+    <div class="movie-original-name">{{movie.name}}</div>
+    <hr class="hr-black">
+  </div>
+  <div class="mid">
+    <img class="movie-img" [src]="movie.pictureUrl">
+    <div class="trailer-block">
+      <div class="trailer-title">Trailer:</div>
+      <hr class="hr-black">
+      <video controls class="trailer"></video>
+    </div>
+  </div>
+  <div class="bottom">
+    <div class="movie-title">Watch {{movie.name}}</div>
+    <hr>
+    <div class="r-container">
+      <iframe class="video-url r-iframe" frameborder="0" allowfullscreen></iframe>
+    </div>
+    
+  </div>
+</div>
