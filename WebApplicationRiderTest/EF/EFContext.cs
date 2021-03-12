@@ -12,5 +12,6 @@ namespace WebApplicationRiderTest.EF
         public DbSet<Photo> photos { get; set; }
         public DbSet<Review> reviews { get; set; }
         public DbSet<Video> videos { get; set; }
+        public DbSet<Mark> marks { get; set; }
     }
 }

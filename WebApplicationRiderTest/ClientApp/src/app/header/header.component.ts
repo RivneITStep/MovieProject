@@ -55,11 +55,20 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+
+  nav() {
+    const burger = document.querySelector('.burger');
+    const nav = document.querySelector('.main-nav');
+    burger.addEventListener('click', () => {
+      nav.classList.toggle('show')
+    })
+  }
+
   showAdminPanel() {
     this.display = true;
   }
 
-  
+
 
   addActor() {
     this.actorService.addActor(this.actorAdd).subscribe(
@@ -96,6 +105,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
+    document.addEventListener('DOMContentLoaded', this.nav)
     this.isLoggedIn = this.apiService.isLoggedIn();
     this.isAdmin = this.apiService.isAdmin();
   }

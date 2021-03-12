@@ -233,5 +233,28 @@ namespace WebApplicationRiderTest.Controllers
                 };
             }
         }
+
+        [HttpGet("marks/{id}")]
+        public async Task<IEnumerable<MarkDTO>> GetUserMarks([FromRoute] string id, [FromBody] MarkDTO model)
+        {
+            var user = await _context.Users.SingleOrDefaultAsync(t => t.Id == id);
+            var entities = user.Marks.ToList();
+
+            return _mapper.Map<List<Mark>, List<MarkDTO>>(entities);
+        }
+
+        [HttpDelete("marks/{markid}")]
+        public async Task<ResultDTO> DeleteMovie([FromRoute] int markid)
+        {
+            var mark = await _context.marks.SingleOrDefaultAsync(t => t.Id == markid);
+            _context.marks.Remove(mark);
+
+            await _context.SaveChangesAsync();
+            return new ResultDTO
+            {
+                Status = 200,
+                Message = "Deleted"
+            };
+        }
     }
 }

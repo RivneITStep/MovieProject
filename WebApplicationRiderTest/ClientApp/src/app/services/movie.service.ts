@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ActorModel } from '../models/actor.model';
 import { CinemaModel } from '../models/cinema.model';
+import { MarkAddModel } from '../models/mark-add.model';
 import { MovieAddModel } from '../models/movie-add.model';
 import { MovieModel } from '../models/movie.model';
 import { ApiResult } from '../models/result.model';
@@ -52,8 +53,8 @@ export class MovieService {
     return this.http.get<ActorModel[]>(this.baseUrl + '/' + id + '/actors/available');
   }
 
-  rateMovie(id: number, mark: number){
-    return this.http.post<ApiResult>(this.baseUrl + '/rate/' + id + '/' + mark, null);
+  rateMovie(id: number, userId: string, model: MarkAddModel){
+    return this.http.post<ApiResult>(this.baseUrl + '/rate/' + id + '/' + userId, model);
   }
 
   getFilterList(filter: string){

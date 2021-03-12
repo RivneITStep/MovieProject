@@ -11,6 +11,7 @@ namespace WebApplicationRiderTest.EF.Entities
         public int Age { get; set; }
         public string PictureUrl { get; set; }
         public virtual ICollection<Review> Reviews { get; set; }
+        public virtual ICollection<Mark> Marks { get; set; }
         public virtual ICollection<Movie> Movies { get; set; }
     }
 }

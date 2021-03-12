@@ -76,3 +76,19 @@
         font-size: 12px;
     }
 }
+
+@media screen and (max-width: 850px){
+    .item{
+        font-size: 10px;
+    }
+
+    .logo-text{
+        font-size: 14pxs;
+    }
+}
+
+@media screen and (max-width: 550px){
+    .item{
+        font-size: 8px;
+    }
+}

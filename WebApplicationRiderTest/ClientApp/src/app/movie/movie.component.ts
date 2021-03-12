@@ -19,6 +19,7 @@ import { PhotoService } from '../services/photo.service';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { EditableColumn } from 'primeng/table';
 import { VideoModel } from '../models/video.model';
+import { MarkAddModel } from '../models/mark-add.model';
 
 @Component({
   selector: 'app-movie',
@@ -45,6 +46,8 @@ export class MovieComponent implements OnInit {
 
   users: UserModel[] = [];
   favMovies: MovieModel[] = [];
+
+  markAdd: MarkAddModel = new MarkAddModel();
 
   movie: MovieModel = new MovieModel();
   movieEdit: MovieModel = new MovieModel();
@@ -219,7 +222,11 @@ export class MovieComponent implements OnInit {
   }
 
   rateMovie() {
-    this.movieService.rateMovie(this.id, this.rate).subscribe(
+    this.markAdd.value = this.rate;
+
+    var userId = (jwt_decode(localStorage.getItem('token')) as UserModel).id;
+
+    this.movieService.rateMovie(this.id, userId, this.markAdd).subscribe(
       (data: ApiResult) => {
         if (data.status == 200) {
           this.movieService.getMovie(this.id).subscribe(

@@ -217,21 +217,32 @@ namespace WebApplicationRiderTest.Controllers
         }
         
 
-        [HttpPost("rate/{id}/{mark}")]
-        public async Task<ResultDTO> RateMovieById([FromRoute] int id, [FromRoute] int mark)
+        [HttpPost("rate/{id}/{userid}")]
+        public async Task<ResultDTO> RateMovieById([FromRoute] int id, [FromRoute] string userid, [FromBody] MarkAddDTO model)
         {
             var movie = await _context.movies
                 .SingleOrDefaultAsync(t => t.Id == id);
+            var user = await _context.Users
+                .SingleOrDefaultAsync(t => t.Id == userid);
+            
             if (movie.Rating == 0)
             {
-                movie.Rating = mark;
+                movie.Rating = model.Value;
             }
             else
             {
-                movie.Rating += mark;
+                movie.Rating += model.Value;
                 movie.Rating /= 2;
             }
 
+            var entity = new Mark
+            {
+                Value = model.Value,
+                Movie = movie,
+                User = user
+            };
+            
+            await _context.marks.AddAsync(entity);
             await _context.SaveChangesAsync();
             
             return new ResultDTO

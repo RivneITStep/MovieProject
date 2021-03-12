@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApplicationRiderTest.EF;
 
 namespace WebApplicationRiderTest.Migrations
 {
     [DbContext(typeof(EFContext))]
-    partial class EFContextModelSnapshot : ModelSnapshot
+    [Migration("20210312124513_marks")]
+    partial class marks
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -232,8 +234,8 @@ namespace WebApplicationRiderTest.Migrations
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<float>("Value")
-                        .HasColumnType("real");
+                    b.Property<double>("Value")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
@@ -544,13 +546,13 @@ namespace WebApplicationRiderTest.Migrations
             modelBuilder.Entity("WebApplicationRiderTest.EF.Entities.Mark", b =>
                 {
                     b.HasOne("WebApplicationRiderTest.EF.Entities.Movie", "Movie")
-                        .WithMany("Marks")
+                        .WithMany()
                         .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("WebApplicationRiderTest.EF.Entities.User", "User")
-                        .WithMany("Marks")
+                        .WithMany()
                         .HasForeignKey("UserId");
 
                     b.Navigation("Movie");
@@ -604,8 +606,6 @@ namespace WebApplicationRiderTest.Migrations
 
             modelBuilder.Entity("WebApplicationRiderTest.EF.Entities.Movie", b =>
                 {
-                    b.Navigation("Marks");
-
                     b.Navigation("Reviews");
 
                     b.Navigation("Video");
@@ -613,8 +613,6 @@ namespace WebApplicationRiderTest.Migrations
 
             modelBuilder.Entity("WebApplicationRiderTest.EF.Entities.User", b =>
                 {
-                    b.Navigation("Marks");
-
                     b.Navigation("Reviews");
                 });
 #pragma warning restore 612, 618

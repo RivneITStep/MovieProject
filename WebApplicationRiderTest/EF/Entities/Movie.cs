@@ -27,6 +27,7 @@ namespace WebApplicationRiderTest.EF.Entities
         public virtual ICollection<Actor> Actors { get; set; }
         public virtual ICollection<Review> Reviews { get; set; } 
         public virtual ICollection<User> Users { get; set; }
+        public virtual ICollection<Mark> Marks { get; set; }
         public virtual Video Video { get; set; }
     }
 }
