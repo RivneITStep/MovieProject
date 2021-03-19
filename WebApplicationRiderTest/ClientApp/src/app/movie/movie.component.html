@@ -28,7 +28,7 @@
                         <source [src]="movie.trailerUrl">
                     </video>
                 </p-dialog>
-                <p-toggleButton (onChange)="favChange($event)" [(ngModel)]="fav" offIcon="pi pi-star-o" onIcon="pi ; pi-star"></p-toggleButton>
+                <p-toggleButton *ngIf="isLoggedIn" (onChange)="favChange($event)" [(ngModel)]="fav" offIcon="pi pi-star-o" onIcon="pi ; pi-star"></p-toggleButton>
             </div>
             <div *ngIf="isAdmin" class="admin-panel">
                 <button (click)="showActorManager()" class="admin-btn p-button-help" pButton type="button"

@@ -1,8 +1,69 @@
-<div class="bg">
-  <div class="login-form">
-    <div class="title">Authorization</div>
-    <input [(ngModel)]="user.email" class="auth-input" type="text" placeholder="Email">
-    <input [(ngModel)]="user.password" class="auth-input" type="password" placeholder="Password">
-    <button (click)="login()" class="auth-btn">Login</button>
+<div *ngIf="display" class="bg" (window:resize)="onResize($event)">
+  <div class="container" id="container">
+    <div class="form-container sign-up-container">
+      <form action="#">
+        <h1>Create Account</h1>
+        <div class="social-container">
+          <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+          <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <span>or use your email for registration</span>
+        <input type="text" placeholder="Name" />
+        <input type="email" placeholder="Email" />
+        <input type="password" placeholder="Password" />
+        <button>Sign Up</button>
+      </form>
+    </div>
+    <div class="form-container sign-in-container">
+      <form action="#">
+        <h1>Login</h1>
+        <span>using your account</span>
+        <input type="email" placeholder="Email" [(ngModel)]="user.email" name="email" />
+        <input type="password" placeholder="Password" [(ngModel)]="user.password" name="password" />
+        <a (click)="displayForgotPassword()">Forgot your password?</a>
+        <p-dialog baseZIndex="1500" position="left" header="Reset password" [(visible)]="displayForgot">
+          <input placeholder="Your email" pInput type="email" class="email-recover-input" [(ngModel)]="recoverEmail" />
+          <button label="Recover" (click)="recoverPassword()" pButton type="button" class="p-button-help"></button>
+        </p-dialog>
+        <button (click)="login()">Login</button>
+      </form>
+    </div>
+    <div class="overlay-container">
+      <div class="overlay">
+        <div class="overlay-panel overlay-left">
+          <button class="ghost" id="signIn">Login</button>
+        </div>
+        <div class="overlay-panel overlay-right">
+          <h1>Movie Project</h1>
+          <p>Enjoy all oportunities with our member account. If you haven`t still got it, register</p>
+          <button (click)="routeRegister()" class="ghost" id="signUp">Register</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!display" class="bg-mobile">
+  <div class="mobile-form-container">
+    <div class="mobile-login-form">
+      <div class="mobile-text-title">
+        Sign in
+      </div>
+      <div class="under-title-text">
+        login via site account
+      </div>
+      <input class="auth-input" placeholder="Email" pInput type="text" [(ngModel)]="user.email" />
+      <input class="auth-input" placeholder="Password" pInput type="password" [(ngModel)]="user.password" />
+      <a (click)="op.show($event)" class="forgot-pass">Forgot password</a>
+      <p-overlayPanel #op>
+        <ng-template pTemplate>
+          <input pInput type="email" [(ngModel)]="recoverEmail" placeholder="Your email"/>
+          <button label="Recover" (click)="recoverPassword()" pButton type="button" class="p-button-help"></button>
+        </ng-template>
+      </p-overlayPanel>
+      <a (click)="routeRegister()" class="register-user">Don`t have an account? Register</a>
+      <button (click)="login()" pButton class="auth-btn" type="button" label="Login"></button>
+    </div>
   </div>
 </div>

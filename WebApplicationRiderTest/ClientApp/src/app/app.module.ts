@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
@@ -31,6 +31,10 @@ import { NgxFileDropModule } from 'ngx-file-drop';
 import {ToggleButtonModule} from 'primeng/togglebutton';
 import { CinemaComponent } from './cinema/cinema.component';
 import { WatchComponent } from './watch/watch.component';
+import {DropdownModule} from 'primeng/dropdown';
+import { TokenInterceptorService } from './token-interceptor.service';
+import {OverlayPanelModule} from 'primeng/overlaypanel';
+import { LoginGuard } from './guards/login.guard';
 
 
 @NgModule({
@@ -58,11 +62,13 @@ import { WatchComponent } from './watch/watch.component';
     CommonModule,
     DialogModule,
     ConfirmDialogModule,
+    OverlayPanelModule,
     HttpClientModule,
     ButtonModule,
     CarouselModule,
     RatingModule,
     ToggleButtonModule,
+    DropdownModule,
     NgxFileDropModule,
     FormsModule,
     RouterModule.forRoot([
@@ -73,7 +79,7 @@ import { WatchComponent } from './watch/watch.component';
       { path: 'actors/:id', component: ActorComponent},
       { path: 'movies', component: MoviesComponent},
       { path: 'movies/:id', component: MovieComponent},
-      { path: 'profile', component: ProfileComponent },
+      { path: 'profile', component: ProfileComponent, canActivate: [LoginGuard] },
       { path: 'cinema', component: CinemaComponent },
       { path: 'cinema/:id', component: WatchComponent}
     ])
@@ -82,7 +88,12 @@ import { WatchComponent } from './watch/watch.component';
     MessageService,
     NgxSpinnerService,
     FilterService,
-    ConfirmationService
+    ConfirmationService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

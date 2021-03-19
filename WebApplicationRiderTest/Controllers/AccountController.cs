@@ -1,9 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Net;
+using System.Net.Mail;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using WebApplicationRiderTest.DTO.Password;
 using WebApplicationRiderTest.DTO.Result;
 using WebApplicationRiderTest.DTO.User;
 using WebApplicationRiderTest.EF;
@@ -138,6 +143,32 @@ namespace WebApplicationRiderTest.Controllers
 
                 }
             }
+        }
+
+        [HttpPost("recover/password")]
+        public async Task<ResultDTO> RecoverPassword([FromBody] RecoverPasswordDTO model)
+        {
+            var user = await _userManager.FindByEmailAsync(model.Email);
+            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+            var newPass = PasswordManager.CreatePassword(10);
+            var result = await _userManager.ResetPasswordAsync(user, token, newPass);
+            MailAddress from = new MailAddress("andreyaspnet@gmail.com", "MovieProject");
+            MailAddress to = new MailAddress(model.Email);
+            MailMessage m = new MailMessage(from, to);
+            m.Subject = "Recover Password";
+            m.Body = "<h1>New password: </h1> <h2>" + newPass + "</h2>";
+            m.IsBodyHtml = true;
+            SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
+            smtp.Credentials = new NetworkCredential("andreyaspnet@gmail.com", "SmtpAndreyAspNet2002");
+            smtp.EnableSsl = true;
+            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+            smtp.Send(m);
+            await _context.SaveChangesAsync();
+            return new ResultDTO
+            {
+                Status = 200,
+                Message = "OK"
+            };
         }
     }
 }

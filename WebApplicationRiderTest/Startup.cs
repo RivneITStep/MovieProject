@@ -121,7 +121,7 @@ namespace WebApplicationRiderTest
             app.UseAuthorization();
             app.UseSwagger();
             
-            SeederDatabase.SeedData(app.ApplicationServices, env, Configuration);
+            //SeederDatabase.SeedData(app.ApplicationServices, env, Configuration);
             app.UseSwaggerUI(options =>
             {
                 options.SwaggerEndpoint("/swagger/v1/swagger.json","Swagger API");

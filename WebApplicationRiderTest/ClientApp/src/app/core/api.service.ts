@@ -24,6 +24,10 @@ export class ApiService {
     return this.http.post<ApiResult>(this.baseUrl + '/login', UserLoginDTO);
   }
 
+  recoverPassword(email: string){
+    return this.http.post<ApiResult>(this.baseUrl + '/recover/password', { email: email });
+  }
+
   isAdmin() {
     const token = localStorage.getItem('token');
     if (token !== null) {

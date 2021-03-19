@@ -1,12 +1,65 @@
-<div class="bg">
-  <div class="login-form">
-    <div class="title">Register</div>
-    <input [(ngModel)]="user.email" class="auth-input" type="text" placeholder="Email">
-    <input [(ngModel)]="user.country" class="auth-input" type="text" placeholder="Country">
-    <input [(ngModel)]="user.gender" class="auth-input" type="text" placeholder="Gender">
-    <input [(ngModel)]="user.age" class="auth-input" type="text" placeholder="Age">
-    <input [(ngModel)]="user.password" class="auth-input" type="password" placeholder="Password">
-    <input [(ngModel)]="confirm" class="auth-input" type="password" placeholder="Confirm password">
-    <button (click)="Register()" class="auth-btn">Register</button>
+<div *ngIf="display" class="bg" (window:resize)="onResize($event)">
+  <div class="container" id="container">
+    <div class="form-container sign-up-container">
+      <form action="#">
+        <h1>Create Account</h1>
+        <div class="social-container">
+          <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+          <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <span>or use your email for registration</span>
+        <input type="text" placeholder="Name" />
+        <input type="email" placeholder="Email" />
+        <input type="password" placeholder="Password" />
+        <button>Register</button>
+      </form>
+    </div>
+    <div class="form-container sign-in-container">
+      <form action="#">
+        <h1>Register</h1>
+        <input type="email" placeholder="Email" [(ngModel)]="user.email" name="email"/>
+        <input type="number" placeholder="Age" [(ngModel)]="user.age" name="age"/>
+        <input type="password" placeholder="Password" [(ngModel)]="user.password" name="password"/>
+        <input type="password" placeholder="Confirm password" [(ngModel)]="confirm" name="passconfirm"/>
+        <p-dropdown [options]="countries" [(ngModel)]="selectedCountry" optionLabel="name" name="country"></p-dropdown>
+        <p-dropdown [options]="genders" [(ngModel)]="selectedGender" name="gender" optionLabel="gender"></p-dropdown>
+        <button class="btn-auth" (click)="Register()">Register</button>
+      </form>
+    </div>
+    <div class="overlay-container">
+      <div class="overlay">
+        <div class="overlay-panel overlay-left">
+          <button class="ghost" id="signIn">Login</button>
+        </div>
+        <div class="overlay-panel overlay-right">
+          <h1>Movie Project</h1>
+          <p>Already have an account on our site?</p>
+          <button (click)="routeLogin()" class="ghost" id="signUp">Login</button>
+        </div>
+      </div>
+    </div>
   </div>
+</div>
+
+<div *ngIf="!display" class="bg-mobile">
+  <div class="mobile-form-container">
+    <div class="mobile-login-form">
+      <div class="mobile-text-title">
+        Register
+      </div>
+      <div class="under-title-text">
+        join our site
+      </div>
+      <input class="auth-input" placeholder="Email" pInput type="text" [(ngModel)]="user.email"/>
+      <input class="auth-input" type="number" placeholder="Age" [(ngModel)]="user.age" name="age"/>
+      <input class="auth-input" placeholder="Password" pInput type="password" [(ngModel)]="user.password"/>
+      <input class="auth-input" type="password" placeholder="Confirm password" [(ngModel)]="confirm"/>
+      <p-dropdown [options]="countries" [(ngModel)]="selectedCountry" optionLabel="name" name="country"></p-dropdown>
+      <p-dropdown [options]="genders" [(ngModel)]="selectedGender" name="gender" optionLabel="gender"></p-dropdown>
+      <a (click)="routeLogin()" class="register-user">Already have an account? Login</a>
+      <button (click)="Register()" pButton class="auth-btn" type="button" label="Login"></button>
+    </div>
+  </div>
+
 </div>

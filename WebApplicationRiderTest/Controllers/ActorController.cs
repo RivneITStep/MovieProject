@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
+using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApplicationRiderTest.DTO.Actor;
@@ -34,6 +38,7 @@ namespace WebApplicationRiderTest.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ResultDTO> AddActor([FromBody]ActorAddDTO model)
         {
@@ -89,6 +94,7 @@ namespace WebApplicationRiderTest.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
+        [Authorize(Roles = "Admin")]
         [HttpPost("edit")]
         public async Task<ResultDTO> EditActor([FromBody]ActorDTO model)
         {
@@ -107,6 +113,7 @@ namespace WebApplicationRiderTest.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<ResultDTO> DeleteActor([FromRoute] int id)
         {
@@ -174,6 +181,7 @@ namespace WebApplicationRiderTest.Controllers
             return _mapper.Map<List<Photo>, List<PhotoDTO>>(photos);
         }
         
+        [Authorize(Roles = "Admin")]
         [HttpPost("photos/{id}")]
         public async Task<ResultDTO> AddActorPhoto([FromRoute] int id, [FromBody] PhotoDTO model)
         {
@@ -203,6 +211,7 @@ namespace WebApplicationRiderTest.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete("photos/{id}/{photoId}")]
         public async Task<ResultDTO> DeleteActorPhoto([FromRoute] int id, [FromRoute] int photoId)
         {
@@ -218,6 +227,7 @@ namespace WebApplicationRiderTest.Controllers
             };
         }
         
+        [Authorize(Roles = "Admin")]
         [HttpPost("{id}/{movieid}")]
         public async Task<ResultDTO> AddActorMovie([FromRoute] int id, [FromRoute] int movieid)
         {
@@ -245,5 +255,7 @@ namespace WebApplicationRiderTest.Controllers
                 };
             }
         }
+        
+        
     }
 }

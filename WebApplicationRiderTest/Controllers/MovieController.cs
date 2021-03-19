@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
@@ -34,6 +35,7 @@ namespace WebApplicationRiderTest.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ResultDTO> AddMovie([FromBody] MovieAddDTO model)
         {
@@ -91,6 +93,7 @@ namespace WebApplicationRiderTest.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
+        [Authorize(Roles = "Admin")]
         [HttpPost("edit")]
         public async Task<ResultDTO> EditMovie([FromBody] MovieDTO model)
         {

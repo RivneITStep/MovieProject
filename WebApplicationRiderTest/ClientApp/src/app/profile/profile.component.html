@@ -26,5 +26,15 @@
         <img (click)="redirect(data.id)" [src]="data.pictureUrl" class="movie-img">
       </div>
     </div>
+    <hr>
+    <div class="fav-movie-title">Movie marks: </div>
+    <hr>
+    <div class="user-marks">
+      <div *ngFor="let data of userMarks" class="user-mark">
+        <img class="user-mark-img" [src]="data.movie.pictureUrl">
+        <div class="mark-movie-name">{{data.movie.name}}</div>
+        <div class="mark-movie-value">{{data.value}}</div>
+      </div>
+    </div>
   </div>
 </div>

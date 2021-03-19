@@ -70,6 +70,37 @@
     font-size: 24px;
 }
 
+
+.user-marks{
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.user-mark{
+    display: grid;
+    background-color: rgba(20, 20, 20, 0.507);
+    grid-template-columns: 100px 3fr 1fr;
+    border-radius: 5px;
+}
+
+.user-mark-img{
+    width: 75px;
+    border-radius: 5px;
+}
+
+.mark-movie-name{
+    color: white;
+    font-size: 20px;
+    align-self: center;
+}
+
+.mark-movie-value{
+    color: white;
+    align-self: center;
+    font-size: 36px;
+    font-weight: 600;
+}
+
 @media screen and (max-width: 950px){
     .bg{
         grid-template-columns: 200px 1fr;

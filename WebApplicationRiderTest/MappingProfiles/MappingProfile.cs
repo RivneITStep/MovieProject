@@ -23,6 +23,7 @@ namespace WebApplicationRiderTest.MappingProfiles
             CreateMap<Video, VideoDTO>().ReverseMap();
             CreateMap<User, UserDTO>().ReverseMap();
             CreateMap<User, UserEditDTO>().ReverseMap();
+            CreateMap<Mark, MarkDTO>().ReverseMap();
         }
     }
 }

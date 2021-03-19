@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http.Headers;
+using System.Net.Mail;
 using System.Net.Mime;
+using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Hosting;
@@ -12,6 +15,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApplicationRiderTest.DTO.Movie;
+using WebApplicationRiderTest.DTO.Password;
 using WebApplicationRiderTest.DTO.Result;
 using WebApplicationRiderTest.DTO.User;
 using WebApplicationRiderTest.EF;
@@ -235,7 +239,7 @@ namespace WebApplicationRiderTest.Controllers
         }
 
         [HttpGet("marks/{id}")]
-        public async Task<IEnumerable<MarkDTO>> GetUserMarks([FromRoute] string id, [FromBody] MarkDTO model)
+        public async Task<IEnumerable<MarkDTO>> GetUserMarks([FromRoute] string id)
         {
             var user = await _context.Users.SingleOrDefaultAsync(t => t.Id == id);
             var entities = user.Marks.ToList();

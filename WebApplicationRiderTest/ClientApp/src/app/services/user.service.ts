@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { MarkModel } from '../models/mark.model';
 import { MovieModel } from '../models/movie.model';
 import { ApiResult } from '../models/result.model';
 import { UserModel } from '../models/user.model';
@@ -45,4 +46,7 @@ export class UserService {
     return this.http.post(this.baseUrl + '/upload/image/' + id, form);
   }
 
+  getUserMarks(id: string): Observable<MarkModel[]>{
+    return this.http.get<MarkModel[]>(this.baseUrl + '/marks/' + id);
+  }
 }

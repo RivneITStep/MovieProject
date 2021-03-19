@@ -9,6 +9,7 @@ import { MessageService } from 'primeng/api';
 import { MovieModel } from '../models/movie.model';
 import { MovieService } from '../services/movie.service';
 import { Router } from '@angular/router';
+import { MarkModel } from '../models/mark.model';
 
 @Component({
   selector: 'app-profile',
@@ -20,6 +21,7 @@ export class ProfileComponent implements OnInit {
   id: string;
   user: UserModel = new UserModel();
   favMovies: MovieModel[] = [];
+  userMarks: MarkModel[] = [];
   file: any;
   data: any;
 
@@ -82,7 +84,11 @@ export class ProfileComponent implements OnInit {
         this.favMovies = data;
       }
     );
-
+    this.userService.getUserMarks(this.id).subscribe(
+      (data: MarkModel[]) => {
+        this.userMarks = data;
+      }
+    );
   }
 
 }
