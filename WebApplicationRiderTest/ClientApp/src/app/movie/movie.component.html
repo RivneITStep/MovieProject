@@ -112,7 +112,7 @@
     <div class="middle">
         <div class="rate">
             <div class="action">
-                <p-rating stars="10" (onRate)="rateMovie()" [(ngModel)]="rate" [cancel]="false"></p-rating>
+                <p-rating *ngIf="isLoggedIn" stars="10" (onRate)="rateMovie()" [(ngModel)]="rate" [cancel]="false"></p-rating>
                 <div class="movie-rating-title">Current movie rating:</div>
                 <div class="rating-text">{{movie.rating.toFixed(2)}}</div>
             </div>
